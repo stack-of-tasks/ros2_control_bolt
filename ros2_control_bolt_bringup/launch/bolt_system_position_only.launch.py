@@ -47,7 +47,7 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "slowdown", default_value="3.0", description="Slowdown factor of the RRbot."
+            "slowdown", default_value="3.0", description="Slowdown factor of Bolt."
         )
     )
     declared_arguments.append(
@@ -66,9 +66,9 @@ def generate_launch_description():
     robot_controller = LaunchConfiguration("robot_controller")
 
     base_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([ThisLaunchFileDir(), "/rrbot.launch.py"]),
+        PythonLaunchDescriptionSource([ThisLaunchFileDir(), "/bolt.launch.py"]),
         launch_arguments={
-            "description_file": "rrbot_system_position_only.urdf.xacro",
+            "description_file": "bolt_system_position_only.urdf.xacro",
             "prefix": prefix,
             "use_fake_hardware": use_fake_hardware,
             "fake_sensor_commands": fake_sensor_commands,

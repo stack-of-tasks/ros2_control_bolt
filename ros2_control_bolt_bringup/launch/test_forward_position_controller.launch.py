@@ -24,7 +24,7 @@ def generate_launch_description():
         [
             FindPackageShare("ros2_control_demo_bringup"),
             "config",
-            "rrbot_forward_position_publisher.yaml",
+            "bolt_forward_position_publisher.yaml",
         ]
     )
 

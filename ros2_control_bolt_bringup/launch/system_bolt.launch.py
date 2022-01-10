@@ -21,7 +21,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "controllers_file",
-            default_value="rrbot_controllers.yaml",
+            default_value="bolt_controllers.yaml",
             description="YAML file with the controllers configuration.",
         )
     )
@@ -116,7 +116,7 @@ def generate_launch_description():
         ]
     )
     rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare(description_package), "rviz", "rrbot.rviz"]
+        [FindPackageShare(description_package), "rviz", "bolt.rviz"]
     )
 
     print (robot_description)

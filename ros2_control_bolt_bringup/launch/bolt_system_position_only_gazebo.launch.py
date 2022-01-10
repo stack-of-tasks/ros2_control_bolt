@@ -42,7 +42,7 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "slowdown", default_value="3.0", description="Slowdown factor of the RRbot."
+            "slowdown", default_value="3.0", description="Slowdown factor of Bolt."
         )
     )
     declared_arguments.append(
@@ -77,7 +77,7 @@ def generate_launch_description():
     spawn_entity = Node(
         package="gazebo_ros",
         executable="spawn_entity.py",
-        arguments=["-topic", "robot_description", "-entity", "rrbot_system_position"],
+        arguments=["-topic", "robot_description", "-entity", "bolt_system_position"],
         output="screen",
     )
 
@@ -88,13 +88,13 @@ def generate_launch_description():
                     [
                         FindPackageShare("ros2_control_demo_bringup"),
                         "launch",
-                        "rrbot.launch.py",
+                        "bolt.launch.py",
                     ]
                 )
             ]
         ),
         launch_arguments={
-            "description_file": "rrbot_system_position_only.urdf.xacro",
+            "description_file": "bolt_system_position_only.urdf.xacro",
             "prefix": prefix,
             "use_sim": use_sim,
             "slowdown": slowdown,
