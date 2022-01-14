@@ -65,20 +65,19 @@ int main(int argc, char **argv)
     auto imu = std::make_shared<IMU>(
         main_board_ptr_, rotate_vector, orientation_vector);
 
+    // Define controller to calibrate the joints.
+    std::vector<CalibrationMethod> directions = {
+        AUTO, AUTO, AUTO, AUTO, AUTO, AUTO};                           // AUTO*12 --> AUTO*6
+    Vector6d position_offsets;
+    position_offsets << 0.238, -0.308, 0.276, -0.115, -0.584, 0.432;   // REDEFINI !
+    auto calib_ctrl = std::make_shared<JointCalibrator>(
+        joints, directions, position_offsets, 5., 0.05, 2., 0.001);
+
     // Define the robot.
-    auto robot = std::make_shared<Robot>(main_board_ptr_, joints, imu);
+    auto robot = std::make_shared<Robot>(main_board_ptr_, joints, imu, calib_ctrl);
 
     // Start the robot.
     robot->Start();
-
-    // Define controller to calibrate the joints.
-    std::vector<CalibrationMethod> directions = {
-        AUTO, AUTO, AUTO, AUTO, AUTO, AUTO};                              // AUTO*12 --> AUTO*6
-    Vector6d position_offsets;
-    position_offsets << 0.238, -0.308, 0.276, -0.115, -0.584, 0.432;      // Redefinition après calibrage
-
-    auto calib_ctrl = std::make_shared<JointCalibrator>(
-        joints, directions, position_offsets, 5., 0.05, 2., 0.001);
 
     Vector6d torques;
 

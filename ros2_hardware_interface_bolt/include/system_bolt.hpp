@@ -222,6 +222,7 @@ private:
   //robot 
   std::shared_ptr<odri_control_interface::Robot> robot_;
   std::shared_ptr<odri_control_interface::JointModules> joints_;
+  std::shared_ptr<odri_control_interface::JointCalibrator> calib_;
   std::shared_ptr<MasterBoardInterface> main_board_ptr_;
   
 

@@ -112,9 +112,17 @@ return_type SystemBoltHardware::init_robot()
   auto imu = std::make_shared<IMU>(
       main_board_ptr_, rotate_vector_, orientation_vector_);
 
+  double Kp = stod(info_.hardware_parameters.at("calib_kp"));
+  double Kd = stod(info_.hardware_parameters.at("calib_kd"));
+  double T = stod(info_.hardware_parameters.at("calib_T"));
+  double dt = stod(info_.hardware_parameters.at("calib_dt"));
+  std::vector<CalibrationMethod> directions = {
+      AUTO, AUTO, AUTO, AUTO, AUTO, AUTO}; 
+  calib_ = std::make_shared<JointCalibrator>(
+      joints_, directions, position_offsets_, Kp, Kd, T, dt);
 
   // Define the robot (ODRI).
-  robot_ = std::make_shared<Robot>(main_board_ptr_, joints_, imu);
+  robot_ = std::make_shared<Robot>(main_board_ptr_, joints_, imu, calib_);
 
 return return_type::OK;
 }
@@ -519,18 +527,8 @@ SystemBoltHardware::export_command_interfaces()
 
 //Calibration function
 return_type SystemBoltHardware::calibration(){
-
-    double Kp = stod(info_.hardware_parameters.at("calib_kp"));
-    double Kd = stod(info_.hardware_parameters.at("calib_kd"));
-    double T = stod(info_.hardware_parameters.at("calib_T"));
-    double dt = stod(info_.hardware_parameters.at("calib_dt"));
-    std::vector<CalibrationMethod> directions = {
-        AUTO, AUTO, AUTO, AUTO, AUTO, AUTO}; 
-    auto calib_ctrl = std::make_shared<JointCalibrator>(
-        joints_, directions, position_offsets_, Kp, Kd, T, dt);
-
-    robot_->RunCalibration(calib_ctrl);
-
+    Eigen::Vector6d zeros = Eigen::Vector6d::Zero();
+    robot_->RunCalibration(zeros);
     return return_type::OK;
   }
 
