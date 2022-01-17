@@ -162,7 +162,7 @@ endif(BUILD_PYTHON_INTERFACE)
 # --- CHECK DEMOS -----------------------------------------------------------
 macro(create_bolt_demo source)
 
-  set(demo_name ${PROJECT_NAME}_${source})
+  set(demo_name ${source})
   add_executable(${demo_name} test/${source}.cpp)
   target_link_libraries(${demo_name} ${PROJECT_NAME})
   target_compile_definitions(
@@ -177,7 +177,9 @@ macro(create_bolt_demo source)
   	odri_control_interface
     master_board_sdk
 	)	
-  install(TARGETS ${demo_name} DESTINATION bin)
+  # install(TARGETS ${demo_name} DESTINATION bin)
+  install (TARGETS ${demo_name}
+          RUNTIME DESTINATION lib/${PROJECT_NAME})
 
 endmacro(create_bolt_demo source)
 
