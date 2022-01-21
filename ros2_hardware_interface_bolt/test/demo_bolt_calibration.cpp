@@ -41,9 +41,9 @@ int main(int argc, char **argv)
     motor_reversed << true, false, true, true, false, false;
 
     Vector6d joint_lower_limits;
-    joint_lower_limits << -0.5, -1.7, -3.4, -0.5, -1.7, -3.4;     //Modif d'après lecture des capteurs (demo bolt)
+    joint_lower_limits << -0.9, -1.7, -3.4, -0.9, -1.7, -3.4;     //Modif d'après lecture des capteurs (demo bolt)
     Vector6d joint_upper_limits;
-    joint_upper_limits << 0.5, 1.7, +3.4, +0.5, +1.7, +3.4;       //Modif d'après lecture des capteurs (demo bolt)
+    joint_upper_limits << 0.9, 1.7, +3.4, +0.9, +1.7, +3.4;       //Modif d'après lecture des capteurs (demo bolt)
 
     // Define the joint module.
     auto joints = std::make_shared<JointModules>(main_board_ptr_,

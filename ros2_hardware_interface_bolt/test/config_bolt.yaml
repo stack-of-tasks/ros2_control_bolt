@@ -1,7 +1,7 @@
 # Inspiré de config_solo12.yaml
 
 robot:
-    interface: ens3  #enp3s0(?)
+    interface: enp6s0f1  #enp3s0(?)
     joint_modules:
         motor_numbers: [0, 3, 2, 1, 5, 4]
         motor_constants: 0.025
@@ -11,10 +11,10 @@ robot:
             true, true, true, true, false, false     #MODIF avec bolt_driver.yaml
         ]
         lower_joint_limits: [
-            -0.5, -1.7, -3.4, -0.5, -1.7, -3.4   #MODIF avec test sur systeme
+            -0.9, -1.7, -3.4, -0.9, -1.7, -3.4   #MODIF avec test sur systeme
         ]
         upper_joint_limits: [
-            0.5, 1.7, +3.4, +0.5, +1.7, +3.4    #MODIF avec test sur systeme
+            0.9, 1.7, +3.4, +0.9, +1.7, +3.4    #MODIF avec test sur systeme
         ]
         max_joint_velocities: 80.
         safety_damping: 0.3                         #MODIF avec bolt_driver.yaml
@@ -24,11 +24,12 @@ robot:
 joint_calibrator:
     # Can be either POS, NEG, ALT or AUTO
     search_methods: [
-      AUTO, AUTO, AUTO, AUTO, AUTO, AUTO
-      #POS, NEG, POS, NEG, NEG, POS               #MODIF avec bolt_driver.yaml
+      #AUTO, AUTO, AUTO, AUTO, AUTO, AUTO
+      #POS, NEG, POS, NEG, NEG, POS             #MODIF avec bolt_driver.yaml
+      POS, POS, POS, POS, POS, POS               
     ]
     position_offsets: [
-        0.238, -0.308, 0.276, -0.115, -0.584, 0.432
+              0.2393,  0.3891,  0.2745,   0.584, 0.09607,  0.4386
     ]                                             #Calibration cpp codes made
     Kp: 3.
     Kd: 0.05

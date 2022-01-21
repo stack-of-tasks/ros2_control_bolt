@@ -159,6 +159,28 @@ if(BUILD_PYTHON_INTERFACE)
 
 endif(BUILD_PYTHON_INTERFACE)
 
+# --- HARDWARE CALIBRATION EXECUTABLE --------------------------------------
+
+set(exe_name bolt_hardware_calibration)
+add_executable(${exe_name} src/${exe_name}.cpp)
+target_link_libraries(${exe_name} ${PROJECT_NAME})
+target_compile_definitions(
+  ${exe_name}
+  PUBLIC CONFIG_BOLT_YAML="${PROJECT_SOURCE_DIR}/test/config_bolt.yaml")
+ament_target_dependencies(
+  ${exe_name}
+  controller_interface
+  hardware_interface
+  pluginlib
+  rclcpp
+  odri_control_interface
+  master_board_sdk
+)	
+# install(TARGETS ${exe_name} DESTINATION bin)
+install (TARGETS ${exe_name}
+        RUNTIME DESTINATION lib/${PROJECT_NAME})
+
+
 # --- CHECK DEMOS -----------------------------------------------------------
 macro(create_bolt_demo source)
 
@@ -188,5 +210,6 @@ create_bolt_demo(demo_bolt_from_yaml)
 create_bolt_demo(demo_bolt_sensor_reading)
 create_bolt_demo(demo_bolt_calibration)
 create_bolt_demo(demo_bolt_write_commands)
+
 
 ament_package()
