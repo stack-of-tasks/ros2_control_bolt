@@ -53,7 +53,9 @@ Eigen::Vector6d desired_torque = Eigen::Vector6d::Zero();
 return_type SystemBoltHardware::init_robot()
 {
   //Define the ODRI robot from URDF values
-
+  RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+        " System Bolt Hardware init_robot().");
   // Get the ethernet interface to discuss with the ODRI master board
   eth_interface_ = info_.hardware_parameters.at("eth_interface");
  
@@ -61,25 +63,33 @@ return_type SystemBoltHardware::init_robot()
   main_board_ptr_ = std::make_shared<MasterBoardInterface>(eth_interface_);
 
   // Define joints (ODRI)
+  int index_joint = 0;
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {
-    // Motor numbers
-    motor_numbers_[joint_name_to_motor_nb_[joint.name]] = stoi(joint.parameters.at("motor_number"));
+    // Map joint with motor number
+    // (uses at instead of [] because of joint constantness)
+    joint_name_to_motor_nb_[joint.name] = stoi(joint.parameters.at("motor_number"));
+    
+    // Motor numbers to initialize the master board
+    motor_numbers_[index_joint] = joint_name_to_motor_nb_[joint.name];
+
     // Reversed polarities
     if (joint.parameters.at("motor_reversed_polarity") == "true"){
-      motor_reversed_polarities_[joint_name_to_motor_nb_[joint.name]] = true;
+      motor_reversed_polarities_[index_joint] = true;
     }
     else {
-      motor_reversed_polarities_[joint_name_to_motor_nb_[joint.name]] = false;
+      motor_reversed_polarities_[index_joint] = false;
     }
     // Joint parameters
-    joint_lower_limits_[joint_name_to_motor_nb_[joint.name]] = stod(joint.command_interfaces[0].min);   //Modif d'après lecture des capteurs (demo bolt)
-    joint_upper_limits_[joint_name_to_motor_nb_[joint.name]] = stod(joint.command_interfaces[0].max);   //Modif d'après lecture des capteurs (demo bolt)
+    joint_lower_limits_[index_joint] = stod(joint.command_interfaces[0].min);   //Modif d'après lecture des capteurs (demo bolt)
+    joint_upper_limits_[index_joint] = stod(joint.command_interfaces[0].max);   //Modif d'après lecture des capteurs (demo bolt)
     
     motor_constants_ = stod(joint.parameters.at("motor_constant"));
     gear_ratios_ = stod(joint.parameters.at("gear_ratio"));
     max_currents_ = stod(joint.parameters.at("max_current"));
     max_joint_velocities_ = stod(joint.parameters.at("max_joint_velocity"));
     safety_damping_ = stod(joint.parameters.at("safety_damping"));
+
+    index_joint++;
   }
 
   joints_ = std::make_shared<JointModules>(main_board_ptr_,
@@ -95,11 +105,13 @@ return_type SystemBoltHardware::init_robot()
 
   // Get position offset of each joint
     for (const hardware_interface::ComponentInfo & joint : info_.joints) {
-      position_offsets_[joint_name_to_motor_nb_[joint.name]] = stod(joint.parameters.at("position_offset"));   //Modif d'après lecture des capteurs (demo bolt)
+      position_offsets_[joint_name_to_motor_nb_[joint.name]] = stod(joint.parameters.at("position_offset"));
+         //Modif d'après lecture des capteurs (demo bolt)
     }
 
   // Define the IMU (ODRI).
   for (const hardware_interface::ComponentInfo & sensor : info_.sensors) {
+
     std::istringstream iss_rotate (sensor.parameters.at("rotate_vector"));
     std::istringstream iss_orientation (sensor.parameters.at("orientation_vector"));
     for (int n=0; n<3; n++){
@@ -109,6 +121,7 @@ return_type SystemBoltHardware::init_robot()
       iss_orientation >> orientation_vector_[n];
     }
   }
+
   auto imu = std::make_shared<IMU>(
       main_board_ptr_, rotate_vector_, orientation_vector_);
 
@@ -131,10 +144,11 @@ return return_type::OK;
 
 return_type SystemBoltHardware::configure()
 {
+
   if (configure_default(info_) != return_type::OK) {
     return return_type::ERROR;
   }
-
+  
 
   hw_start_sec_ = stod(info_.hardware_parameters["example_param_hw_start_duration_sec"]);
   hw_stop_sec_ = stod(info_.hardware_parameters["example_param_hw_stop_duration_sec"]);
@@ -159,14 +173,11 @@ return_type SystemBoltHardware::configure()
       std::numeric_limits<double>::quiet_NaN(),
       std::numeric_limits<double>::quiet_NaN(),
       std::numeric_limits<double>::quiet_NaN()};
+      
   }
   // For each joint.
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {
 
-    // Map joint with motor number
-    // (uses at instead of [] because of joint constantness)
-    joint_name_to_motor_nb_[joint.name] = stoi(joint.parameters.at("motor_number"));
-    
     // Initialize state of the joint by default to NaN
     // it allows to see which joints are not properly initialized
     // from the real hardware
@@ -197,7 +208,8 @@ return_type SystemBoltHardware::configure()
         joint.name.c_str(), joint.command_interfaces.size());
       return return_type::ERROR;
     }
-
+    
+    
     // For each command interface of the joint
     for (const auto & a_joint_cmd_inter : joint.command_interfaces)
     {
@@ -527,17 +539,24 @@ SystemBoltHardware::export_command_interfaces()
 
 //Calibration function
 return_type SystemBoltHardware::calibration(){
+    RCLCPP_INFO(
+      rclcpp::get_logger("SystemBoltHardware"),
+      "Step calibration");
     Eigen::Vector6d zeros = Eigen::Vector6d::Zero();
-    robot_->RunCalibration(zeros);
+    robot_->RunCalibration(zeros); 
     return return_type::OK;
   }
 
 
 return_type SystemBoltHardware::start()
 {
+  RCLCPP_INFO(
+    rclcpp::get_logger("SystemBoltHardware"),
+    "System Bolt Hardware Start() !");
+  // Initialize Robot
+  init_robot();
   //robot_->Start();
   robot_->odri_control_interface::Robot::Start();
-
   // set some default values
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {
     if (std::isnan(hw_states_[joint.name].position)) {
@@ -546,9 +565,15 @@ return_type SystemBoltHardware::start()
     }
   }
 
+  RCLCPP_INFO(
+    rclcpp::get_logger("SystemBoltHardware"),
+    "System Bolt Hardware Test 1 !");
+
   // Calibration
   calibration();
-
+  RCLCPP_INFO(
+    rclcpp::get_logger("SystemBoltHardware"),
+    "System Bolt Hardware start_fin() !");
   // Sensor reading
   read();
 
