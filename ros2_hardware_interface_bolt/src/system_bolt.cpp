@@ -65,6 +65,9 @@ return_type SystemBoltHardware::init_robot()
   // Define joints (ODRI)
   int index_joint = 0;
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {
+    RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+        " System Bolt Hardware init_robot_CHECK_1().");
     // Map joint with motor number
     // (uses at instead of [] because of joint constantness)
     joint_name_to_motor_nb_[joint.name] = stoi(joint.parameters.at("motor_number"));
@@ -88,10 +91,80 @@ return_type SystemBoltHardware::init_robot()
     max_currents_ = stod(joint.parameters.at("max_current"));
     max_joint_velocities_ = stod(joint.parameters.at("max_joint_velocity"));
     safety_damping_ = stod(joint.parameters.at("safety_damping"));
+  
+  
+  RCLCPP_INFO(
+      rclcpp::get_logger("SystemBoltHardware"),
+      "Joint '%s' export_state_interface.",
+      joint.name.c_str());
+  RCLCPP_INFO(
+      rclcpp::get_logger("SystemBoltHardware"),
+      "Joint  joint_name_to_motor_nb_[joint.name]. == '%d'",
+      joint_name_to_motor_nb_[joint.name]);
+  RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+	"from joint.command_interfaces joint_lower_limits_ = '%s'",
+	joint.command_interfaces[0].min.c_str());
+  RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+	"from joint.parameters Motor_number_ = '%s'",
+	joint.parameters.at("motor_number").c_str());
+  RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+	"from joint.parameters Motor_constant_ = '%s'",
+	joint.parameters.at("motor_constant").c_str());
+  RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+	"Motor_constants_ = '%f'",
+	motor_constants_);     
+  RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+	"gear_ratios_ = '%f'",
+	gear_ratios_);    
+  RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+	"max_currents_ = '%f'",
+	max_currents_);    
+  RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+	"Motor_constants_ = '%f'",
+	max_joint_velocities_);  
+ 
+  RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+	"safety_damping_ = '%f'",
+	safety_damping_); 
+  RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+	      "joint_lower_limits_ = '%f'",
+        joint_lower_limits_[index_joint]); 
+  RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+	      "joint_upper_limits_ = '%f'",
+	      joint_upper_limits_[index_joint]); 
+  RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+	      "motor_numbers_ = '%d'",
+	      motor_numbers_[index_joint]);
+  
+  RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+	      "motor_reversed_polarities_ = '%d'",
+	      motor_reversed_polarities_[index_joint]);
+  RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+	"main_board_ptr_ = '%p'",
+	main_board_ptr_);  
 
     index_joint++;
   }
-
+ 
+ 
+ 
+  
+  RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+        " System Bolt Hardware init_robot_CHECK_2().");
   joints_ = std::make_shared<JointModules>(main_board_ptr_,
                                                motor_numbers_,
                                                motor_constants_,
@@ -102,16 +175,23 @@ return_type SystemBoltHardware::init_robot()
                                                joint_upper_limits_,
                                                max_joint_velocities_,
                                                safety_damping_);
-
+  RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+        " System Bolt Hardware init_robot_CHECK_3().");
   // Get position offset of each joint
     for (const hardware_interface::ComponentInfo & joint : info_.joints) {
+      RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+        " System Bolt Hardware init_robot_CHECK_4().");
       position_offsets_[joint_name_to_motor_nb_[joint.name]] = stod(joint.parameters.at("position_offset"));
          //Modif d'après lecture des capteurs (demo bolt)
     }
 
   // Define the IMU (ODRI).
   for (const hardware_interface::ComponentInfo & sensor : info_.sensors) {
-
+    RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+        " System Bolt Hardware init_robot_CHECK_5().");
     std::istringstream iss_rotate (sensor.parameters.at("rotate_vector"));
     std::istringstream iss_orientation (sensor.parameters.at("orientation_vector"));
     for (int n=0; n<3; n++){
@@ -121,7 +201,9 @@ return_type SystemBoltHardware::init_robot()
       iss_orientation >> orientation_vector_[n];
     }
   }
-
+  RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+        " System Bolt Hardware init_robot_CHECK_6().");
   auto imu = std::make_shared<IMU>(
       main_board_ptr_, rotate_vector_, orientation_vector_);
 
@@ -136,6 +218,9 @@ return_type SystemBoltHardware::init_robot()
 
   // Define the robot (ODRI).
   robot_ = std::make_shared<Robot>(main_board_ptr_, joints_, imu, calib_);
+  RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+        " System Bolt Hardware init_robot_CHECK_7().");
 
 return return_type::OK;
 }
@@ -144,6 +229,9 @@ return return_type::OK;
 
 return_type SystemBoltHardware::configure()
 {
+  RCLCPP_INFO(
+    rclcpp::get_logger("SystemBoltHardware"),
+    "JE SUIS LA !!!!!!!!!!!!!!!!!!!!!!! .");
 
   if (configure_default(info_) != return_type::OK) {
     return return_type::ERROR;
@@ -541,7 +629,7 @@ SystemBoltHardware::export_command_interfaces()
 return_type SystemBoltHardware::calibration(){
     RCLCPP_INFO(
       rclcpp::get_logger("SystemBoltHardware"),
-      "Step calibration");
+      "Etape calibration");
     Eigen::Vector6d zeros = Eigen::Vector6d::Zero();
     robot_->RunCalibration(zeros); 
     return return_type::OK;
@@ -555,8 +643,14 @@ return_type SystemBoltHardware::start()
     "System Bolt Hardware Start() !");
   // Initialize Robot
   init_robot();
+  RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+        " System Bolt CHECK_8 ");
   //robot_->Start();
   robot_->odri_control_interface::Robot::Start();
+  RCLCPP_INFO(
+        rclcpp::get_logger("SystemBoltHardware"),
+        " System Bolt CHECK_9 ");
   // set some default values
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {
     if (std::isnan(hw_states_[joint.name].position)) {
