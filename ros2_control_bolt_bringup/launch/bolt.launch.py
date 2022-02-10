@@ -26,7 +26,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "runtime_config_package",
-            default_value="ros2_control_demo_bringup",
+            default_value="ros2_control_bolt_bringup",
             description='Package with the controller\'s configuration in "config" folder. \
         Usually the argument is not set, it enables use of a custom setup.',
         )
@@ -49,6 +49,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "description_file",
+            default_value="system_bolt_description.urdf.xacro",
             description="URDF/XACRO description file with the robot.",
         )
     )
