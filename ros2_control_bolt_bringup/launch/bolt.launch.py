@@ -14,7 +14,7 @@
 
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
-from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
+from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution, EnvironmentVariable, TextSubstitution
 
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -110,8 +110,8 @@ def generate_launch_description():
     robot_controller = LaunchConfiguration("robot_controller")
 
     # Get URDF via xacro
-    robot_description_content = Command(
-        [
+    robot_description_content_expr = [
+            
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution(
@@ -133,7 +133,8 @@ def generate_launch_description():
             "slowdown:=",
             slowdown,
         ]
-    )
+    print(robot_description_content_expr)
+    robot_description_content = Command(robot_description_content_expr)
     robot_description = {"robot_description": robot_description_content}
 
     robot_controllers = PathJoinSubstitution(
@@ -149,6 +150,15 @@ def generate_launch_description():
 
     control_node = Node(
         package="controller_manager",
+        prefix = [# Sudo command cause need to be sudoer when we do this node cause it real time 
+            'sudo -E env PATH=',
+            EnvironmentVariable("PATH", default_value='${PATH}'),
+            " LD_LIBRARY_PATH=",
+            EnvironmentVariable("LD_LIBRARY_PATH", default_value='${LD_LIBRARY_PATH}'),
+            " PYTHONPATH=",
+            EnvironmentVariable("PYTHONPATH", default_value='${PYTHONPATH}'),
+            " "
+            ],
         executable="ros2_control_node",
         parameters=[robot_description, robot_controllers],
         output={
