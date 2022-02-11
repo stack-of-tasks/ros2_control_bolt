@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:macro name="system_bolt_ros2_control" params="name prefix use_sim:=^|false use_fake_hardware:=^|true fake_sensor_commands:=^|false slowdown:=2.0 enp6s0f1:=^|enp6s0f1 true:=^|true false:=^|false">
+  <xacro:macro name="system_bolt_ros2_control" params="name prefix use_sim:=^|false use_fake_hardware:=^|true fake_sensor_commands:=^|false slowdown:=2.0 ethernet_port:=^|enp6s0f1 true:=^|true false:=^|false">
 
     <ros2_control name="${name}" type="system">
 
       <xacro:if value="$(arg use_sim)">
-        <hardware>
+        <hardware> 
           <plugin>gazebo_ros2_control/GazeboSystem</plugin>
         </hardware>
       </xacro:if>
@@ -22,7 +22,7 @@
             <param name="example_param_hw_start_duration_sec">2.0</param>
             <param name="example_param_hw_stop_duration_sec">3.0</param>
             <param name="example_param_hw_slowdown">${slowdown}</param>
-            <param name="eth_interface">${enp6s0f1}</param>
+            <param name="eth_interface">${ethernet_port}</param>
             <param name="calib_kp">3.</param>
             <param name="calib_kd">0.05</param>
             <param name="calib_T">2.</param>
@@ -33,8 +33,8 @@
 
       <joint name="FLHAA">
         <command_interface name="position">
-          <param name="min">-0.6</param>
-          <param name="max">0.6</param>
+          <param name="min">-0.5</param>
+          <param name="max">0.5</param>
         </command_interface>
         <command_interface name="velocity">
           <param name="min">-1</param>
