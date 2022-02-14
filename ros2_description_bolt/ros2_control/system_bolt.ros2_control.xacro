@@ -264,8 +264,8 @@
         <state_interface name="attitude_quaternion_y"/>
         <state_interface name="attitude_quaternion_z"/>
         <state_interface name="attitude_quaternion_w"/>
-        <param name="rotate_vector">"1 2 3"</param>
-        <param name="orientation_vector">"1 2 3 4"</param>
+        <param name="rotate_vector">1 2 3</param>
+        <param name="orientation_vector">1 2 3 4</param>
       </sensor>
     </ros2_control>
 
