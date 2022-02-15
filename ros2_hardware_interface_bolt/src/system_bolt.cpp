@@ -66,9 +66,6 @@ return_type SystemBoltHardware::init_robot()
   // Define joints (ODRI)
   int index_joint = 0;
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {
-    RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-        " System Bolt Hardware init_robot_CHECK_1().");
     // Map joint with motor number
     // (uses at instead of [] because of joint constantness)
     joint_name_to_motor_nb_[joint.name] = stoi(joint.parameters.at("motor_number"));
@@ -163,11 +160,6 @@ return_type SystemBoltHardware::init_robot()
   }
  
  
- 
-  
-  RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-        " System Bolt Hardware init_robot_CHECK_2().");
   joints_ = std::make_shared<JointModules>(main_board_ptr_,
                                                motor_numbers_,
                                                motor_constants_,
@@ -178,23 +170,17 @@ return_type SystemBoltHardware::init_robot()
                                                joint_upper_limits_,
                                                max_joint_velocities_,
                                                safety_damping_);
-  RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-        " System Bolt Hardware init_robot_CHECK_3().");
+
   // Get position offset of each joint
     for (const hardware_interface::ComponentInfo & joint : info_.joints) {
-      RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-        " System Bolt Hardware init_robot_CHECK_4().");
+
       position_offsets_[joint_name_to_motor_nb_[joint.name]] = stod(joint.parameters.at("position_offset"));
          //Modif d'après lecture des capteurs (demo bolt)
     }
 
   // Define the IMU (ODRI).
   for (const hardware_interface::ComponentInfo & sensor : info_.sensors) {
-    RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-        " System Bolt Hardware init_robot_CHECK_5()");
+
     std::istringstream iss_rotate (sensor.parameters.at("rotate_vector"));
     std::istringstream iss_orientation (sensor.parameters.at("orientation_vector"));
 
@@ -205,9 +191,7 @@ return_type SystemBoltHardware::init_robot()
       iss_orientation >> orientation_vector_[n];
     }
   }
-  RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-        " System Bolt Hardware init_robot_CHECK_6().");
+
   auto imu = std::make_shared<IMU>(
       main_board_ptr_, rotate_vector_, orientation_vector_);
 
@@ -216,15 +200,13 @@ return_type SystemBoltHardware::init_robot()
   double T = stod(info_.hardware_parameters.at("calib_T"));
   double dt = stod(info_.hardware_parameters.at("calib_dt"));
   std::vector<CalibrationMethod> directions = {
-      AUTO, AUTO, AUTO, AUTO, AUTO, AUTO}; 
+      POSITIVE, POSITIVE, POSITIVE, POSITIVE, POSITIVE, POSITIVE}; 
   calib_ = std::make_shared<JointCalibrator>(
       joints_, directions, position_offsets_, Kp, Kd, T, dt);
 
   // Define the robot (ODRI).
   robot_ = std::make_shared<Robot>(main_board_ptr_, joints_, imu, calib_);
-  RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-        " System Bolt Hardware init_robot_CHECK_7().");
+
 
 return return_type::OK;
 }
@@ -233,9 +215,7 @@ return return_type::OK;
 
 return_type SystemBoltHardware::configure()
 {
-  RCLCPP_INFO(
-    rclcpp::get_logger("SystemBoltHardware"),
-    "System Bolt Hardware configure_robot_CHECK_1().");
+
 
   if (configure_default(info_) != return_type::OK) {
     return return_type::ERROR;
@@ -448,11 +428,10 @@ SystemBoltHardware::prepare_command_mode_switch
       // Something else is using the joint! Abort!
       RCLCPP_ERROR(
         rclcpp::get_logger("SystemBoltHardware"),
-	"Joint '%s' has no valid control mode %d %d",
-	joint.name.c_str(),
-	control_mode_[joint.name],
-	new_modes_[joint.name]
-
+      	"Joint '%s' has no valid control mode %d %d",
+	      joint.name.c_str(),
+	      control_mode_[joint.name],
+	      new_modes_[joint.name]
       );
       return return_type::ERROR;
     }
@@ -482,11 +461,11 @@ SystemBoltHardware::export_state_interfaces()
     state_interfaces.emplace_back(
       hardware_interface::StateInterface(
         joint.name, HW_IF_GAIN_KP,
-        &hw_states_[joint.name].effort));
+        &hw_states_[joint.name].Kp));
     state_interfaces.emplace_back(
       hardware_interface::StateInterface(
         joint.name, HW_IF_GAIN_KD,
-        &hw_states_[joint.name].effort));
+        &hw_states_[joint.name].Kd));
         
   }
 
@@ -649,33 +628,33 @@ return_type SystemBoltHardware::start()
   init_robot();
   RCLCPP_INFO(
         rclcpp::get_logger("SystemBoltHardware"),
-        " System Bolt CHECK_8 ");
+        " System Bolt CHECK_1 ");
   //robot_->Start();
   /* robot_->SystemBoltHardware::GetIMU(); */
   robot_->odri_control_interface::Robot::Start();
   RCLCPP_INFO(
         rclcpp::get_logger("SystemBoltHardware"),
-        " System Bolt CHECK_9 ");
+        " System Bolt CHECK_2 ");
   // set some default values
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {
     if (std::isnan(hw_states_[joint.name].position)) {
-      hw_states_[joint.name] = {0.0, 0.0, 0.0, 0.0, 0.0};
-      hw_commands_[joint.name] = {0.0, 0.0, 0.0, 0.0, 0.0};
+      hw_states_[joint.name] = {0.0, 0.0, 0.0, 3.0, 0.05};
+      hw_commands_[joint.name] = {0.0, 0.0, 0.0, 3.0, 0.05};
     }
   }
-
   RCLCPP_INFO(
     rclcpp::get_logger("SystemBoltHardware"),
     "System Bolt Hardware Test 1 !");
-
   // Calibration
   calibration();
   RCLCPP_INFO(
     rclcpp::get_logger("SystemBoltHardware"),
-    "System Bolt Hardware start_fin() !");
+    "System Bolt Hardware End_Calibration() !");
   // Sensor reading
   read();
-
+  RCLCPP_INFO(
+    rclcpp::get_logger("SystemBoltHardware"),
+    "System Bolt Hardware start_fin() !");
   status_ = hardware_interface::status::STARTED;
 
   return return_type::OK;
@@ -694,28 +673,68 @@ return_type SystemBoltHardware::stop()
 hardware_interface::return_type SystemBoltHardware::read()
 {
   // Data acquisition (with ODRI)
+  RCLCPP_INFO(
+    rclcpp::get_logger("SystemBoltHardware"),
+    "System Bolt Hardware start Read !");
   robot_->ParseSensorData();
-
+  RCLCPP_INFO(
+    rclcpp::get_logger("SystemBoltHardware"),
+    "System Bolt Hardware start Read 1 !");
   auto sensor_positions = robot_->joints->GetPositions();
   auto sensor_velocities = robot_->joints->GetVelocities();
   auto measured_torques = robot_->joints->GetMeasuredTorques();
-   
+  RCLCPP_INFO(
+    rclcpp::get_logger("SystemBoltHardware"),
+    "System Bolt Hardware start Read 2 !");
   auto imu_gyroscope = robot_->imu->GetGyroscope();
   auto imu_accelero = robot_->imu->GetAccelerometer();
   auto imu_linear_acc = robot_->imu->GetLinearAcceleration();
   auto imu_euler = robot_->imu->GetAttitudeEuler();
   auto imu_quater = robot_->imu->GetAttitudeQuaternion();
 
+  RCLCPP_INFO(
+    rclcpp::get_logger("SystemBoltHardware"),
+    "System Bolt Hardware start Read 3 !");
 
   // Assignment of sensor data to ros2_control variables (URDF)
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {
+    RCLCPP_INFO(
+      rclcpp::get_logger("SystemBoltHardware"),
+      "System Bolt Hardware start Read 3.1 !");
     hw_states_[joint.name].position = sensor_positions[joint_name_to_motor_nb_[joint.name]];
+
+    RCLCPP_INFO(
+      rclcpp::get_logger("SystemBoltHardware"),
+      "hw_states_[joint.name].position) == '%f'",
+      hw_states_[joint.name].position);
+
     hw_states_[joint.name].velocity = sensor_velocities[joint_name_to_motor_nb_[joint.name]];
+    RCLCPP_INFO(
+      rclcpp::get_logger("SystemBoltHardware"),
+      "hw_states_[joint.name].velocity == '%f'",
+      hw_states_[joint.name].velocity);
+
     hw_states_[joint.name].effort = measured_torques[joint_name_to_motor_nb_[joint.name]];
-    hw_states_[joint.name].Kp = stod(joint.parameters.at("kp"));
-    hw_states_[joint.name].Kd = stod(joint.parameters.at("kd"));
+    RCLCPP_INFO(
+      rclcpp::get_logger("SystemBoltHardware"),
+      "hw_states_[joint.name].effort == '%f'",
+      hw_states_[joint.name].effort);
+
+    hw_states_[joint.name].Kp = hw_commands_[joint.name].Kp;
+    RCLCPP_INFO(
+      rclcpp::get_logger("SystemBoltHardware"),
+      "hw_states_[joint.name].Kp == '%f'",
+      hw_states_[joint.name].Kp);
+
+    hw_states_[joint.name].Kd = hw_commands_[joint.name].Kd;
+    RCLCPP_INFO(
+      rclcpp::get_logger("SystemBoltHardware"),
+      "hw_states_[joint.name].Kp == '%f'",
+      hw_states_[joint.name].Kd);
   }
-  
+  RCLCPP_INFO(
+    rclcpp::get_logger("SystemBoltHardware"),
+    "System Bolt Hardware start Read 4 !");
   // Assignment of IMU data (URDF)
   // Modif with for loop possible to optimize the code
   imu_states_["IMU"].gyro_x = imu_gyroscope[0];
@@ -738,7 +757,9 @@ hardware_interface::return_type SystemBoltHardware::read()
   imu_states_["IMU"].quater_y = imu_quater[1];
   imu_states_["IMU"].quater_z = imu_quater[2];
   imu_states_["IMU"].quater_w = imu_quater[3];
-  
+  RCLCPP_INFO(
+    rclcpp::get_logger("SystemBoltHardware"),
+    "System Bolt Hardware start Read 5 !");
   return return_type::OK;
 }
 
@@ -750,8 +771,10 @@ SystemBoltHardware::write()
   Eigen::Vector6d positions;
   Eigen::Vector6d velocities;
   Eigen::Vector6d torques;
+  
   Eigen::Vector6d gain_KP;
   Eigen::Vector6d gain_KD;
+  
 
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {
     positions[joint_name_to_motor_nb_[joint.name]] = hw_commands_[joint.name].position;
