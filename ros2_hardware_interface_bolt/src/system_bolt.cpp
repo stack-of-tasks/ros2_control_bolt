@@ -20,6 +20,7 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include <fstream>
 
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "rclcpp/rclcpp.hpp"
@@ -91,8 +92,10 @@ return_type SystemBoltHardware::init_robot()
     max_currents_ = stod(joint.parameters.at("max_current"));
     max_joint_velocities_ = stod(joint.parameters.at("max_joint_velocity"));
     safety_damping_ = stod(joint.parameters.at("safety_damping"));
-  
-  
+
+
+  //    Print all variables for the creation of Bolt
+  /*
   RCLCPP_INFO(
       rclcpp::get_logger("SystemBoltHardware"),
       "Joint '%s' export_state_interface.",
@@ -154,7 +157,7 @@ return_type SystemBoltHardware::init_robot()
   RCLCPP_INFO(
         rclcpp::get_logger("SystemBoltHardware"),
 	"main_board_ptr_ = '%p'",
-	main_board_ptr_);  
+	main_board_ptr_);  */ 
 
     index_joint++;
   }
@@ -191,9 +194,10 @@ return_type SystemBoltHardware::init_robot()
   for (const hardware_interface::ComponentInfo & sensor : info_.sensors) {
     RCLCPP_INFO(
         rclcpp::get_logger("SystemBoltHardware"),
-        " System Bolt Hardware init_robot_CHECK_5().");
+        " System Bolt Hardware init_robot_CHECK_5()");
     std::istringstream iss_rotate (sensor.parameters.at("rotate_vector"));
     std::istringstream iss_orientation (sensor.parameters.at("orientation_vector"));
+
     for (int n=0; n<3; n++){
       iss_rotate >> rotate_vector_[n];
     }
@@ -231,7 +235,7 @@ return_type SystemBoltHardware::configure()
 {
   RCLCPP_INFO(
     rclcpp::get_logger("SystemBoltHardware"),
-    "JE SUIS LA !!!!!!!!!!!!!!!!!!!!!!! .");
+    "System Bolt Hardware configure_robot_CHECK_1().");
 
   if (configure_default(info_) != return_type::OK) {
     return return_type::ERROR;
@@ -647,6 +651,7 @@ return_type SystemBoltHardware::start()
         rclcpp::get_logger("SystemBoltHardware"),
         " System Bolt CHECK_8 ");
   //robot_->Start();
+  /* robot_->SystemBoltHardware::GetIMU(); */
   robot_->odri_control_interface::Robot::Start();
   RCLCPP_INFO(
         rclcpp::get_logger("SystemBoltHardware"),
