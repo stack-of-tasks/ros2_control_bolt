@@ -157,7 +157,7 @@ def generate_launch_description():
             EnvironmentVariable("LD_LIBRARY_PATH", default_value='${LD_LIBRARY_PATH}'),
             " PYTHONPATH=",
             EnvironmentVariable("PYTHONPATH", default_value='${PYTHONPATH}'),
-            " "
+            " HOME=/tmp "
             ],
         executable="ros2_control_node",
         parameters=[robot_description, robot_controllers],
