@@ -51,181 +51,12 @@ Eigen::Vector6d desired_joint_position = Eigen::Vector6d::Zero();
 Eigen::Vector6d desired_torque = Eigen::Vector6d::Zero();
 
 
-return_type SystemBoltHardware::init_robot()
-{
-  //Define the ODRI robot from URDF values
-  RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-        " System Bolt Hardware init_robot().");
-  // Get the ethernet interface to discuss with the ODRI master board
-  eth_interface_ = info_.hardware_parameters.at("eth_interface");
- 
-  // Define board (ODRI)
-  main_board_ptr_ = std::make_shared<MasterBoardInterface>(eth_interface_);
-
-  // Define joints (ODRI)
-  int index_joint = 0;
-  for (const hardware_interface::ComponentInfo & joint : info_.joints) {
-    // Map joint with motor number
-    // (uses at instead of [] because of joint constantness)
-    joint_name_to_motor_nb_[joint.name] = stoi(joint.parameters.at("motor_number"));
-    
-    // Motor numbers to initialize the master board
-    motor_numbers_[index_joint] = joint_name_to_motor_nb_[joint.name];
-
-    // Reversed polarities
-    if (joint.parameters.at("motor_reversed_polarity") == "true"){
-      motor_reversed_polarities_[index_joint] = true;
-    }
-    else {
-      motor_reversed_polarities_[index_joint] = false;
-    }
-    // Joint parameters
-    joint_lower_limits_[index_joint] = stod(joint.command_interfaces[0].min);   //Modif d'après lecture des capteurs (demo bolt)
-    joint_upper_limits_[index_joint] = stod(joint.command_interfaces[0].max);   //Modif d'après lecture des capteurs (demo bolt)
-    
-    motor_constants_ = stod(joint.parameters.at("motor_constant"));
-    gear_ratios_ = stod(joint.parameters.at("gear_ratio"));
-    max_currents_ = stod(joint.parameters.at("max_current"));
-    max_joint_velocities_ = stod(joint.parameters.at("max_joint_velocity"));
-    safety_damping_ = stod(joint.parameters.at("safety_damping"));
-
-
-  //    Print all variables for the creation of Bolt
-  /*
-  RCLCPP_INFO(
-      rclcpp::get_logger("SystemBoltHardware"),
-      "Joint '%s' export_state_interface.",
-      joint.name.c_str());
-  RCLCPP_INFO(
-      rclcpp::get_logger("SystemBoltHardware"),
-      "Joint  joint_name_to_motor_nb_[joint.name]. == '%d'",
-      joint_name_to_motor_nb_[joint.name]);
-  RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-	"from joint.command_interfaces joint_lower_limits_ = '%s'",
-	joint.command_interfaces[0].min.c_str());
-  RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-	"from joint.parameters Motor_number_ = '%s'",
-	joint.parameters.at("motor_number").c_str());
-  RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-	"from joint.parameters Motor_constant_ = '%s'",
-	joint.parameters.at("motor_constant").c_str());
-  RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-	"Motor_constants_ = '%f'",
-	motor_constants_);     
-  RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-	"gear_ratios_ = '%f'",
-	gear_ratios_);    
-  RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-	"max_currents_ = '%f'",
-	max_currents_);    
-  RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-	"Motor_constants_ = '%f'",
-	max_joint_velocities_);  
- 
-  RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-	"safety_damping_ = '%f'",
-	safety_damping_); 
-  RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-	      "joint_lower_limits_ = '%f'",
-        joint_lower_limits_[index_joint]); 
-  RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-	      "joint_upper_limits_ = '%f'",
-	      joint_upper_limits_[index_joint]); 
-  RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-	      "motor_numbers_ = '%d'",
-	      motor_numbers_[index_joint]);
-  
-  RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-	      "motor_reversed_polarities_ = '%d'",
-	      motor_reversed_polarities_[index_joint]);
-  RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-	"main_board_ptr_ = '%p'",
-	main_board_ptr_);  */ 
-
-    index_joint++;
-  }
- 
- 
-  joints_ = std::make_shared<JointModules>(main_board_ptr_,
-                                               motor_numbers_,
-                                               motor_constants_,
-                                               gear_ratios_,
-                                               max_currents_,
-                                               motor_reversed_polarities_,
-                                               joint_lower_limits_,
-                                               joint_upper_limits_,
-                                               max_joint_velocities_,
-                                               safety_damping_);
-
-  // Get position offset of each joint
-    for (const hardware_interface::ComponentInfo & joint : info_.joints) {
-
-      position_offsets_[joint_name_to_motor_nb_[joint.name]] = stod(joint.parameters.at("position_offset"));
-         //Modif d'après lecture des capteurs (demo bolt)
-    }
-
-  // Define the IMU (ODRI).
-  for (const hardware_interface::ComponentInfo & sensor : info_.sensors) {
-
-    std::istringstream iss_rotate (sensor.parameters.at("rotate_vector"));
-    std::istringstream iss_orientation (sensor.parameters.at("orientation_vector"));
-
-    for (int n=0; n<3; n++){
-      iss_rotate >> rotate_vector_[n];
-    }
-    for (int n=0; n<4; n++){
-      iss_orientation >> orientation_vector_[n];
-    }
-  }
-
-  auto imu = std::make_shared<IMU>(
-      main_board_ptr_, rotate_vector_, orientation_vector_);
-
-  double Kp = stod(info_.hardware_parameters.at("calib_kp"));
-  double Kd = stod(info_.hardware_parameters.at("calib_kd"));
-  double T = stod(info_.hardware_parameters.at("calib_T"));
-  double dt = stod(info_.hardware_parameters.at("calib_dt"));
-  std::vector<CalibrationMethod> directions = {
-      POSITIVE, POSITIVE, POSITIVE, POSITIVE, POSITIVE, POSITIVE}; 
-  calib_ = std::make_shared<JointCalibrator>(
-      joints_, directions, position_offsets_, Kp, Kd, T, dt);
-
-  // Define the robot (ODRI).
-  robot_ = std::make_shared<Robot>(main_board_ptr_, joints_, imu, calib_);
-
-
-return return_type::OK;
-}
-
-
-
 return_type SystemBoltHardware::configure()
 {
-
-
   if (configure_default(info_) != return_type::OK) {
     return return_type::ERROR;
   }
   
-
-  hw_start_sec_ = stod(info_.hardware_parameters["example_param_hw_start_duration_sec"]);
-  hw_stop_sec_ = stod(info_.hardware_parameters["example_param_hw_stop_duration_sec"]);
-  hw_slowdown_ = stod(info_.hardware_parameters["example_param_hw_slowdown"]);
-
   //For each sensor.
   for (const hardware_interface::ComponentInfo & sensor : info_.sensors) {
     imu_states_[sensor.name] =
@@ -342,12 +173,8 @@ return_type SystemBoltHardware::configure()
     }
   }
 
-  
 
   status_ = hardware_interface::status::CONFIGURED;
-  RCLCPP_INFO(
-    rclcpp::get_logger("SystemBoltHardware"),
-    "Finished configure() %p",this);
 
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {
     RCLCPP_INFO(
@@ -366,6 +193,9 @@ SystemBoltHardware::prepare_command_mode_switch
  const std::vector<std::string> & stop_interfaces
  )
 {
+  RCLCPP_INFO(
+    rclcpp::get_logger("SystemBoltHardware"),
+    "Prepare_command_mode_switch Start");
 
   RCLCPP_INFO(
     rclcpp::get_logger("SystemBoltHardware"),
@@ -373,8 +203,9 @@ SystemBoltHardware::prepare_command_mode_switch
     start_interfaces.size());
 
   // Initialize new modes.
-  for (const hardware_interface::ComponentInfo & joint : info_.joints)
+  for (const hardware_interface::ComponentInfo & joint : info_.joints){
     new_modes_[joint.name] = control_mode_t::NO_VALID_MODE;
+  }
 
   /// Check that the key interfaces are coherent
   for (auto & key : start_interfaces) {
@@ -383,29 +214,28 @@ SystemBoltHardware::prepare_command_mode_switch
 
     /// For each joint
     for (const hardware_interface::ComponentInfo & joint : info_.joints) {
-      if (key == joint.name + "/" + hardware_interface::HW_IF_POSITION)
-	{
-	  new_modes_[joint.name]=control_mode_t::POSITION;
-	  RCLCPP_INFO(rclcpp::get_logger("SystemBoltHardware"),
-		      "%s switch to position",key.c_str());
 
-	}
-      if (key == joint.name + "/" + hardware_interface::HW_IF_VELOCITY)
-	{
-	  new_modes_[joint.name]=control_mode_t::VELOCITY;
-	}
-      if (key == joint.name + "/" + hardware_interface::HW_IF_EFFORT)
-	{
-	  new_modes_[joint.name]=control_mode_t::EFFORT;
-	}
-      if (key == joint.name + "/" + ros2_control_bolt::HW_IF_GAIN_KP)
-	{
-	  new_modes_[joint.name]=control_mode_t::POS_VEL_EFF_GAINS;
-	}
-      if (key == joint.name + "/" + ros2_control_bolt::HW_IF_GAIN_KD)
-	{
-	  new_modes_[joint.name]=control_mode_t::POS_VEL_EFF_GAINS;
-	}
+      if (key == joint.name + "/" + hardware_interface::HW_IF_POSITION){
+        new_modes_[joint.name]=control_mode_t::POSITION;
+        RCLCPP_INFO(
+          rclcpp::get_logger("SystemBoltHardware"),
+          "%s switch to position",key.c_str());
+      }
+
+      if (key == joint.name + "/" + hardware_interface::HW_IF_VELOCITY){
+	      new_modes_[joint.name]=control_mode_t::VELOCITY;
+	    }
+
+      if (key == joint.name + "/" + hardware_interface::HW_IF_EFFORT){
+	      new_modes_[joint.name]=control_mode_t::EFFORT;
+      }
+
+      if (key == joint.name + "/" + ros2_control_bolt::HW_IF_GAIN_KP){
+	      new_modes_[joint.name]=control_mode_t::POS_VEL_EFF_GAINS;
+      }
+      if (key == joint.name + "/" + ros2_control_bolt::HW_IF_GAIN_KD){
+	      new_modes_[joint.name]=control_mode_t::POS_VEL_EFF_GAINS;
+      }
     }
   }
   // Stop motion on all relevant joints that are stopping
@@ -621,11 +451,15 @@ return_type SystemBoltHardware::start()
 {
 
   // Initialize Robot
-  init_robot();
-
+  robot_ = RobotFromYamlFile(info_.hardware_parameters["bolt_config_yaml"]);
+  
+  Vector6d des_pos;
+    des_pos << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ;
   //robot_->Start();
   /* robot_->SystemBoltHardware::GetIMU(); */
-  robot_->odri_control_interface::Robot::Start();
+  //robot_->odri_control_interface::Robot::Start();
+  
+  robot_->Initialize(des_pos);
 
   // set some default values
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {
@@ -637,7 +471,10 @@ return_type SystemBoltHardware::start()
 
   // Calibration
   calibration();
-
+  RCLCPP_INFO(
+      rclcpp::get_logger("SystemBoltHardware"),
+      "Calibration END"
+      );
   // Sensor reading
   read();
 
@@ -677,6 +514,12 @@ hardware_interface::return_type SystemBoltHardware::read()
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {
     
     hw_states_[joint.name].position = sensor_positions[joint_name_to_motor_nb_[joint.name]];
+    RCLCPP_INFO(
+      rclcpp::get_logger("SystemBoltHardware"),
+      "Joint '%s' as position : '%f'",
+      joint.name.c_str(),
+      hw_states_[joint.name].position
+      );
     hw_states_[joint.name].velocity = sensor_velocities[joint_name_to_motor_nb_[joint.name]];
     hw_states_[joint.name].effort = measured_torques[joint_name_to_motor_nb_[joint.name]];
     hw_states_[joint.name].Kp = hw_commands_[joint.name].Kp;
