@@ -19,19 +19,15 @@
           </xacro:if>
           <xacro:unless value="${use_fake_hardware}">
             <plugin>ros2_control_bolt/SystemBoltHardware</plugin>
-            <param name="example_param_hw_start_duration_sec">2.0</param>
-            <param name="example_param_hw_stop_duration_sec">3.0</param>
-            <param name="example_param_hw_slowdown">${slowdown}</param>
-            <param name="eth_interface">${ethernet_port}</param>
-            <param name="calib_kp">3.</param>
-            <param name="calib_kd">0.05</param>
-            <param name="calib_T">3.</param>
-            <param name="calib_dt">0.001</param>
+            <param name="bolt_yaml">2.0</param>
+            <xacro:property name="prop_bolt_config_yaml" value="$(find ros2_description_bolt)/config/bolt_config.yaml" />
+            <param name="bolt_config_yaml">${prop_bolt_config_yaml}</param>
             </xacro:unless>
         </hardware>
       </xacro:unless>
 
-      <joint name="FLHAA">
+      
+      <!-- <joint name="FLHAA">
         <command_interface name="position">
           <param name="min">-0.9</param>
           <param name="max">0.9</param>
@@ -64,13 +60,13 @@
         <param name="max_joint_velocity">80.</param>
         <param name="safety_damping">0.5</param>
         <param name="motor_reversed_polarity">${true}</param>
-        <param name="position_offset">0.2393</param>
+        <param name="position_offset">-0.113570</param>
       </joint>
       
-      <joint name="FLHFE">
+      <joint name="FRHAA">
         <command_interface name="position">
-          <param name="min">-1.7</param>
-          <param name="max">1.7</param>
+          <param name="min">-0.9</param>
+          <param name="max">0.9</param>
         </command_interface>
         <command_interface name="velocity">
           <param name="min">-1</param>
@@ -100,7 +96,7 @@
         <param name="max_joint_velocity">80.</param>
         <param name="safety_damping">0.5</param>
         <param name="motor_reversed_polarity">${true}</param>
-        <param name="position_offset">0.3891</param>
+        <param name="position_offset">0.834380</param>
       </joint>
 
       <joint name="FLK">
@@ -136,13 +132,13 @@
         <param name="max_joint_velocity">80.</param>
         <param name="safety_damping">0.5</param>
         <param name="motor_reversed_polarity">${true}</param>
-        <param name="position_offset">0.2745</param>
+        <param name="position_offset">-0.058488</param>
       </joint>
 
-      <joint name="FRHAA">
+      <joint name="FLHFE">
         <command_interface name="position">
-          <param name="min">-0.5</param>
-          <param name="max">0.5</param>
+          <param name="min">-1.7</param>
+          <param name="max">1.7</param>
         </command_interface>
         <command_interface name="velocity">
           <param name="min">-1</param>
@@ -172,13 +168,13 @@
         <param name="max_joint_velocity">80.</param>
         <param name="safety_damping">0.5</param>
         <param name="motor_reversed_polarity">${true}</param>
-        <param name="position_offset">0.584</param>
+        <param name="position_offset">0.609496</param>
       </joint>
 
-      <joint name="FRHFE">
+      <joint name="FRK">
         <command_interface name="position">
-          <param name="min">-1.7</param>
-          <param name="max">1.7</param>
+          <param name="min">-3.4</param>
+          <param name="max">3.4</param>
         </command_interface>
         <command_interface name="velocity">
           <param name="min">-1</param>
@@ -208,13 +204,13 @@
         <param name="max_joint_velocity">80.</param>
         <param name="safety_damping">0.5</param>
         <param name="motor_reversed_polarity">${false}</param>
-        <param name="position_offset">0.09607</param>
+        <param name="position_offset">0.093402</param>
       </joint>
-
-      <joint name="FRK">
+      
+      <joint name="FRHFE">
         <command_interface name="position">
-          <param name="min">-3.4</param>
-          <param name="max">3.4</param>
+          <param name="min">-1.7</param>
+          <param name="max">1.7</param>
         </command_interface>
         <command_interface name="velocity">
           <param name="min">-1</param>
@@ -244,8 +240,8 @@
         <param name="max_joint_velocity">80.</param>
         <param name="safety_damping">0.5</param>
         <param name="motor_reversed_polarity">${false}</param>
-        <param name="position_offset">0.4386</param>
-      </joint>
+        <param name="position_offset">0.586886</param>
+      </joint> -->
 
       <sensor name="IMU">
         <state_interface name="gyroscope_x"/>
@@ -264,8 +260,8 @@
         <state_interface name="attitude_quaternion_y"/>
         <state_interface name="attitude_quaternion_z"/>
         <state_interface name="attitude_quaternion_w"/>
-        <param name="rotate_vector">1 2 3</param>
-        <param name="orientation_vector">1 2 3 4</param>
+        <!-- <param name="rotate_vector">1 2 3</param>
+        <param name="orientation_vector">1 2 3 4</param> -->
       </sensor>
     </ros2_control>
 
