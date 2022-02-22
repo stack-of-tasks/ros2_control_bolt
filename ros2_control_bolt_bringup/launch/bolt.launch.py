@@ -183,12 +183,30 @@ def generate_launch_description():
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner.py",
+        prefix = [# Sudo command cause need to be sudoer when we do this node cause it real time 
+            'sudo -E env PATH=',
+            EnvironmentVariable("PATH", default_value='${PATH}'),
+            " LD_LIBRARY_PATH=",
+            EnvironmentVariable("LD_LIBRARY_PATH", default_value='${LD_LIBRARY_PATH}'),
+            " PYTHONPATH=",
+            EnvironmentVariable("PYTHONPATH", default_value='${PYTHONPATH}'),
+            " HOME=/tmp "
+            ],
         arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
     )
 
     robot_controller_spawner = Node(
         package="controller_manager",
         executable="spawner.py",
+        prefix = [# Sudo command cause need to be sudoer when we do this node cause it real time 
+            'sudo -E env PATH=',
+            EnvironmentVariable("PATH", default_value='${PATH}'),
+            " LD_LIBRARY_PATH=",
+            EnvironmentVariable("LD_LIBRARY_PATH", default_value='${LD_LIBRARY_PATH}'),
+            " PYTHONPATH=",
+            EnvironmentVariable("PYTHONPATH", default_value='${PYTHONPATH}'),
+            " HOME=/tmp "
+            ],
         arguments=[robot_controller, "-c", "/controller_manager"],
     )
 
