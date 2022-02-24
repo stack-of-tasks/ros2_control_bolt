@@ -25,9 +25,7 @@
             </xacro:unless>
         </hardware>
       </xacro:unless>
-
-      
-      <!-- <joint name="FLHAA">
+      <joint name="FLHAA">
         <command_interface name="position">
           <param name="min">-0.9</param>
           <param name="max">0.9</param>
@@ -53,14 +51,6 @@
         <state_interface name="effort"/>
         <state_interface name="gain_kp"/>
         <state_interface name="gain_kd"/>
-        <param name="motor_number">0</param>
-        <param name="gear_ratio">9.</param>
-        <param name="motor_constant">0.025</param>
-        <param name="max_current">12.</param>
-        <param name="max_joint_velocity">80.</param>
-        <param name="safety_damping">0.5</param>
-        <param name="motor_reversed_polarity">${true}</param>
-        <param name="position_offset">-0.113570</param>
       </joint>
       
       <joint name="FRHAA">
@@ -89,16 +79,7 @@
         <state_interface name="effort"/>
         <state_interface name="gain_kp"/>
         <state_interface name="gain_kd"/>
-        <param name="motor_number">3</param>
-        <param name="gear_ratio">9.</param>
-        <param name="motor_constant">0.025</param>
-        <param name="max_current">12.</param>
-        <param name="max_joint_velocity">80.</param>
-        <param name="safety_damping">0.5</param>
-        <param name="motor_reversed_polarity">${true}</param>
-        <param name="position_offset">0.834380</param>
       </joint>
-
       <joint name="FLK">
         <command_interface name="position">
           <param name="min">-3.4</param>
@@ -125,16 +106,7 @@
         <state_interface name="effort"/>
         <state_interface name="gain_kp"/>
         <state_interface name="gain_kd"/>
-        <param name="motor_number">2</param>
-        <param name="gear_ratio">9.</param>
-        <param name="motor_constant">0.025</param>
-        <param name="max_current">12.</param>
-        <param name="max_joint_velocity">80.</param>
-        <param name="safety_damping">0.5</param>
-        <param name="motor_reversed_polarity">${true}</param>
-        <param name="position_offset">-0.058488</param>
       </joint>
-
       <joint name="FLHFE">
         <command_interface name="position">
           <param name="min">-1.7</param>
@@ -161,16 +133,7 @@
         <state_interface name="effort"/>
         <state_interface name="gain_kp"/>
         <state_interface name="gain_kd"/>
-        <param name="motor_number">1</param>
-        <param name="gear_ratio">9.</param>
-        <param name="motor_constant">0.025</param>
-        <param name="max_current">12.</param>
-        <param name="max_joint_velocity">80.</param>
-        <param name="safety_damping">0.5</param>
-        <param name="motor_reversed_polarity">${true}</param>
-        <param name="position_offset">0.609496</param>
       </joint>
-
       <joint name="FRK">
         <command_interface name="position">
           <param name="min">-3.4</param>
@@ -197,14 +160,6 @@
         <state_interface name="effort"/>
         <state_interface name="gain_kp"/>
         <state_interface name="gain_kd"/>
-        <param name="motor_number">5</param>
-        <param name="gear_ratio">9.</param>
-        <param name="motor_constant">0.025</param>
-        <param name="max_current">12.</param>
-        <param name="max_joint_velocity">80.</param>
-        <param name="safety_damping">0.5</param>
-        <param name="motor_reversed_polarity">${false}</param>
-        <param name="position_offset">0.093402</param>
       </joint>
       
       <joint name="FRHFE">
@@ -233,16 +188,7 @@
         <state_interface name="effort"/>
         <state_interface name="gain_kp"/>
         <state_interface name="gain_kd"/>
-        <param name="motor_number">4</param>
-        <param name="gear_ratio">9.</param>
-        <param name="motor_constant">0.025</param>
-        <param name="max_current">12.</param>
-        <param name="max_joint_velocity">80.</param>
-        <param name="safety_damping">0.5</param>
-        <param name="motor_reversed_polarity">${false}</param>
-        <param name="position_offset">0.586886</param>
-      </joint> -->
-
+      </joint>
       <sensor name="IMU">
         <state_interface name="gyroscope_x"/>
         <state_interface name="gyroscope_y"/>
