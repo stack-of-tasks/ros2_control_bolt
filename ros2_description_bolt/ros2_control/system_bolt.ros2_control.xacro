@@ -25,7 +25,8 @@
             </xacro:unless>
         </hardware>
       </xacro:unless>
-      <joint name="FLHAA">
+
+      <joint name="FL_HAA">
         <command_interface name="position">
           <param name="min">-0.9</param>
           <param name="max">0.9</param>
@@ -53,7 +54,7 @@
         <state_interface name="gain_kd"/>
       </joint>
       
-      <joint name="FRHAA">
+      <joint name="FR_HAA">
         <command_interface name="position">
           <param name="min">-0.9</param>
           <param name="max">0.9</param>
@@ -80,7 +81,8 @@
         <state_interface name="gain_kp"/>
         <state_interface name="gain_kd"/>
       </joint>
-      <joint name="FLK">
+
+      <joint name="FL_KFE">
         <command_interface name="position">
           <param name="min">-3.4</param>
           <param name="max">3.4</param>
@@ -107,7 +109,8 @@
         <state_interface name="gain_kp"/>
         <state_interface name="gain_kd"/>
       </joint>
-      <joint name="FLHFE">
+
+      <joint name="FR_KFE">
         <command_interface name="position">
           <param name="min">-1.7</param>
           <param name="max">1.7</param>
@@ -134,7 +137,8 @@
         <state_interface name="gain_kp"/>
         <state_interface name="gain_kd"/>
       </joint>
-      <joint name="FRK">
+
+      <joint name="FL_HFE">
         <command_interface name="position">
           <param name="min">-3.4</param>
           <param name="max">3.4</param>
@@ -162,7 +166,7 @@
         <state_interface name="gain_kd"/>
       </joint>
       
-      <joint name="FRHFE">
+      <joint name="FR_HFE">
         <command_interface name="position">
           <param name="min">-1.7</param>
           <param name="max">1.7</param>
@@ -189,6 +193,7 @@
         <state_interface name="gain_kp"/>
         <state_interface name="gain_kd"/>
       </joint>
+
       <sensor name="IMU">
         <state_interface name="gyroscope_x"/>
         <state_interface name="gyroscope_y"/>
