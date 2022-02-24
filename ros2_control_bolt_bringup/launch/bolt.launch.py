@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from inspect import Parameter
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution, EnvironmentVariable, TextSubstitution
@@ -145,7 +146,7 @@ def generate_launch_description():
         ]
     )
     rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare(description_package), "rviz", "bolt.rviz"]
+        [FindPackageShare(description_package), "config", "bolt.rviz"]
     )
 
     control_node = Node(
@@ -177,6 +178,7 @@ def generate_launch_description():
         executable="rviz2",
         name="rviz2",
         output="log",
+        arguments = ["-d", rviz_config_file],
     )
 
     joint_state_broadcaster_spawner = Node(
