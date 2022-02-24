@@ -147,10 +147,7 @@ public:
   RCLCPP_SHARED_PTR_DEFINITIONS(SystemBoltHardware)
 
   ROS2_CONTROL_BOLT_PUBLIC
-  return_type configure();
-
-  ROS2_CONTROL_BOLT_PUBLIC
-  return_type init_robot();
+  hardware_interface::return_type configure(const hardware_interface::HardwareInfo & system_info) override;
 
   ROS2_CONTROL_BOLT_PUBLIC
   std::vector<hardware_interface::StateInterface> export_state_interfaces() override;
@@ -190,7 +187,7 @@ private:
   double hw_slowdown_;
   
   //Joint number from urdf
-  std::map<std::string,int> joint_name_to_motor_nb_;
+  std::map<std::string,int> joint_name_to_array_index_;
 
   // Store the command for the simulated robot
   std::map<std::string,PosVelEffortGains> hw_commands_;
