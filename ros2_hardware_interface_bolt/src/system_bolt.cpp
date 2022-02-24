@@ -272,9 +272,6 @@ return_type SystemBoltHardware::prepare_command_mode_switch
 std::vector<hardware_interface::StateInterface>
 SystemBoltHardware::export_state_interfaces()
 {
-  RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-        "Export_State_Interface_Start()");
 
   std::vector<hardware_interface::StateInterface> state_interfaces;
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {
@@ -391,10 +388,6 @@ SystemBoltHardware::export_state_interfaces()
         &values_.fx));*/
   }
 
-    RCLCPP_INFO(
-        rclcpp::get_logger("SystemBoltHardware"),
-        "Export_State_Interface Size : '%d'",
-        info_.joints.size());
 
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {
     RCLCPP_INFO(
