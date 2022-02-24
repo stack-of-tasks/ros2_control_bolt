@@ -144,7 +144,6 @@ def generate_launch_description():
             controllers_file,
         ]
     )
-    print(robot_controllers)
     rviz_config_file = PathJoinSubstitution(
         [FindPackageShare(description_package), "rviz", "bolt.rviz"]
     )
