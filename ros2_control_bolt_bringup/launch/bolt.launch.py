@@ -133,7 +133,7 @@ def generate_launch_description():
             "slowdown:=",
             slowdown,
         ]
-    print(robot_description_content_expr)
+
     robot_description_content = Command(robot_description_content_expr)
     robot_description = {"robot_description": robot_description_content}
 
@@ -144,6 +144,7 @@ def generate_launch_description():
             controllers_file,
         ]
     )
+    print(robot_controllers)
     rviz_config_file = PathJoinSubstitution(
         [FindPackageShare(description_package), "rviz", "bolt.rviz"]
     )
@@ -177,7 +178,6 @@ def generate_launch_description():
         executable="rviz2",
         name="rviz2",
         output="log",
-        arguments=["-d", rviz_config_file],
     )
 
     joint_state_broadcaster_spawner = Node(
