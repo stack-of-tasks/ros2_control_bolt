@@ -379,13 +379,7 @@ SystemBoltHardware::export_state_interfaces()
         sensor.name,
         "attitude_quaternion_w",
         &imu_states_[sensor.name].quater_w));
-    
-
-    /*state_interfaces.emplace_back(
-      hardware_interface::StateInterface(
-        sensor_name,
-        "fx",
-        &values_.fx));*/
+  
   }
 
 
@@ -439,12 +433,12 @@ SystemBoltHardware::export_command_interfaces()
 }
 
 //Calibration function
-return_type SystemBoltHardware::calibration(){
+/* return_type SystemBoltHardware::calibration(){
 
     Eigen::Vector6d zeros = Eigen::Vector6d::Zero();
     robot_->RunCalibration(zeros); 
     return return_type::OK;
-  }
+  } */
 
 
 return_type SystemBoltHardware::start()
@@ -454,10 +448,7 @@ return_type SystemBoltHardware::start()
   robot_ = RobotFromYamlFile(info_.hardware_parameters["bolt_config_yaml"]);
 
   Vector6d des_pos;
-    des_pos << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ;
-  //robot_->Start();
-  /* robot_->SystemBoltHardware::GetIMU(); */
-  //robot_->odri_control_interface::Robot::Start();
+  des_pos << 0.0, 0.0, 0.0, 0.0 ,0.0 ,0.0 ;
   
   robot_->Initialize(des_pos);
 
@@ -472,14 +463,12 @@ return_type SystemBoltHardware::start()
 
   uint idx=0;
   for (auto it = joint_name_to_array_index_.begin(); 
-            it != joint_name_to_array_index_.end(); ++it) {
+            it != joint_name_to_array_index_.end(); ++it) {         
     joint_name_to_array_index_[it->first]=idx++;
+    
   }
-  // Calibration
-  calibration();
-  // Sensor reading
-  read();
-
+  
+  
   status_ = hardware_interface::status::STARTED;
 
   return return_type::OK;
@@ -514,6 +503,12 @@ hardware_interface::return_type SystemBoltHardware::read()
 
   // Assignment of sensor data to ros2_control variables (URDF)
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {    
+/*     RCLCPP_INFO(
+      rclcpp::get_logger("SystemBoltHardware"),
+      "Sensor_position  '%lf' for joint '%s'",
+      sensor_positions[joint_name_to_array_index_[joint.name]],
+      joint.name.c_str());  */
+  
     hw_states_[joint.name].position = sensor_positions[joint_name_to_array_index_[joint.name]];
     hw_states_[joint.name].velocity = sensor_velocities[joint_name_to_array_index_[joint.name]];
     hw_states_[joint.name].effort = measured_torques[joint_name_to_array_index_[joint.name]];
@@ -568,6 +563,13 @@ SystemBoltHardware::write()
     gain_KP[joint_name_to_array_index_[joint.name]] = hw_commands_[joint.name].Kp;
     gain_KD[joint_name_to_array_index_[joint.name]] = hw_commands_[joint.name].Kd;
   }
+
+  std::cout << "positions:" << positions << std::endl;
+  std::cout << "velocities:" << velocities << std::endl;
+  std::cout << "torques: " << torques << std::endl;
+  std::cout << "gain_KP: " << gain_KP << std::endl;
+  std::cout << "gain_KD: " << gain_KD << std::endl;
+  
   robot_->joints->SetDesiredPositions(positions);
   robot_->joints->SetDesiredVelocities(velocities);
   robot_->joints->SetTorques(torques);
