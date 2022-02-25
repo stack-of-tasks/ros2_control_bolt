@@ -208,7 +208,6 @@ endmacro(create_bolt_demo source)
 create_bolt_demo(demo_create_bolt_robot)
 create_bolt_demo(demo_bolt_from_yaml)
 create_bolt_demo(demo_bolt_sensor_reading)
-create_bolt_demo(demo_bolt_calibration)
 create_bolt_demo(demo_bolt_write_commands)
 
 
