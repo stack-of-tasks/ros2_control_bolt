@@ -14,10 +14,10 @@ controller_manager:
 forward_position_controller:
   ros__parameters:
     joints:
-      - FLHAA
-      - FRHAA
-      - FLK
-      - FLHFE
-      - FRK
-      - FRHFE
+      - FL_HAA
+      - FR_HAA
+      - FL_KFE
+      - FL_HFE
+      - FR_KFE
+      - FR_HFE
     interface_name: position
