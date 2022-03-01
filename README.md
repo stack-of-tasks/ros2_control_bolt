@@ -319,3 +319,6 @@ Now you should also see the *RRbot* represented correctly in `rviz2`.
    ```
 
 3. You should also see the *RRbot* moving in `rviz2`.
+
+# BOLT IS POWER !
+export FASTRTPS_DEFAULT_PROFILES_FILE=/users/local/bamsellem/devel/workspace/src/ros2_control_bolt/ros2_description_bolt/config/FastRTP.xml
