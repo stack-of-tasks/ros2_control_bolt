@@ -214,9 +214,6 @@ return_type SystemBoltHardware::prepare_command_mode_switch
 
       if (key == joint.name + "/" + hardware_interface::HW_IF_POSITION){
         new_modes_[joint.name]=control_mode_t::POSITION;
-        RCLCPP_INFO(
-          rclcpp::get_logger("SystemBoltHardware"),
-          "%s switch to position",key.c_str());
       }
 
       if (key == joint.name + "/" + hardware_interface::HW_IF_VELOCITY){
@@ -503,12 +500,6 @@ hardware_interface::return_type SystemBoltHardware::read()
 
   // Assignment of sensor data to ros2_control variables (URDF)
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {    
-/*     RCLCPP_INFO(
-      rclcpp::get_logger("SystemBoltHardware"),
-      "Sensor_position  '%lf' for joint '%s'",
-      sensor_positions[joint_name_to_array_index_[joint.name]],
-      joint.name.c_str());  */
-  
     hw_states_[joint.name].position = sensor_positions[joint_name_to_array_index_[joint.name]];
     hw_states_[joint.name].velocity = sensor_velocities[joint_name_to_array_index_[joint.name]];
     hw_states_[joint.name].effort = measured_torques[joint_name_to_array_index_[joint.name]];
@@ -564,17 +555,24 @@ SystemBoltHardware::write()
     gain_KD[joint_name_to_array_index_[joint.name]] = hw_commands_[joint.name].Kd;
   }
 
-  std::cout << "positions:" << positions << std::endl;
-  std::cout << "velocities:" << velocities << std::endl;
-  std::cout << "torques: " << torques << std::endl;
-  std::cout << "gain_KP: " << gain_KP << std::endl;
-  std::cout << "gain_KD: " << gain_KD << std::endl;
+  // static unsigned int my_perso_counter2 = 0;
+  // if(my_perso_counter2 % 1000 == 0)
+  // {
+  //   std::cout << "positions:" << positions.transpose() << std::endl;
+  //   std::cout << "velocities:" << velocities.transpose() << std::endl;
+  //   std::cout << "torques: " << torques.transpose() << std::endl;
+  //   std::cout << "gain_KP: " << gain_KP.transpose() << std::endl;
+  //   std::cout << "gain_KD: " << gain_KD.transpose() << std::endl;
+  // }
+  // ++my_perso_counter2;
   
   robot_->joints->SetDesiredPositions(positions);
   robot_->joints->SetDesiredVelocities(velocities);
   robot_->joints->SetTorques(torques);
   robot_->joints->SetPositionGains(gain_KP);
   robot_->joints->SetVelocityGains(gain_KD);
+
+  robot_->SendCommandAndWaitEndOfCycle(0.001);
 
   return return_type::OK;
 }
