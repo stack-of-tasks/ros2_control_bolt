@@ -22,9 +22,9 @@ ROS 2 it's the big brother of ROS 1, he adapt the changes of robotics community 
         - ROS2 CONTROL is a framework for (real-time) control of robots. This goal is to simplify integrating new hardware and overcome some drawbacks.
         
         - Do :
-            `sudo apt update`
-            `sudo apt install ros-foxy-ros2-control`
-            `sudo apt install ros-foxy-ros2-controllers`
+            -`sudo apt update`
+            -`sudo apt install ros-foxy-ros2-control`
+            -`sudo apt install ros-foxy-ros2-controllers`
 
 
     2 - Second step, Workspace :
