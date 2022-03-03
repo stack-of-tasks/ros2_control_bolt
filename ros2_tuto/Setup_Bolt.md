@@ -1,5 +1,4 @@
-# BOLT TUTORIAL :
-## SETUP
+# SETUP
 
 After you've follow the the Start tutorial you need to know how to setup Bolt, that will take you 3 steps :
 
