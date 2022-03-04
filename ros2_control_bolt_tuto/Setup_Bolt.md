@@ -25,7 +25,7 @@ Bolt is a tiny robot completely built in our labs. We have assemblate their comp
     - An emergency stop button,
     - A power cable. 
 
-2) Take your alimentation, put them on and adjust behind alimentation the port (P1/P2/P3) and put the mode to SET then set the Voltage to 20V and amperage 5A. Finally change the mode to NORMAL.
+2) Take your alimentation, put them on and adjust behind alimentation the port (P1/P2/P3) and put the mode to SET then set the Voltage to 20V and amperage 5A at the fronto. Finally change the mode to NORMAL.
 
         [PHOTO DERRIERE L'ALIMENTATION]
 

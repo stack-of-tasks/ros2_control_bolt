@@ -24,15 +24,11 @@ robot:
 joint_calibrator:
     # Can be either POS, NEG, ALT or AUTO
     search_methods: [
-      #AUTO, AUTO, AUTO, AUTO, AUTO, AUTO
       #POS, NEG, POS, NEG, NEG, POS             #MODIF avec bolt_driver.yaml
       POS, POS, POS, POS, POS, POS               
     ]
     position_offsets: [ # [ FLHAA, FLHFE, FLKFE, FRHAA, FRHFE, FRKFE ]
-            # 0.39620453147888185, 0.42925912553999157, 0.2865775082455741, 0.4388355898751153, 0.16206956309212578, 0.4076508879396651
               0.2403, 0.3996, 0.2668, 0.5836, 0.1053, 0.4465
-              #0,0,0,0,0,0
-            #-0.149, -0.030, -0.019, 0.144, -0.048, +0.038
     ]                                             #Calibration cpp codes made
     Kp: 3.
     Kd: 0.05
