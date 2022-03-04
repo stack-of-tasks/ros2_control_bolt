@@ -176,13 +176,6 @@ return_type SystemBoltHardware::configure(const hardware_interface::HardwareInfo
 
   status_ = hardware_interface::status::CONFIGURED;
 
-  for (const hardware_interface::ComponentInfo & joint : info_.joints) {
-    RCLCPP_INFO(
-      rclcpp::get_logger("SystemBoltHardware"),
-      "Joint '%s' configuration.",
-      joint.name.c_str());
-  }
-
   return return_type::OK;
 }
 
@@ -194,11 +187,6 @@ return_type SystemBoltHardware::prepare_command_mode_switch
  )
 {
 
-  RCLCPP_INFO(
-    rclcpp::get_logger("SystemBoltHardware"),
-    "Going through SystemBoltHardware::prepare_command_mode_switch %d",
-    start_interfaces.size());
-
   // Initialize new modes.
   for (const hardware_interface::ComponentInfo & joint : info_.joints){
     new_modes_[joint.name] = control_mode_t::NO_VALID_MODE;
@@ -206,8 +194,6 @@ return_type SystemBoltHardware::prepare_command_mode_switch
 
   /// Check that the key interfaces are coherent
   for (auto & key : start_interfaces) {
-    RCLCPP_INFO(rclcpp::get_logger("SystemBoltHardware"),
-		"prepare_command_mode_switch %s",key.c_str());
 
     /// For each joint
     for (const hardware_interface::ComponentInfo & joint : info_.joints) {
@@ -379,13 +365,6 @@ SystemBoltHardware::export_state_interfaces()
   
   }
 
-
-  for (const hardware_interface::ComponentInfo & joint : info_.joints) {
-    RCLCPP_INFO(
-      rclcpp::get_logger("SystemBoltHardware"),
-      "Joint '%s' export_state_interface.",
-      joint.name.c_str());
-  }
   return state_interfaces;
 }
 
@@ -418,24 +397,8 @@ SystemBoltHardware::export_command_interfaces()
         &hw_commands_[joint.name].Kd));
   }
 
-  for (const hardware_interface::ComponentInfo & joint : info_.joints) {
-
-    RCLCPP_INFO(
-      rclcpp::get_logger("SystemBoltHardware"),
-      "Joint '%s' export_command_interface.",
-      joint.name.c_str());
-  }
-
   return command_interfaces;
 }
-
-//Calibration function
-/* return_type SystemBoltHardware::calibration(){
-
-    Eigen::Vector6d zeros = Eigen::Vector6d::Zero();
-    robot_->RunCalibration(zeros); 
-    return return_type::OK;
-  } */
 
 
 return_type SystemBoltHardware::start()
