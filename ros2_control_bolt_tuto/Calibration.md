@@ -41,7 +41,7 @@ For this step you need to have configurate all the parameters you need mentionne
 
         [PHOTO DES VALEURS RETOURNE DU TERMINAL]
         
-6)  Open file ros2_control_bolt/ros2_hardware_bolt/src/config_bolt.yaml and paste the values in the variable position_offsets (line 31), save the file and do a colcon build at `Bolt_ws/`.
+6)  Open file ros2_control_bolt/ros2_hardware_bolt/src/config_bolt.yaml and paste the values in the variable position_offsets (line 30), save the file and do a colcon build at `Bolt_ws/`.
 
         [PHOTO DE OU LE METTRE]
         
