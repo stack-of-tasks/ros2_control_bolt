@@ -26,23 +26,24 @@ Bolt is a tiny robot completely built in our labs. We have put together their co
 
 2) Take your alimentation, put them on and adjust behind alimentation the port (P1/P2/P3) and put the mode to SET then set the Voltage to 20V and amperage 5A at the front. Finally, change the mode to NORMAL.
 
-        [PHOTO DERRIERE L'ALIMENTATION]
-
+![Behind alimentation](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Setup_Bolt_1-R.jpeg?raw=true "Behind alimentation")
+        
 3) Connect the emergency stop button to the alimentation (by behind, not front).
 
-        [PHOTO DU BRANCHEMENT DEVANT BARRE] [PHOTO DU BRANCHEMENT DERRIERE]
+    ![Not Front](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Setup_Bolt_2-R.jpeg?raw=true "Not Front") 
+    ![Behind](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Setup_Bolt_3-R.jpeg?raw=true "Behind")
 
 4) Connect the power cable to Bolt, one end to the Ethernet port of the Master-Board and the power cable inside Bolt.
 
-        [PHOTO DE LA CONNECTION A BOLT]
+    ![Bolt Connection](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Setup_Bolt_4-R.jpeg?raw=true "Connection")
 
 5) See if any cable is plugged out of the Master-Board (below Bolt).
 
-        [PHOTO DES BONS BRANCHEMENTS]
+    ![Connection Master-Board](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Setup_Bolt_5-R.jpeg?raw=true "Master-Board Connection")
 
 6) Connect the other end to the emergency button and the Ethernet cable to your pc. 
 
-        [PHOTO DE LA CONNECTION AU BOUTON]
+     ![Button Connection](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Setup_Bolt_7-R.jpeg?raw=true "Buttun Connection")
 
 
 7) Finally, unlock the emergency stop button and power on the alimentation.
