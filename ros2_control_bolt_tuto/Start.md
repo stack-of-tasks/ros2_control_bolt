@@ -31,9 +31,9 @@ ROS2 CONTROL is a framework for (real-time) control of robots this goal is to si
 
 ## 2 - Second step, Workspace :
 
-You need to have a clear workspace to do some tests or find your files easily. Many differents workspaces exist but for the rest of the tutoriel you would be easier to use the same workspace than me. 
+You need to have a clear workspace to do some tests or find your files easily. Many differents workspaces exist but for the rest of the tutoriel you would be easier to use the same workspace as me. 
 
-1) Have a local workspace is better :
+1) Having a local workspace is better :
       
         cd /users/local/<User_Name>
 
@@ -41,12 +41,12 @@ You need to have a clear workspace to do some tests or find your files easily. M
     - Go to : 
   
           cd /
-          mkdir users/local/<User_Name>
+          sudo mkdir -p users/local/<User_Name>
           cd users/local/<User_Name>
   
 3) Create your own Workspace :
 
-        mkdir Bolt_ws/src
+        sudo mkdir -p Bolt_ws/src
         cd Bolt_ws/src
 
 4) Add the bolt project (in the src file) :
@@ -64,6 +64,7 @@ You need to have git tool install
 
 Every time you change something in your code you need to upload with a colcon build otherwise your updates don't be transmitted.
 
+        [DOWNLOAD COLCON BUILD]
 1) Go to the Bolt_ws file :
 
         cd ..
