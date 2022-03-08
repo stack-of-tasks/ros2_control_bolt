@@ -42,29 +42,33 @@ You need to have a clear workspace to do some tests or find your files easily. M
   
           cd /
           sudo mkdir -p users/local/<User_Name>
-          cd users/local/<User_Name>
+          cd users/local/
+          sudo chown User_Name User_Name
   
 3) Create your own Workspace :
 
-        sudo mkdir -p Bolt_ws/src
+        mkdir -p Bolt_ws/src
         cd Bolt_ws/src
 
 4) Add the bolt project (in the src file) :
 You need to have git tool install 
 
-        git clone https://github.com/stack-of-tasks/ros2_control_bolt.git
+        git clone --recursive https://github.com/stack-of-tasks/ros2_control_bolt.git
 
 5) Add some dependencies of Bolt (in the src file) :
 
-        git clone https://github.com/open-dynamic-robot-initiative/master-board.git
-        git clone https://github.com/open-dynamic-robot-initiative/odri_control_interface.git
-
+        git clone --recursive https://github.com/open-dynamic-robot-initiative/master-board.git
+        git clone --recursive https://github.com/open-dynamic-robot-initiative/odri_control_interface.git
+        sudo apt install python3-sphinx python3-pybind11
+        
+        
 
 ## 3 - Third step, Colcon Build  
 
 Every time you change something in your code you need to upload with a colcon build otherwise your updates don't be transmitted.
 
         [DOWNLOAD COLCON BUILD]
+        
 1) Go to the Bolt_ws file :
 
         cd ..
