@@ -1,6 +1,8 @@
 # SETUP
 
-After you've been following the Start tutorial, you need to know how to setup Bolt, that will take you 3 steps :
+
+ After  having followed the Starting tutorial, you need to know how to setup Bolt, this will take you 3 steps :
+
 
 * Bolt skeleton
 * How to plug correctly Bolt
@@ -10,42 +12,44 @@ After you've been following the Start tutorial, you need to know how to setup Bo
 
 ##  1)  Bolt Skeleton :
 
-Bolt is a tiny robot completely built in our labs. We have put together their components, modeled their bones with a 3D printer and made it look like real robots. 
 
-  - If one day, one of their bones broke you will need to go to this link and follow the tutorial. You will have to print a new bone for Bolt with a 3D Printer :
+ Bolt is a small robot that has been totally built in our laboratories. We assembled its components, modeled its bones with a 3D printer and gave it the appearance of real robots.
+
+
+- If ever a bone in his body should break, you will have to go to this link and follow the tutorial. You will then have to print a new bone for Bolt with a 3D Printer :
       - ' TUTORIAL FOR BOLT 3D PRINTING '
 
 ##  2)  Plug Bolt properly :
 
-1) You need before any commands who need Bolt have it properly connected. Is really simple that what you need :
+1) For any command that needs Bolt, you must first have it properly connected. The process is simple, and for that you would need:
 
-    - An alimentation,
+    - A power supply,
     - A pc with Ubuntu 20.04 and 2 or more Ethernet port,
     - An emergency stop button,
     - A power cable. 
 
-2) Take your alimentation, put them on and adjust behind alimentation the port (P1/P2/P3) and put the mode to SET then set the Voltage to 20V and amperage 5A at the front. Finally, change the mode to NORMAL.
+2) Take your power supply, turn it on and adjust behind the power supply the port (P1/P2/P3) and set the mode to SET then set the voltage to 20V and the amperage to 5A on the front. Finally, set the mode to NORMAL.
 
 ![Behind alimentation](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Setup_Bolt_1-R.jpeg?raw=true "Behind alimentation")
         
-3) Connect the emergency stop button to the alimentation (by behind, not front).
+3) Connect the emergency stop button to the power supply (from behind,and not in front
 
     ![Not Front](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Setup_Bolt_2-R.jpeg?raw=true "Not Front") 
     ![Behind](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Setup_Bolt_3-R.jpeg?raw=true "Behind")
-   
-4) Connect the other end to the emergency button and the Ethernet cable to your pc. 
+    
+4) Connect the other end to the emergency button and the Ethernet cable to your computer.
 
      ![Button Connection](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Setup_Bolt_7-R.jpeg?raw=true "Buttun Connection")
-
+   
 5) Connect the power cable to Bolt, one end to the Ethernet port of the Master-Board and the power cable inside Bolt.
 
     ![Bolt Connection](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Setup_Bolt_4-R.jpeg?raw=true "Connection")
 
-6) See if any cable is plugged out of the Master-Board (below Bolt).
+6) Check if any cable is plugged out of the Master-Board (below Bolt).
 
     ![Connection Master-Board](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Setup_Bolt_5-R.jpeg?raw=true "Master-Board Connection")
 
-7) Finally, unlock the emergency stop button and power on the alimentation.
+7) Finally, unlock the emergency stop button and power on the supply power.
 
    - If you see a Red-Light flash below Bolt, it means Bolt is ON
 
@@ -53,7 +57,7 @@ Bolt is a tiny robot completely built in our labs. We have put together their co
 **Now Bolt is connected properly to your computer.**
 
 
-## 3) Set some important information on Bolt :
+## 3) Set some important informations on Bolt :
 
 1) You need to set the internet port of Bolt in the code. 
 
@@ -61,7 +65,7 @@ Bolt is a tiny robot completely built in our labs. We have put together their co
 
           ifconfig
 
-2) All the name ports start with "en" you can see them on the left of your terminal.
+2) All the name ports starting with "en" you can see them on the left of your terminal.
 
     - Power ON Bolt.
 
@@ -72,7 +76,7 @@ Bolt is a tiny robot completely built in our labs. We have put together their co
      - Try one by one all the port with this command,  <PORT> is a value where you change the port name :
 
             ros2 run --prefix="sudo -E env PATH=${PATH} LD_LIBRARY_PATH=${LD_LIBRARY_PATH} PYTHONPATH=${PYTHONPATH}" ros2_hardware_interface_bolt demo_bolt_sensor_reading <PORT>
-3) When you haven't an error, and you have some values returned, you have found the correct port.    
+3) When you have no errors, and you have some  returned values, you have found the correct port.    
 
       - Copy and paste the right port in the file :
   
@@ -83,6 +87,6 @@ Bolt is a tiny robot completely built in our labs. We have put together their co
 
 4) Save your file and now you don’t need to put the port name in every command you send to Bolt. 
 
-    **Now you have seen how you put the correct Ethernet Port in the code.**
+    Now you have seen how you put the right Ethernet Port in the code.
   
 ### Your next step is to run some tests to see how the Bolt works.
