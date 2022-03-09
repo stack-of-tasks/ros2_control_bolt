@@ -46,6 +46,7 @@ For this step, you need to have configured all the parameters you need mentioned
 
     ![Offset Change](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Calibration_Bolt_4-R.png?raw=true "Offset Change")
         
+        
 7)  If you want to change the way how to each motor find their Index, go to `line 26` at `Search_methods` and modify how you want (By default all is set at POS) :
 
       - `POS`;
