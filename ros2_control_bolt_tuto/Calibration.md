@@ -35,15 +35,16 @@ For this step, you need to have configured all the parameters you need mentioned
        
 4)  Put the calibrating object on Bolt when the simulation is on
 
-        [PHOTO DE BOLT AVEC L'OBJET]
+    ![Bolt With Object](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Calibration_Bolt_1-R.jpeg?raw=true "Bolt with object")
+    ![Bolt With Object](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Calibration_Bolt_2-R.jpeg?raw=true "Bolt with object")
         
 5)  When the object is put, do a Ctrl + C to stop the simulation and take one of the latest return values.
 
-        [PHOTO DES VALEURS RETOURNE DU TERMINAL]
+    ![Bolt Calibration Values](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Calibration_Bolt_3-R.jpeg.png?raw=true "Bolt Calibration Values")
         
 6)  Open file ros2_control_bolt/ros2_hardware_bolt/src/config_bolt.yaml and paste the values in the variable position_offsets (line 30), save the file and do a colcon build at `Bolt_ws/`.
 
-        [PHOTO DE OU LE METTRE]
+    ![Offset Change](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Calibration_Bolt_4-R.png?raw=true "Offset Change")
         
 7)  If you want to change the way how to each motor find their Index, go to `line 26` at `Search_methods` and modify how you want (By default all is set at POS) :
 
