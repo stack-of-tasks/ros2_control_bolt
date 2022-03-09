@@ -42,7 +42,9 @@ You can need to setup 2 things to run a launch file :
 
 		    export FASTRTPS_DEFAULT_PROFILES_FILE=<PATH_TO_THE_FILE>
 
-    Where <PATH_TO_THE_FILE> is your path to the file FasrRTPS.xml from the root "cd /".
+    Where <PATH_TO_THE_FILE> is your path to the file FasrRTPS.xml from the root "cd /". For exemple for bolt the right command is :
+    
+    		export FASTRTPS_DEFAULT_PROFILES_FILE=users/local/<User_Name>/Bolt_ws/src/ros2_control_bolt/ros2_description_bolt/config/FastRTPS.xml
 
     After that, you know every thing, and you have set every thing to run your first launch file. 
 
