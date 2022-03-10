@@ -31,9 +31,9 @@ ROS2 CONTROL is a framework for (real-time) control of robots this goal is to si
 
 ## 2 - Second step, Workspace :
 
-You need to have a clear workspace to do some tests or find your files easily. Many differents workspaces exist but for the rest of the tutoriel you would be easier to use the same workspace than me. 
+You need to have a clear workspace to do some tests or find your files easily. Many differents workspaces exist but for the rest of the tutoriel you would be easier to use the same workspace as me. 
 
-1) Have a local workspace is better :
+1) Having a local workspace is better :
       
         cd /users/local/<User_Name>
 
@@ -41,42 +41,50 @@ You need to have a clear workspace to do some tests or find your files easily. M
     - Go to : 
   
           cd /
-          mkdir users/local/<User_Name>
-          cd users/local/<User_Name>
+          sudo mkdir -p users/local/<User_Name>
+          cd users/local/
+          sudo chown User_Name User_Name
   
 3) Create your own Workspace :
 
-        mkdir Bolt_ws/src
+        mkdir -p Bolt_ws/src
         cd Bolt_ws/src
 
 4) Add the bolt project (in the src file) :
 You need to have git tool install 
 
-        git clone https://github.com/stack-of-tasks/ros2_control_bolt.git
+        git clone --recursive https://github.com/stack-of-tasks/ros2_control_bolt.git
 
 5) Add some dependencies of Bolt (in the src file) :
 
-        git clone https://github.com/open-dynamic-robot-initiative/master-board.git
-        git clone https://github.com/open-dynamic-robot-initiative/odri_control_interface.git
-
+        git clone --recursive https://github.com/open-dynamic-robot-initiative/master-board.git
+        git clone --recursive https://github.com/open-dynamic-robot-initiative/odri_control_interface.git
+        sudo apt install python3-sphinx python3-pybind11 ros-foxy-xacro
+        
+        
 
 ## 3 - Third step, Colcon Build  
 
 Every time you change something in your code you need to upload with a colcon build otherwise your updates don't be transmitted.
 
-1) Go to the Bolt_ws file :
+1) Install Colcon with these extension :
+
+                sudo apt update
+                sudo apt install python3-colcon-common-extensions
+        
+2) Go to the Bolt_ws file :
 
         cd ..
 
-2) Do your first Colcon Build :
+3) Do your first Colcon Build :
 
         colcon build
 
-3) If everything install properly you must come to this end when you do your first colcon build :
+4) If everything install properly you must come to this end when you do your first colcon build :
 
-        [IMAGE COLCON BUILD]
+![Colcon Build](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Start_Bolt_1-R.png?raw=true "Colcon Build")
 
-4) To only update the part of your code that you changed, you can do this :
+5) To only update the part of your code that you changed, you can do this :
 
         colcon build --packages-select ros2_hardware_interface_bolt
 
