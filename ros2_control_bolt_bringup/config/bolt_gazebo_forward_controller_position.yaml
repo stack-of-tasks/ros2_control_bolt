@@ -15,13 +15,23 @@ controller_manager:
 forward_position_controller:
   ros__parameters:
     joints:
-      - joint1
-      - joint2
+      - FL_HAA
+      - FR_HAA
+      - FL_KFE
+      - FL_HFE
+      - FR_KFE
+      - FR_HFE
+
     interface_name: position
 
 joint_trajectory_controller:
   ros__parameters:
     joints:
-      - joint1
-      - joint2
+      - FL_HAA
+      - FR_HAA
+      - FL_KFE
+      - FL_HFE
+      - FR_KFE
+      - FR_HFE
+
     interface_name: position

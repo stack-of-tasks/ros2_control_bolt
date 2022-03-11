@@ -24,7 +24,7 @@ def generate_launch_description():
         [
             FindPackageShare("ros2_control_bolt_bringup"),
             "config",
-            "bolt_forward_position_publisher.yaml",
+            "bolt_joint_trajectory_publisher.yaml",
         ]
     )
 
@@ -32,8 +32,8 @@ def generate_launch_description():
         [
             Node(
                 package="ros2_control_test_nodes",
-                executable="publisher_forward_position_controller",
-                name="publisher_forward_position_controller",
+                executable="publisher_joint_trajectory_controller",
+                name="publisher_joint_trajectory_controller",
                 parameters=[position_goals],
                 output={
                     "stdout": "screen",
