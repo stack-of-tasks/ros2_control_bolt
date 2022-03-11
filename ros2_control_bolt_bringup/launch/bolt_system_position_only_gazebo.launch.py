@@ -15,8 +15,7 @@
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
-
+from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution, EnvironmentVariable, TextSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
@@ -86,7 +85,7 @@ def generate_launch_description():
             [
                 PathJoinSubstitution(
                     [
-                        FindPackageShare("ros2_control_demo_bringup"),
+                        FindPackageShare("ros2_control_bolt_bringup"),
                         "launch",
                         "bolt.launch.py",
                     ]
@@ -94,7 +93,7 @@ def generate_launch_description():
             ]
         ),
         launch_arguments={
-            "description_file": "bolt_system_position_only.urdf.xacro",
+            "description_file": "system_bolt_description.urdf.xacro",
             "prefix": prefix,
             "use_sim": use_sim,
             "slowdown": slowdown,
