@@ -1,6 +1,6 @@
 controller_manager:
   ros__parameters:
-    update_rate: 100  # Hz
+    update_rate: 500  # Hz
 
     joint_trajectory_controller:
       type: joint_trajectory_controller/JointTrajectoryController
@@ -8,21 +8,6 @@ controller_manager:
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-    forward_position_controller:
-      type: forward_command_controller/ForwardCommandController
-
-
-forward_position_controller:
-  ros__parameters:
-    joints:
-      - FL_HAA
-      - FR_HAA
-      - FL_KFE
-      - FL_HFE
-      - FR_KFE
-      - FR_HFE
-
-    interface_name: position
 
 joint_trajectory_controller:
   ros__parameters:
@@ -33,5 +18,6 @@ joint_trajectory_controller:
       - FL_HFE
       - FR_KFE
       - FR_HFE
+    origin: [0.0, 0.0, 1.0]
 
     interface_name: position
