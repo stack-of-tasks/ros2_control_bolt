@@ -29,7 +29,7 @@ https://github.com/open-dynamic-robot-initiative/robot_properties_bolt/blob/mast
       <visual>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <mesh filename="package://ros2_description_bolt/meshes/${mesh_ext}/bolt_body.${mesh_ext}"/>
+            <mesh filename="file://$(find ros2_description_bolt)/meshes/${mesh_ext}/bolt_body.${mesh_ext}"/>
           </geometry>
           <material name="${color_name}">
               <color rgba="${color} ${opacity}"/>
@@ -39,7 +39,7 @@ https://github.com/open-dynamic-robot-initiative/robot_properties_bolt/blob/mast
       <collision>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <mesh filename="package://ros2_description_bolt/meshes/${mesh_ext}/bolt_body.${mesh_ext}"/>
+            <mesh filename="file://$(find ros2_description_bolt)/meshes/${mesh_ext}/bolt_body.${mesh_ext}"/>
           </geometry>
           <material name="${color_name}">
               <color rgba="${color} ${opacity}"/>
