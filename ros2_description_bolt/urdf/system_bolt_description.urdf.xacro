@@ -23,15 +23,26 @@ https://github.com/open-dynamic-robot-initiative/robot_properties_bolt/blob/mast
 
   <!-- Include the legs -->
   <xacro:include filename="system_bolt.urdf.xacro"/>
+  
+  <!--If we use Gazebo-->
+  <xacro:if value="$(arg use_sim)">
+     <xacro:include filename="$(find ros2_description_bolt)/urdf/crane.urdf.xacro" />
+  </xacro:if>
 
   <xacro:include filename="$(find ros2_description_bolt)/ros2_control/system_bolt.ros2_control.xacro" />
 
   <!-- ros_control plugin -->
   <gazebo>
     <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+      <parameters>$(find ros2_control_bolt_bringup)/config/bolt_gazebo_forward_controller_position.yaml</parameters>
     </plugin>
   </gazebo>
 
+  <xacro:if value="$(arg use_sim)">
+     <xacro:crane parent="base_link" />
+  </xacro:if>
+
+  
   <!-- Include the fully parametrized bolt -->
   <xacro:bolt_full
       mesh_ext="${mesh_ext}"
