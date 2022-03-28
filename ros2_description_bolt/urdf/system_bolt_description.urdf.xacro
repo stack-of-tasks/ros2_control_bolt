@@ -26,6 +26,12 @@ https://github.com/open-dynamic-robot-initiative/robot_properties_bolt/blob/mast
 
   <xacro:include filename="$(find ros2_description_bolt)/ros2_control/system_bolt.ros2_control.xacro" />
 
+  <!-- ros_control plugin -->
+  <gazebo>
+    <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+    </plugin>
+  </gazebo>
+
   <!-- Include the fully parametrized bolt -->
   <xacro:bolt_full
       mesh_ext="${mesh_ext}"
@@ -36,6 +42,7 @@ https://github.com/open-dynamic-robot-initiative/robot_properties_bolt/blob/mast
       has_passive_ankle="${has_passive_ankle}"/>
 
   <xacro:system_bolt_ros2_control
-    name="SystemBoltRos2Control" prefix="$(arg prefix)" use_fake_hardware="$(arg use_fake_hardware)"/>
+    name="SystemBoltRos2Control" prefix="$(arg prefix)" use_fake_hardware="$(arg use_fake_hardware)" 
+      use_sim="$(arg use_sim)"/>
 
 </robot>
