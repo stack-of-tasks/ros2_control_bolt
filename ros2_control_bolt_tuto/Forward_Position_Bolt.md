@@ -18,15 +18,15 @@ You can use a controller for moove bolt where ever you want, for that you just n
 
         ros2 run --prefix="sudo -E env PATH=${PATH} LD_LIBRARY_PATH=${LD_LIBRARY_PATH} PYTHONPATH=${PYTHONPATH}" ros2_hardware_interface_bolt demo_bolt_sensor_reading
       
-- Moove the robot where you wanna he go and do a Ctrl-C for stop the file demo_bolt_sensor_reading running.
+- Moove the robot where you wanna he go and do a `Ctrl-C` for stop the file `demo_bolt_sensor_reading` running.
 
-- Copy the last value in your Terminal and paste it in the file [bolt_forward_position_publisher.yaml](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_bringup/config/bolt_forward_position_publisher.yaml), at line 8 pos1
+- Copy the last value in your Terminal and paste it in the file [bolt_forward_position_publisher.yaml](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_bringup/config/bolt_forward_position_publisher.yaml), at `line 8` `pos1`
 
 - Repeat that how many times you want, just past the next position in the file yaml at the pos2 ect...
 
-- If you need more than 4 position, you can add some but you need to add it in a goal_names[] line 7 and add a line for the position, for exemple pos5.
+- If you need more than 4 position, you can add some but you need to add it in a `goal_names[]` `line 7` and add a line for the position, for exemple pos5.
 
-- You can also play with the value wait_sec_between_publish line 5, for Bolt be faster reduce it and for Bolt be slower raise it.
+- You can also play with the value `wait_sec_between_publish` `line 5`, for Bolt be faster reduce it and for Bolt be slower raise it.
 
 - Now you have create your own cycle, you need to launch the file for see Bolt mooves.  
 
@@ -37,13 +37,13 @@ When you have set up all the positions, you need to run the new controller :
 
 - Open a new terminal, source ros and do a colcon build if you have change something
 
-- Run in this terminal the bolt_system_position_only file (if you don't know how, follow the previous tutorial) :
+- Run in this terminal the `bolt_system_position_only` file (if you don't know how, follow the previous tutorial) :
 
       ros2 launch ros2_control_bolt_bringup bolt_system_position_only.launch.py
       
-- When it running you have 2 way to run the bolt_forward_position_publisher controller :
+- When it running you have 2 way to run the `bolt_forward_position_publisher` **controller** :
 
-    - First, look in the file bolt_system_position_only at DeclareLaunchArgument line 54 and see the default_value. Normally, if haven't change anything you will see forward_position_controller, and it's the controller we need to launch, it is already launch in the file we just need to launch the file :
+    - First, look in the file `bolt_system_position_only` at `DeclareLaunchArgument` line 54 and see the default_value. Normally, if haven't change anything you will see `forward_position_controller`, and it's the controller we need to launch, it is already launch in the file we just need to launch the file :
         
         - Open a new Terminal, source ros
 
@@ -57,10 +57,10 @@ When you have set up all the positions, you need to run the new controller :
 
                       ros2 launch ros2_control_bolt_bringup test_forward_position_controller.launch.py
 
-          Now you can see bolt go to each points you have give to it.
+          **Now you can see bolt go to each points you have give to it.**
             
    
-    - Second, if you haven't the forward_position_controller to default_value for the DeclareLaunchArgument and you don't want to put them for some reason. You can start the controller in an other method, manually :
+    - Second, if you haven't the `forward_position_controller` to `default_value` for the `DeclareLaunchArgument` and you don't want to put them for some reason. You can start the controller in an other method, **manually** :
     
       - Open a new Terminal, source ros and do :
         
