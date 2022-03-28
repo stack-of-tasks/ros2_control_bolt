@@ -12,7 +12,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             [PathJoinSubstitution([FindPackageShare("gazebo_ros"), "launch", "gazebo.launch.py"])]
         ),
-        launch_arguments={"verbose": "false"}.items(),
+        launch_arguments={"verbose": "false", "pause":  "true"}.items(),
     )
 
     # Get URDF via xacro
@@ -42,7 +42,7 @@ def generate_launch_description():
     spawn_entity = Node(
         package="gazebo_ros",
         executable="spawn_entity.py",
-        arguments=["-topic", "robot_description", "-entity", "bolt"],
+        arguments=["-topic", "robot_description", "-entity", "bolt", "-x 0", "-y 0", "-z 0.5"],
         output="screen",
     )
     spawn_controller = Node(
@@ -52,11 +52,19 @@ def generate_launch_description():
         output="screen",
     )
 
+    spawn_controller_effort = Node(
+        package="controller_manager",
+        executable="spawner.py",
+        arguments=["effort_controllers"],
+        output="screen",
+    )
+
     return LaunchDescription(
         [
             gazebo,
             node_robot_state_publisher,
             spawn_entity,
             spawn_controller,
+            spawn_controller_effort,
         ]
     )
