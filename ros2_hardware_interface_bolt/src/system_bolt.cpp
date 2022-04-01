@@ -416,7 +416,7 @@ return_type SystemBoltHardware::start()
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {
     if (std::isnan(hw_states_[joint.name].position)) {
       hw_states_[joint.name] = {0.0, 0.0, 0.0, 3.0, 0.05};
-      hw_commands_[joint.name] = {0.0, 0.0, 0.0, 0.3, 0.05};
+      hw_commands_[joint.name] = {0.0, 0.0, 0.0, 0.4, 0.05};
     }
     joint_name_to_array_index_[joint.name]=0;
   }
