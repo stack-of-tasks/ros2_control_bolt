@@ -112,7 +112,7 @@
                     <color rgba="${color} ${opacity}"/>
                 </material>
             </collision>
-            <!-- Bullet specific paramters -->
+            <!-- Bullet specific parameters -->
             <contact>
                 <lateral_friction value="1.0"/>
                 <restitution value="0.5"/>
@@ -213,7 +213,7 @@
                     <color rgba="${color} ${opacity}"/>
                 </material>
             </collision>
-            <!-- Bullet specific paramters -->
+            <!-- Bullet specific parameters -->
             <contact>
                 <lateral_friction value="1.0"/>
                 <restitution value="0.5"/>
@@ -317,7 +317,7 @@
                     <color rgba="${color} ${opacity}"/>
                 </material>
             </collision>
-            <!-- Bullet specific paramters -->
+            <!-- Bullet specific parameters -->
             <contact>
                 <lateral_friction value="1.0"/>
                 <restitution value="0.5"/>
@@ -340,7 +340,7 @@
             <!-- joints rotates around the y-axis -->
                 <axis xyz="0 1 0"/>
             </xacro:if>
-            <!-- Limits (usefull?) -->
+            <!-- Limits (useful?) -->
             <limit effort="1000" lower="-10" upper="10" velocity="1000"/>
             <!-- pybullet simulation parameters -->
             <dynamics damping="0.0" friction="0.0"/>
@@ -404,7 +404,7 @@
                     <color rgba="${color} ${opacity}"/>
                 </material>
             </collision>
-            <!-- Bullet specific paramters -->
+            <!-- Bullet specific parameters -->
             <contact>
                 <lateral_friction value="4.0"/>
                 <restitution value="0.0"/>

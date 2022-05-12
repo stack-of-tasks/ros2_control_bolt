@@ -23,7 +23,7 @@ https://github.com/open-dynamic-robot-initiative/robot_properties_bolt/blob/mast
 
   <!-- Include the legs -->
   <xacro:include filename="system_bolt.urdf.xacro"/>
-  
+
   <!--If we use Gazebo-->
   <xacro:if value="$(arg use_sim)">
      <xacro:include filename="$(find ros2_description_bolt)/urdf/crane.urdf.xacro" />
@@ -42,7 +42,7 @@ https://github.com/open-dynamic-robot-initiative/robot_properties_bolt/blob/mast
      <xacro:crane parent="base_link" />
   </xacro:if>
 
-  
+
   <!-- Include the fully parametrized bolt -->
   <xacro:bolt_full
       mesh_ext="${mesh_ext}"
@@ -53,7 +53,7 @@ https://github.com/open-dynamic-robot-initiative/robot_properties_bolt/blob/mast
       has_passive_ankle="${has_passive_ankle}"/>
 
   <xacro:system_bolt_ros2_control
-    name="SystemBoltRos2Control" prefix="$(arg prefix)" use_fake_hardware="$(arg use_fake_hardware)" 
+    name="SystemBoltRos2Control" prefix="$(arg prefix)" use_fake_hardware="$(arg use_fake_hardware)"
       use_sim="$(arg use_sim)"/>
 
 </robot>
