@@ -72,7 +72,7 @@ add_project_dependency(master_board_sdk REQUIRED)
 add_project_dependency(odri_control_interface REQUIRED)
 add_project_dependency(controller_interface REQUIRED)
 
-# Usefull for system_bolt
+# Useful for system_bolt
 #add_project_dependency(hardware_interface REQUIRED)
 #add_project_dependency(ament_cmake REQUIRED)
 #add_project_dependency(pluginlib REQUIRED)
@@ -175,7 +175,7 @@ ament_target_dependencies(
   rclcpp
   odri_control_interface
   master_board_sdk
-)	
+)
 # install(TARGETS ${exe_name} DESTINATION bin)
 install (TARGETS ${exe_name}
         RUNTIME DESTINATION lib/${PROJECT_NAME})
@@ -198,7 +198,7 @@ macro(create_bolt_demo source)
   	rclcpp
   	odri_control_interface
     master_board_sdk
-	)	
+	)
   # install(TARGETS ${demo_name} DESTINATION bin)
   install (TARGETS ${demo_name}
           RUNTIME DESTINATION lib/${PROJECT_NAME})

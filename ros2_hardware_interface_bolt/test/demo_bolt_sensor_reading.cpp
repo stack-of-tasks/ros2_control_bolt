@@ -36,7 +36,7 @@ int main()
     std::chrono::time_point<std::chrono::system_clock> last =
         std::chrono::system_clock::now();
     bool is_calibrated = false;
-    
+
     while (!robot->IsTimeout())
     {
         if (((std::chrono::duration<double>)(std::chrono::system_clock::now()-last)).count() > 0.001)
@@ -111,7 +111,7 @@ int main()
                 std::cout << "\n";
                 std::cout << "\n";
                 std::cout << std::endl;
-                
+
             }
         }
         else
@@ -122,4 +122,3 @@ int main()
     std::cout << "Normal program shutdown." << std::endl;
     return 0;
 }
-

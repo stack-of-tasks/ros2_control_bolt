@@ -2,11 +2,11 @@
 
 
 /*Modifs :
-   
+
    Vector12d --> Vector6d
    Boucles for pour les couples : i<12 --> i<6
    CONFIG_SOLO12_YAML --> CONFIG_BOLT_YAML
- 
+
 */
 
 
@@ -99,4 +99,3 @@ int main()
     std::cout << "Normal program shutdown." << std::endl;
     return 0;
 }
-

@@ -13,9 +13,9 @@ The meshes of each actuators and of the body are in "meshes".
 
 system_bolt.ros2_control.xacro :
 
-Definition of all data usefull for system_bolt.cpp (ros2_hardware_interface_bolt) :
+Definition of all data useful for system_bolt.cpp (ros2_hardware_interface_bolt) :
 
-   - Ethernet connexion name
+   - Ethernet connection name
    - Each joint with :
       - Name
       - Min and max values about position, velcity, effort, gain_kp and gain_kd
@@ -24,7 +24,7 @@ Definition of all data usefull for system_bolt.cpp (ros2_hardware_interface_bolt
    - The IMU with :
       - x, y, z values of gyroscope, accelerometer, linear_acceleration, attitude_euler
       - x, y, z, and w values of quaternion
-      
+
 ### In urdf
 
 leg.xacro : all URDF data about legs

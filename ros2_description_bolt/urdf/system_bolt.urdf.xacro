@@ -45,7 +45,7 @@ https://github.com/open-dynamic-robot-initiative/robot_properties_bolt/blob/mast
               <color rgba="${color} ${opacity}"/>
           </material>
       </collision>
-      <!-- Bullet specific paramters -->
+      <!-- Bullet specific parameters -->
       <contact>
         <lateral_friction value="1.0"/>
         <restitution value="0.5"/>

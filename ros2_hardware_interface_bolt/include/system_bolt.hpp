@@ -46,7 +46,7 @@ using hardware_interface::return_type;
 #define rt_printf printf
 
 /**
- * @brief Usefull tool for the demos and programs in order to print data in
+ * @brief Useful tool for the demos and programs in order to print data in
  * real time.
  *
  * @param v_name  is a string defining the data to print.
@@ -159,10 +159,10 @@ public:
   return_type prepare_command_mode_switch(
     const std::vector<std::string> & start_interfaces,
     const std::vector<std::string> & stop_interfaces) override;
-  
+
   ROS2_CONTROL_BOLT_PUBLIC
   return_type calibration();
-  
+
   ROS2_CONTROL_BOLT_PUBLIC
   return_type start() override;
 
@@ -185,7 +185,7 @@ private:
   double hw_start_sec_;
   double hw_stop_sec_;
   double hw_slowdown_;
-  
+
   //Joint number from urdf
   std::map<std::string,int> joint_name_to_array_index_;
 
@@ -211,17 +211,17 @@ private:
   // IMU
   Eigen::Vector3l rotate_vector_;
   Eigen::Vector4l orientation_vector_;
-  
+
 
   //Network id
   std::string eth_interface_;
 
-  //robot 
+  //robot
   std::shared_ptr<odri_control_interface::Robot> robot_;
   std::shared_ptr<odri_control_interface::JointModules> joints_;
   std::shared_ptr<odri_control_interface::JointCalibrator> calib_;
   std::shared_ptr<MasterBoardInterface> main_board_ptr_;
-  
+
 
   double motor_constants_;
   double gear_ratios_;
