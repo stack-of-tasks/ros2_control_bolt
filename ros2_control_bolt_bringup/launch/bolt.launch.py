@@ -21,7 +21,7 @@ from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
 
-def generate_launch_description():        
+def generate_launch_description():
     # Declare arguments
     declared_arguments = []
     declared_arguments.append(
@@ -112,7 +112,7 @@ def generate_launch_description():
 
     # Get URDF via xacro
     robot_description_content_expr = [
-            
+
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution(
@@ -151,7 +151,7 @@ def generate_launch_description():
 
     control_node = Node(
         package="controller_manager",
-        prefix = [# Sudo command cause need to be sudoer when we do this node cause it real time 
+        prefix = [# Sudo command cause need to be sudoer when we do this node cause it real time
             'sudo -E env PATH=',
             EnvironmentVariable("PATH", default_value='${PATH}'),
             " LD_LIBRARY_PATH=",
@@ -184,7 +184,7 @@ def generate_launch_description():
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner.py",
-        prefix = [# Sudo command cause need to be sudoer when we do this node cause it real time 
+        prefix = [# Sudo command cause need to be sudoer when we do this node cause it real time
             'sudo -E env PATH=',
             EnvironmentVariable("PATH", default_value='${PATH}'),
             " LD_LIBRARY_PATH=",
@@ -199,7 +199,7 @@ def generate_launch_description():
     robot_controller_spawner = Node(
         package="controller_manager",
         executable="spawner.py",
-        prefix = [# Sudo command cause need to be sudoer when we do this node cause it real time 
+        prefix = [# Sudo command cause need to be sudoer when we do this node cause it real time
             'sudo -E env PATH=',
             EnvironmentVariable("PATH", default_value='${PATH}'),
             " LD_LIBRARY_PATH=",

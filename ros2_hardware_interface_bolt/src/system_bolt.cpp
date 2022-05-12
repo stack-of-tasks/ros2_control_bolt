@@ -56,7 +56,7 @@ return_type SystemBoltHardware::configure(const hardware_interface::HardwareInfo
   if (configure_default(info) != return_type::OK) {
     return return_type::ERROR;
   }
-  
+
   //For each sensor.
   for (const hardware_interface::ComponentInfo & sensor : info_.sensors) {
     imu_states_[sensor.name] =
@@ -76,7 +76,7 @@ return_type SystemBoltHardware::configure(const hardware_interface::HardwareInfo
       std::numeric_limits<double>::quiet_NaN(),
       std::numeric_limits<double>::quiet_NaN(),
       std::numeric_limits<double>::quiet_NaN()};
-      
+
   }
   // For each joint.
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {
@@ -98,7 +98,7 @@ return_type SystemBoltHardware::configure(const hardware_interface::HardwareInfo
        std::numeric_limits<double>::quiet_NaN()};
     control_mode_[joint.name] = control_mode_t::NO_VALID_MODE;
 
-     
+
 
     // SystemBolt has exactly 5 doubles for the state and
     // 5 doubles for the command interface on each joint
@@ -111,8 +111,8 @@ return_type SystemBoltHardware::configure(const hardware_interface::HardwareInfo
         joint.name.c_str(), joint.command_interfaces.size());
       return return_type::ERROR;
     }
-    
-    
+
+
     // For each command interface of the joint
     for (const auto & a_joint_cmd_inter : joint.command_interfaces)
     {
@@ -278,7 +278,7 @@ SystemBoltHardware::export_state_interfaces()
       hardware_interface::StateInterface(
         joint.name, HW_IF_GAIN_KD,
         &hw_states_[joint.name].Kd));
-        
+
   }
 
   for (const hardware_interface::ComponentInfo & sensor : info_.sensors) {
@@ -362,7 +362,7 @@ SystemBoltHardware::export_state_interfaces()
         sensor.name,
         "attitude_quaternion_w",
         &imu_states_[sensor.name].quater_w));
-  
+
   }
 
   return state_interfaces;
@@ -409,7 +409,7 @@ return_type SystemBoltHardware::start()
 
   Vector6d des_pos;
   des_pos << 0.0, 0.0, 0.0, 0.0 ,0.0 ,0.0 ;
-  
+
   robot_->Initialize(des_pos);
 
   // set some default values
@@ -422,13 +422,13 @@ return_type SystemBoltHardware::start()
   }
 
   uint idx=0;
-  for (auto it = joint_name_to_array_index_.begin(); 
-            it != joint_name_to_array_index_.end(); ++it) {         
+  for (auto it = joint_name_to_array_index_.begin();
+            it != joint_name_to_array_index_.end(); ++it) {
     joint_name_to_array_index_[it->first]=idx++;
-    
+
   }
-  
-  
+
+
   status_ = hardware_interface::status::STARTED;
 
   return return_type::OK;
@@ -462,7 +462,7 @@ hardware_interface::return_type SystemBoltHardware::read()
 
 
   // Assignment of sensor data to ros2_control variables (URDF)
-  for (const hardware_interface::ComponentInfo & joint : info_.joints) {    
+  for (const hardware_interface::ComponentInfo & joint : info_.joints) {
     hw_states_[joint.name].position = sensor_positions[joint_name_to_array_index_[joint.name]];
     hw_states_[joint.name].velocity = sensor_velocities[joint_name_to_array_index_[joint.name]];
     hw_states_[joint.name].effort = measured_torques[joint_name_to_array_index_[joint.name]];
@@ -505,10 +505,10 @@ SystemBoltHardware::write()
   Eigen::Vector6d positions;
   Eigen::Vector6d velocities;
   Eigen::Vector6d torques;
-  
+
   Eigen::Vector6d gain_KP;
   Eigen::Vector6d gain_KD;
-  
+
 
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {
     positions[joint_name_to_array_index_[joint.name]] = hw_commands_[joint.name].position;
@@ -528,7 +528,7 @@ SystemBoltHardware::write()
   //   std::cout << "gain_KD: " << gain_KD.transpose() << std::endl;
   // }
   // ++my_perso_counter2;
-  
+
   robot_->joints->SetDesiredPositions(positions);
   robot_->joints->SetDesiredVelocities(velocities);
   robot_->joints->SetTorques(torques);

@@ -2,7 +2,7 @@
 
 ## What it is
 
-How to use Bolt at LAAS-CNRS to do demonstrations (calibration, sensor reading and command writting), with ONTAKE computer
+How to use Bolt at LAAS-CNRS to do demonstrations (calibration, sensor reading and command writing), with ONTAKE computer
 
 ## Authors
 
@@ -12,11 +12,11 @@ How to use Bolt at LAAS-CNRS to do demonstrations (calibration, sensor reading a
 
 - demo_bolt_calibration.cpp : Demo to test the calibration on real robot.
 
-- demo_bolt_sensor_reading.cpp : Reading and printing of sensors datas, without control
+- demo_bolt_sensor_reading.cpp : Reading and printing of sensors data, without control
 
 - demo_bolt_write_commands.cpp : Demo of a sinusoidal control on each joint : swinging effect of Bolt's legs
-  
-  
+
+
 ## How to compile at LAAS ? (on ONTAKE computer)
 
 Put the workspace at the root, in usr. Ex : `/usr/bolt_ws`. Then, put all source codes needed in a directory named `/src`.

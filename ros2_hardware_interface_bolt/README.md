@@ -31,16 +31,16 @@ Functions :
       - Finally define the robot_ with those 3 elements
 
    - calibration() : use to calibrate the robot. Currently called in start function. **Maybe a bug to fix line 532 :  robot_->RunCalibration(calib_ctrl); {namespace ?}
-   
+
    - start() : Start the robot, set some default values to 0, do the calibration, read sensors data
-   
+
    - stop() : stop the Masterboard, so stop the robot
-   
+
    - read() : sed all the sensors data to the computer
-   
+
    - write() : allow the user to send commands to all actuators
-   
-   
+
+
 ----------------------
 
 ### Tests :

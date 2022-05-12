@@ -25,7 +25,7 @@ joint_calibrator:
     # Can be either POS, NEG, ALT or AUTO
     search_methods: [
       #POS, NEG, POS, NEG, NEG, POS             #MODIF avec bolt_driver.yaml
-      POS, POS, POS, POS, POS, POS               
+      POS, POS, POS, POS, POS, POS
     ]
     position_offsets: [ # [ FLHAA, FLHFE, FLKFE, FRHAA, FRHFE, FRKFE ]
               0.2403, 0.3996, 0.2668, 0.5836, 0.1053, 0.4465
