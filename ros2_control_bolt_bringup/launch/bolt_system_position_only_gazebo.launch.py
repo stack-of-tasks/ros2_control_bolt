@@ -51,7 +51,7 @@ def generate_launch_description():
         arguments=["-topic", "robot_description", "-entity", "bolt", "-x 0", "-y 0", "-z 0.5"],
         output="screen",
     )
-    
+
     spawn_controller = Node(
         package="controller_manager",
         executable="spawner.py",
