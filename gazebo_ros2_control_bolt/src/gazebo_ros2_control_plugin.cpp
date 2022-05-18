@@ -121,7 +121,7 @@ GazeboRosControlPlugin::GazeboRosControlPlugin()
 : impl_(std::make_unique<GazeboRosControlPrivate>())
 {
   RCLCPP_INFO_STREAM(rclcpp::get_logger("gazebo_ros2_control"),
-	      "LAAS version of gazebo_ros2_control: GazeboRosControlPlugin");    
+	      "LAAS version of gazebo_ros2_control: GazeboRosControlPlugin");
 }
 
 GazeboRosControlPlugin::~GazeboRosControlPlugin()
@@ -262,7 +262,7 @@ void GazeboRosControlPlugin::Load(gazebo::physics::ModelPtr parent, sdf::Element
 
   RCLCPP_INFO(impl_->model_nh_->get_logger(),
 	      "Start to read control_hardware");
-    
+
   // Read urdf from ros parameter server then
   // setup actuators and mechanism control node.
   // This call will block if ROS is not properly initialized.
@@ -291,7 +291,7 @@ void GazeboRosControlPlugin::Load(gazebo::physics::ModelPtr parent, sdf::Element
       impl_->model_nh_->get_logger(), "Failed to create robot simulation interface loader: %s ",
       ex.what());
   }
-  
+
   RCLCPP_INFO(impl_->model_nh_->get_logger(),
 	      "Created robot simulation interface loader");
 
@@ -299,13 +299,13 @@ void GazeboRosControlPlugin::Load(gazebo::physics::ModelPtr parent, sdf::Element
     std::string robot_hw_sim_type_str_ = control_hardware[i].hardware_class_type;
     RCLCPP_INFO(impl_->model_nh_->get_logger(),
 		"%s",robot_hw_sim_type_str_.c_str());
-    
+
     auto gazeboSystem = std::unique_ptr<gazebo_ros2_control::GazeboSystemInterface>(
       impl_->robot_hw_sim_loader_->createUnmanagedInstance(robot_hw_sim_type_str_));
 
     RCLCPP_INFO(impl_->model_nh_->get_logger(),
-		"Instanciation of %s",robot_hw_sim_type_str_.c_str());
-    
+		"Instantiation of %s",robot_hw_sim_type_str_.c_str());
+
     rclcpp::Node::SharedPtr node_ros2 = std::dynamic_pointer_cast<rclcpp::Node>(impl_->model_nh_);
     if (!gazeboSystem->initSim(
         node_ros2,
@@ -454,7 +454,7 @@ std::string GazeboRosControlPrivate::getURDF(std::string param_name) const
     usleep(100000);
   }
   RCLCPP_INFO(
-    model_nh_->get_logger(), "Recieved urdf from param server, parsing...");
+    model_nh_->get_logger(), "Received urdf from param server, parsing...");
 
   return urdf_string;
 }

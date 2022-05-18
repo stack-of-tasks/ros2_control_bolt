@@ -369,13 +369,13 @@ GazeboSystem::export_state_interfaces()
 std::vector<hardware_interface::CommandInterface>
 GazeboSystem::export_command_interfaces()
 {
-  RCLCPP_INFO(this->nh_->get_logger(), "LAAS version of gazebo_ros2_control: export_command_interfaces");  
+  RCLCPP_INFO(this->nh_->get_logger(), "LAAS version of gazebo_ros2_control: export_command_interfaces");
   return std::move(this->dataPtr->command_interfaces_);
 }
 
 hardware_interface::return_type GazeboSystem::start()
 {
-  RCLCPP_INFO(this->nh_->get_logger(), "LAAS version of gazebo_ros2_control: start");    
+  RCLCPP_INFO(this->nh_->get_logger(), "LAAS version of gazebo_ros2_control: start");
   status_ = hardware_interface::status::STARTED;
   return hardware_interface::return_type::OK;
 }
