@@ -10,7 +10,7 @@ from launch_ros.substitutions import FindPackageShare
 def generate_launch_description():
 
     arg_world_filename = PathJoinSubstitution([
-           FindPackageShare("ros2_control_bolt_bringup"),
+           FindPackageShare("gazebo_ros2_control_bolt"),
            'world', 'bolt_world.world'
 	])
 
