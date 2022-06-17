@@ -1,0 +1,10 @@
+<library path="control_m_plugins">
+  <class
+    name="control_m/controlm"
+    type="control_m::controlm">
+
+    <description>
+      GazeboPositionJoint
+    </description>
+  </class>
+</library>

@@ -1,3 +1,6 @@
 [submodule "ros2_hardware_interface_bolt/cmake"]
 	path = ros2_hardware_interface_bolt/cmake
 	url = https://github.com/jrl-umi3218/jrl-cmakemodules.git
+[submodule "control_m/commit"]
+	path = control_m/cmake
+	url = https://github.com/jrl-umi3218/jrl-cmakemodules.git

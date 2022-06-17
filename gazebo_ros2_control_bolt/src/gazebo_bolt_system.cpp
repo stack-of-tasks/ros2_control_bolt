@@ -60,6 +60,12 @@ public:
   /// \brief vector with the current joint effort
   std::vector<double> joint_effort_;
 
+  /// \brief vector with the current joint kp
+  std::vector<double> joint_kp_;
+  
+  /// \brief vector with the current joint kd
+  std::vector<double> joint_kd_;
+
   /// \brief vector with the current cmd joint position
   std::vector<double> joint_position_cmd_;
 
@@ -68,6 +74,12 @@ public:
 
   /// \brief vector with the current cmd joint effort
   std::vector<double> joint_effort_cmd_;
+
+  /// \brief vector with the current cmd joint kp
+  std::vector<double> joint_kp_cmd_;
+
+  /// \brief vector with the current cmd joint kp
+  std::vector<double> joint_kd_cmd_;
 
   /// \brief handles to the imus from within Gazebo
   std::vector<gazebo::sensors::ImuSensorPtr> sim_imu_sensors_;
@@ -427,13 +439,12 @@ hardware_interface::return_type GazeboBoltSystem::read()
 
 hardware_interface::return_type GazeboBoltSystem::write()
 {
-
-  double kp = 3;
-  double kd = 0.05;
+  
   // Get the simulation time and period
   gazebo::common::Time gz_time_now = this->dataPtr->parent_model_->GetWorld()->SimTime();
   rclcpp::Time sim_time_ros(gz_time_now.sec, gz_time_now.nsec);
   rclcpp::Duration sim_period = sim_time_ros - this->dataPtr->last_update_sim_time_ros_;
+
 
   for (unsigned int j = 0; j < this->dataPtr->joint_names_.size(); j++) {
      RCLCPP_INFO_STREAM(this->nh_->get_logger(), "\tjoint: "  << this->dataPtr->sim_joints_[j]->GetName());
@@ -451,15 +462,19 @@ hardware_interface::return_type GazeboBoltSystem::write()
         /*this->dataPtr->sim_joints_[j]->SetVelocity(
           0,
           this->dataPtr->joint_velocity_cmd_[j]);*/
-         RCLCPP_INFO_STREAM(this->nh_->get_logger(),dataPtr->joint_velocity_cmd_[j] );
+        const double vitesse =
+          this->dataPtr->joint_kd_cmd_[j]*(this->dataPtr->joint_velocity_cmd_[j] - this->dataPtr->joint_velocity_[j]);
+        this->dataPtr->sim_joints_[j]->SetVelocity(0, vitesse);
+         RCLCPP_INFO_STREAM(this->nh_->get_logger(),vitesse );
       }
       if (this->dataPtr->joint_control_methods_[j] & EFFORT) {
         RCLCPP_INFO_STREAM(this->nh_->get_logger(), "");   //"\tis controlled in EFFORT"
         const double effort =
-          kp*(this->dataPtr->joint_position_cmd_[j] - this->dataPtr->joint_position_[j]) +
-          kd*(this->dataPtr->joint_velocity_cmd_[j] - this->dataPtr->joint_velocity_[j]);
+        this->dataPtr->joint_effort_cmd_[j] + 
+          this->dataPtr->joint_kp_cmd_[j]*(this->dataPtr->joint_position_cmd_[j] - this->dataPtr->joint_position_[j]) +
+          this->dataPtr->joint_kd_cmd_[j]*(this->dataPtr->joint_velocity_cmd_[j] - this->dataPtr->joint_velocity_[j]);
         this->dataPtr->sim_joints_[j]->SetForce(0, effort);
-        RCLCPP_INFO_STREAM(this->nh_->get_logger(), effort );
+        RCLCPP_INFO_STREAM(this->nh_->get_logger(), effort);
       }
     }
   }

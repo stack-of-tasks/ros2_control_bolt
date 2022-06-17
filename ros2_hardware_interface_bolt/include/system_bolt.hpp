@@ -16,7 +16,7 @@
 #define ROS2_CONTROL_BOLT__SYSTEM_BOLT_HPP_
 
 /*Connection to ODRI for read sensors and write commands*/
-#include "odri_control_interface/calibration.hpp"
+#include <odri_control_interface/calibration.hpp>
 #include "odri_control_interface/robot.hpp"
 #include "odri_control_interface/imu.hpp"
 #include "master_board_sdk/master_board_interface.h"
@@ -39,6 +39,7 @@
 #include "visibility_control.h"
 #include "semantic_components/imu_sensor.hpp"
 
+#include "system_interface_bolt.hpp"
 
 
 using hardware_interface::return_type;
@@ -82,62 +83,6 @@ typedef Matrix<long, 4, 1> Vector4l;
 namespace ros2_control_bolt
 {
 
-
-struct PosVelEffortGains
-{
-  double position;
-  double velocity;
-  double effort;
-  double Kp;
-  double Kd;
-};
-
-struct GyroAccLineEulerQuater
-{
-  double gyro_x;
-  double gyro_y;
-  double gyro_z;
-  double accelero_x;
-  double accelero_y;
-  double accelero_z;
-  double line_acc_x;
-  double line_acc_y;
-  double line_acc_z;
-  double euler_x;
-  double euler_y;
-  double euler_z;
-  double quater_x;
-  double quater_y;
-  double quater_z;
-  double quater_w;
-};
-
-constexpr const auto HW_IF_GAIN_KP = "gain_kp";
-constexpr const auto HW_IF_GAIN_KD = "gain_kd";
-
-std::set<std::string> bolt_list_of_cmd_inter {
-  "position",
-  "velocity",
-  "effort",
-  "gain_kp",
-  "gain_kd"
-};
-
-std::set<std::string> bolt_list_of_state_inter {
-  "position",
-  "velocity",
-  "effort",
-  "gain_kp",
-  "gain_kd"
-};
-
-enum control_mode_t {
-  POSITION,
-  VELOCITY,
-  EFFORT,
-  POS_VEL_EFF_GAINS,
-  NO_VALID_MODE
-};
 
 class SystemBoltHardware : public
   hardware_interface::BaseInterface<hardware_interface::SystemInterface>
