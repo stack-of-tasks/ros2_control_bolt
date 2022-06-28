@@ -1,5 +1,4 @@
 
-
 #include <algorithm>
 #include <memory>
 #include <string>
@@ -7,14 +6,16 @@
 #include <vector>
 
 #include "controller_interface/controller_interface.hpp"
-#include "control_m/control_m.hpp"
+#include "position_velocity_effort_gain_controller/position_velocity_effort_gain_controller.hpp"
 #include "hardware_interface/loaned_command_interface.hpp"
 #include "system_interface_bolt.hpp"
 #include "rclcpp/logging.hpp"
 #include "rclcpp/qos.hpp"
 #include "controller_interface/helpers.hpp"
 
-namespace BoltExampleController{
+namespace position_velocity_effort_gain_controller{
+
+    using CallbackReturn = PosVelTorGainsController::CallbackReturn;
 
     PosVelTorGainsController::PosVelTorGainsController() : controller_interface::ControllerInterface(),
     rt_command_ptr_(nullptr), joints_command_subscriber_(nullptr){
@@ -158,8 +159,7 @@ namespace BoltExampleController{
         return controller_interface::return_type::OK;
     }
    
-   
 }
 
 #include "pluginlib/class_list_macros.hpp"
-PLUGINLIB_EXPORT_CLASS(BoltExampleController::PosVelTorGainsController, controller_interface::ControllerInterface)
+PLUGINLIB_EXPORT_CLASS(position_velocity_effort_gain_controller::PosVelTorGainsController, controller_interface::ControllerInterface)

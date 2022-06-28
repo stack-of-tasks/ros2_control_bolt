@@ -25,6 +25,8 @@
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "rclcpp/rclcpp.hpp"
 
+#include <system_interface_bolt.hpp>
+
 /*Connection to ODRI for read sensors and write commands*/
 #include "odri_control_interface/utils.hpp"
 #include "odri_control_interface/imu.hpp"

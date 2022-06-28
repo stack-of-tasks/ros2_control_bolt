@@ -21,8 +21,6 @@
 #include "odri_control_interface/imu.hpp"
 #include "master_board_sdk/master_board_interface.h"
 
-
-
 #include <memory>
 #include <set>
 #include <string>

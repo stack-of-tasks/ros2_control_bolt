@@ -23,6 +23,7 @@
 #include "gazebo/sensors/ImuSensor.hh"
 #include "gazebo/sensors/ForceTorqueSensor.hh"
 #include "gazebo/sensors/SensorManager.hh"
+#include "gazebo_ros2_control_bolt/system_interface_bolt.hpp"
 class gazebo_ros2_control_bolt::GazeboBoltSystemPrivate
 {
 public:
@@ -147,9 +148,14 @@ void GazeboBoltSystem::registerJoints(
   this->dataPtr->joint_position_.resize(this->dataPtr->n_dof_);
   this->dataPtr->joint_velocity_.resize(this->dataPtr->n_dof_);
   this->dataPtr->joint_effort_.resize(this->dataPtr->n_dof_);
+  this->dataPtr->joint_kp_.resize(this->dataPtr->n_dof_);
+  this->dataPtr->joint_kd_.resize(this->dataPtr->n_dof_);
   this->dataPtr->joint_position_cmd_.resize(this->dataPtr->n_dof_);
   this->dataPtr->joint_velocity_cmd_.resize(this->dataPtr->n_dof_);
   this->dataPtr->joint_effort_cmd_.resize(this->dataPtr->n_dof_);
+  this->dataPtr->joint_kp_cmd_.resize(this->dataPtr->n_dof_);
+  this->dataPtr->joint_kd_cmd_.resize(this->dataPtr->n_dof_);
+
 
   for (unsigned int j = 0; j < this->dataPtr->n_dof_; j++) {
     std::string joint_name = this->dataPtr->joint_names_[j] = hardware_info.joints[j].name;
@@ -194,6 +200,20 @@ void GazeboBoltSystem::registerJoints(
           hardware_interface::HW_IF_EFFORT,
           &this->dataPtr->joint_effort_cmd_[j]);
       }
+      if (hardware_info.joints[j].command_interfaces[i].name == "gain_kp") {
+        this->dataPtr->joint_control_methods_[j] |= POS_VEL_EFF_GAINS;
+        RCLCPP_INFO_STREAM(this->nh_->get_logger(), "\t\t gain_kp");
+        this->dataPtr->command_interfaces_.emplace_back(
+          joint_name, ros2_control_bolt::HW_IF_GAIN_KP,
+          &this->dataPtr->joint_kp_cmd_[j]);
+      }
+      if (hardware_info.joints[j].command_interfaces[i].name == "gain_kd") {
+        this->dataPtr->joint_control_methods_[j] |= POS_VEL_EFF_GAINS;
+        RCLCPP_INFO_STREAM(this->nh_->get_logger(), "\t\t gain_kd");
+        this->dataPtr->command_interfaces_.emplace_back(
+          joint_name, ros2_control_bolt::HW_IF_GAIN_KD,
+          &this->dataPtr->joint_kd_cmd_[j]);
+      }
     }
 
     RCLCPP_INFO_STREAM(this->nh_->get_logger(), "\tState:");
@@ -220,6 +240,18 @@ void GazeboBoltSystem::registerJoints(
           joint_name,
           hardware_interface::HW_IF_EFFORT,
           &this->dataPtr->joint_effort_[j]);
+      }
+      if (hardware_info.joints[j].state_interfaces[i].name == "gain_kp") {
+        RCLCPP_INFO_STREAM(this->nh_->get_logger(), "\t\t gain_kp");
+        this->dataPtr->state_interfaces_.emplace_back(
+          joint_name, ros2_control_bolt::HW_IF_GAIN_KP,
+          &this->dataPtr->joint_kp_[j]);
+      }
+      if (hardware_info.joints[j].state_interfaces[i].name == "gain_kd") {
+        RCLCPP_INFO_STREAM(this->nh_->get_logger(), "\t\t gain_kd");
+        this->dataPtr->state_interfaces_.emplace_back(
+          joint_name, ros2_control_bolt::HW_IF_GAIN_KD,
+          &this->dataPtr->joint_kd_[j]);
       }
     }
   }
@@ -451,30 +483,25 @@ hardware_interface::return_type GazeboBoltSystem::write()
 
     if (this->dataPtr->sim_joints_[j]) {
       if (this->dataPtr->joint_control_methods_[j] & POSITION) {
-        RCLCPP_INFO_STREAM(this->nh_->get_logger(), "");   //"\tis controlled in POSITION"
-        /*this->dataPtr->sim_joints_[j]->SetPosition(
-          0, this->dataPtr->joint_position_cmd_[j],
-          true);*/
-          RCLCPP_INFO_STREAM(this->nh_->get_logger(),dataPtr->joint_position_cmd_[j] );
+        RCLCPP_INFO_STREAM(this->nh_->get_logger(), "position");   //"\tis controlled in POSITION"
+        /*this->dataPtr->sim_joints_[j]->SetPosition(0, this->dataPtr->joint_position_cmd_[j],true);*/
+          RCLCPP_INFO_STREAM(this->nh_->get_logger(),"");
       }
       if (this->dataPtr->joint_control_methods_[j] & VELOCITY) {
-        RCLCPP_INFO_STREAM(this->nh_->get_logger(), "");    //\tis controlled in VELOCITY
-        /*this->dataPtr->sim_joints_[j]->SetVelocity(
-          0,
-          this->dataPtr->joint_velocity_cmd_[j]);*/
-        const double vitesse =
-          this->dataPtr->joint_kd_cmd_[j]*(this->dataPtr->joint_velocity_cmd_[j] - this->dataPtr->joint_velocity_[j]);
-        this->dataPtr->sim_joints_[j]->SetVelocity(0, vitesse);
-         RCLCPP_INFO_STREAM(this->nh_->get_logger(),vitesse );
+        RCLCPP_INFO_STREAM(this->nh_->get_logger(), "velocity");    //\tis controlled in VELOCITY
+        /*this->dataPtr->sim_joints_[j]->SetVelocity(0,this->dataPtr->joint_velocity_cmd_[j]);*/
+        // this->dataPtr->joint_velocity_[j] =
+        //   this->dataPtr->joint_kd_cmd_[j]*(this->dataPtr->joint_velocity_cmd_[j] - this->dataPtr->joint_velocity_[j]);
+        // this->dataPtr->sim_joints_[j]->SetVelocity(0, this->dataPtr->joint_velocity_[j]);
+         RCLCPP_INFO_STREAM(this->nh_->get_logger(),  "");
       }
       if (this->dataPtr->joint_control_methods_[j] & EFFORT) {
-        RCLCPP_INFO_STREAM(this->nh_->get_logger(), "");   //"\tis controlled in EFFORT"
-        const double effort =
-        this->dataPtr->joint_effort_cmd_[j] + 
+        RCLCPP_INFO_STREAM(this->nh_->get_logger(), "effort");   //"\tis controlled in EFFORT"
+        this->dataPtr->joint_effort_[j] = this->dataPtr->joint_effort_cmd_[j] + 
           this->dataPtr->joint_kp_cmd_[j]*(this->dataPtr->joint_position_cmd_[j] - this->dataPtr->joint_position_[j]) +
           this->dataPtr->joint_kd_cmd_[j]*(this->dataPtr->joint_velocity_cmd_[j] - this->dataPtr->joint_velocity_[j]);
-        this->dataPtr->sim_joints_[j]->SetForce(0, effort);
-        RCLCPP_INFO_STREAM(this->nh_->get_logger(), effort);
+        this->dataPtr->sim_joints_[j]->SetForce(0,  this->dataPtr->joint_effort_[j]);
+        RCLCPP_INFO_STREAM(this->nh_->get_logger(), this->dataPtr->joint_effort_[j]);
       }
     }
   }

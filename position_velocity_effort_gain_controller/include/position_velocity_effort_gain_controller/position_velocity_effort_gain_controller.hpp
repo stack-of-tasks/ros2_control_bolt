@@ -1,5 +1,5 @@
-#ifndef CONTROL_M_HPP_
-#define CONTROL_M_HPP_
+#ifndef POSITION_VELOCITY_EFFORT_CONTROLLER_HPP_
+#define POSITION_VELOCITY_EFFORT_CONTROLLER_HPP_
 
 #include <memory>
 #include <string>
@@ -16,7 +16,7 @@
 #include <system_interface_bolt.hpp>
 #include "controller_interface/helpers.hpp"
 
-namespace BoltExampleController {
+namespace position_velocity_effort_gain_controller{
     
     using CmdType = std_msgs::msg::Float64MultiArray;
     using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;

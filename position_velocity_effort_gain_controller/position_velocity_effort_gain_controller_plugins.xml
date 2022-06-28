@@ -1,0 +1,10 @@
+<library path="position_velocity_effort_gain_controller">
+  <class
+    name="position_velocity_effort_gain_controller/PosVelTorGainsController"
+    type="position_velocity_effort_gain_controller::PosVelTorGainsController"
+    base_class_type="controller_interface::ControllerInterface">
+    <description>
+      Position, velocity, effort and gains controller of joints through the two gain interfaces
+    </description>
+  </class>
+</library>
