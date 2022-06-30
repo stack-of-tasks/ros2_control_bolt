@@ -27,6 +27,8 @@ Definition of all data useful for system_bolt.cpp (ros2_hardware_interface_bolt)
 
 ### In urdf
 
+crane.urdf.xacro : all URDF data about the crane
+
 leg.xacro : all URDF data about legs
 
 system_bolt.urdf.xacro : global doc that calls leg.xacro

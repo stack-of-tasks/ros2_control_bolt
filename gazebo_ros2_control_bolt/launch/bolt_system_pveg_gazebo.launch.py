@@ -80,6 +80,6 @@ def generate_launch_description():
             spawn_entity,
             spawn_controller,
             spawn_controller_pveg,
-            # robot_controller_spawner,
+            robot_controller_spawner,
         ]
     )
