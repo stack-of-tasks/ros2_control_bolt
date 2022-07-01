@@ -38,7 +38,7 @@
     ![Not Front](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Setup_Bolt_2-R.jpeg?raw=true "Not Front")
     ![Behind](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Setup_Bolt_3-R.jpeg?raw=true "Behind")
 
-4) Connect the other end to the `emergency button` and the `Ethernet cable` to your computer.
+4) Connect the other end of the `emergency button` to the robot and the `Ethernet cable` to your computer.
 
      ![Button Connection](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Setup_Bolt_7-R.jpeg?raw=true "Buttun Connection")
 
@@ -72,7 +72,7 @@
 
     - Open a new Terminal, go to your `Bolt_ws` file and `source` your ROS 2 :
 
-          source install/setup.bash'
+          source install/setup.bash
 
      - Try one by one all the port with this command,  `<PORT>` is a value where you change the `port name` :
 
@@ -82,7 +82,7 @@
 
       - Copy and paste the right port in the file :
 
-             Bolt_ws/src/ros2_control_bolt/ros2_hardware_interface_bolt/test/config_bolt.yaml
+             Bolt_ws/src/ros2_control_bolt/ros2_description_bolt/config/bolt_config.yaml
         at :
 
               interface : <PORT>     (line 4)

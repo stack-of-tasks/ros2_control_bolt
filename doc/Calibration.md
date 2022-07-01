@@ -41,7 +41,7 @@ For this step, you must have configured all the parameters mentioned in the prev
 
     ![Bolt Calibration Values](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Calibration_Bolt_3-R.jpeg.png?raw=true "Bolt Calibration Values")
 
-6)  Open file `ros2_control_bolt/ros2_hardware_bolt/src/config_bolt.yaml` and paste the values in the variable **position_offsets (line 30)**, save the file and do a colcon build at `Bolt_ws/`.
+6)  Open file `ros2_control_bolt/ros2_description_bolt/src/bolt_config.yaml` and paste the values in the variable **position_offsets (line 30)**, save the file and do a colcon build at `Bolt_ws/`.
 
     ![Offset Change](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Calibration_Bolt_4-R.png?raw=true "Offset Change")
 

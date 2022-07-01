@@ -28,7 +28,7 @@ add_library(${PROJECT_NAME}
   src/position_velocity_effort_gain_controller.cpp
 )
 
-#3.
+#3. Add of include directories for the target
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 
 #4. Dependencies
@@ -64,6 +64,7 @@ install(TARGETS
 )
 
 #7. Test
+option(BUILD_TESTING "Building tests" OFF)
 if(BUILD_TESTING)
   find_package(ament_cmake_gmock REQUIRED)
   find_package(controller_manager REQUIRED)

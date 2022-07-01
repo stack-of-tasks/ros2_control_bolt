@@ -2,7 +2,7 @@
 
 ## Introduction
 
-`ros2_control_bolt` is a repository that enables designing and simulation of Bolt robot for testing its controller.
+`ros2_control_bolt` is a repository that enables controlling and simulating the Bolt robot.
 
 
 ## Repository Organization
@@ -15,7 +15,6 @@
 
 `ros2_control_bolt_bringup` - contains files that enable to launch Bolt within its GUIs, and with it hardware interfaces and controllers.
 
-`ros2_control_test_nodes` - containes nodes for testing ros2_control-enabled robots and their integration in the framework.
 
 `ros2_description_bolt` - contains files necessary to describe, create and visualize Bolt with Rviz and Gazebo. It stores URDF-description files, rviz configurations and meshes for the demo robots.
  
@@ -35,8 +34,7 @@ These are some quick hints, especially for those coming from a ROS1 control back
   The most common (position, velocity, acceleration, effort) are already defined as constants in hardware_interface/types/hardware_interface_type_values.hpp.
 * Joint names in <ros2_control> tags in the URDF must be compatible with the controller's configuration.
 * In ros2_control, all parameters for the driver are specified in the URDF.
-  The ros2_control framework uses the **<ros2_control>** tag in the URDF.
-* Joint names in <ros2_control> tags in the URDF must be compatible with the controller's configuration.
+  
  
 
  

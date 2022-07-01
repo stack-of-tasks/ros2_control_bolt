@@ -1,4 +1,4 @@
-// Copyright 2021 Open Source Robotics Foundation, Inc.
+// Copyright 2022 LAAS, CNRS.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -479,29 +479,26 @@ hardware_interface::return_type GazeboBoltSystem::write()
 
 
   for (unsigned int j = 0; j < this->dataPtr->joint_names_.size(); j++) {
-     RCLCPP_INFO_STREAM(this->nh_->get_logger(), "\tjoint: "  << this->dataPtr->sim_joints_[j]->GetName());
+    RCLCPP_INFO_STREAM(this->nh_->get_logger(), "\tjoint: "  << this->dataPtr->sim_joints_[j]->GetName());
 
     if (this->dataPtr->sim_joints_[j]) {
       if (this->dataPtr->joint_control_methods_[j] & POSITION) {
-        RCLCPP_INFO_STREAM(this->nh_->get_logger(), "position");   //"\tis controlled in POSITION"
+        RCLCPP_DEBUG_STREAM(this->nh_->get_logger(), "position");   //"\tis controlled in POSITION"
         /*this->dataPtr->sim_joints_[j]->SetPosition(0, this->dataPtr->joint_position_cmd_[j],true);*/
-          RCLCPP_INFO_STREAM(this->nh_->get_logger(),"");
+          RCLCPP_DEBUG_STREAM(this->nh_->get_logger(),"");
       }
       if (this->dataPtr->joint_control_methods_[j] & VELOCITY) {
-        RCLCPP_INFO_STREAM(this->nh_->get_logger(), "velocity");    //\tis controlled in VELOCITY
-        /*this->dataPtr->sim_joints_[j]->SetVelocity(0,this->dataPtr->joint_velocity_cmd_[j]);*/
-        // this->dataPtr->joint_velocity_[j] =
-        //   this->dataPtr->joint_kd_cmd_[j]*(this->dataPtr->joint_velocity_cmd_[j] - this->dataPtr->joint_velocity_[j]);
-        // this->dataPtr->sim_joints_[j]->SetVelocity(0, this->dataPtr->joint_velocity_[j]);
-         RCLCPP_INFO_STREAM(this->nh_->get_logger(),  "");
+        RCLCPP_DEBUG_STREAM(this->nh_->get_logger(), "velocity");    //\tis controlled in VELOCITY
+
+         RCLCPP_DEBUG_STREAM(this->nh_->get_logger(),  "");
       }
       if (this->dataPtr->joint_control_methods_[j] & EFFORT) {
-        RCLCPP_INFO_STREAM(this->nh_->get_logger(), "effort");   //"\tis controlled in EFFORT"
+        RCLCPP_DEBUG_STREAM(this->nh_->get_logger(), "effort");   //"\tis controlled in EFFORT"
         this->dataPtr->joint_effort_[j] = this->dataPtr->joint_effort_cmd_[j] + 
           this->dataPtr->joint_kp_cmd_[j]*(this->dataPtr->joint_position_cmd_[j] - this->dataPtr->joint_position_[j]) +
           this->dataPtr->joint_kd_cmd_[j]*(this->dataPtr->joint_velocity_cmd_[j] - this->dataPtr->joint_velocity_[j]);
         this->dataPtr->sim_joints_[j]->SetForce(0,  this->dataPtr->joint_effort_[j]);
-        RCLCPP_INFO_STREAM(this->nh_->get_logger(), this->dataPtr->joint_effort_[j]);
+        RCLCPP_DEBUG_STREAM(this->nh_->get_logger(), this->dataPtr->joint_effort_[j]);
       }
     }
   }
