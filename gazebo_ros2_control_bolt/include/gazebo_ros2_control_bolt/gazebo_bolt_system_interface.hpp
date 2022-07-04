@@ -1,3 +1,4 @@
+// Copyright 2021 Open Source Robotics Foundation, Inc.
 // Copyright 2022 LAAS, CNRS.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
