@@ -42,7 +42,7 @@ rclcpp::WaitResultKind wait_for(rclcpp::SubscriptionBase::SharedPtr subscription
 }
 }  // namespace
 
-void PosVelTorGainsControllerTest::SetUpTestCase() { rclcpp::init(0, nullptr); }  
+void PosVelTorGainsControllerTest::SetUpTestCase() { rclcpp::init(0, nullptr); }
 
 void PosVelTorGainsControllerTest::TearDownTestCase() { rclcpp::shutdown(); }
 

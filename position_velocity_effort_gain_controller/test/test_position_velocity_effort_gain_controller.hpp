@@ -48,8 +48,8 @@ public:
   void TearDown();
 
   void SetUpController();
- 
- 
+
+
 protected:
   std::unique_ptr<FriendPosVelTorGainsController> controller_;
 

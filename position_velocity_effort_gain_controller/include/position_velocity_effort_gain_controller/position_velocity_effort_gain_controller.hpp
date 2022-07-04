@@ -32,7 +32,7 @@
 #include "controller_interface/helpers.hpp"
 
 namespace position_velocity_effort_gain_controller{
-    
+
     using CmdType = std_msgs::msg::Float64MultiArray;
     using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
@@ -48,23 +48,23 @@ namespace position_velocity_effort_gain_controller{
             rclcpp::Subscription<CmdType>::SharedPtr joints_command_subscriber_;
 
         public:
-            
+
             PosVelTorGainsController();
-        
+
             ~PosVelTorGainsController() = default;
-          
+
             controller_interface::InterfaceConfiguration command_interface_configuration() const override;
-          
+
             controller_interface::InterfaceConfiguration state_interface_configuration() const override;
-        
+
             controller_interface::return_type init(const std::string & controller_name) ;
-         
+
             CallbackReturn on_configure(
             const rclcpp_lifecycle::State & previous_state) ;
-          
+
             CallbackReturn on_activate(
             const rclcpp_lifecycle::State & previous_state) ;
-            
+
             CallbackReturn on_deactivate(
             const rclcpp_lifecycle::State & previous_state) ;
 
@@ -77,5 +77,4 @@ namespace position_velocity_effort_gain_controller{
 
 }
 
-#endif 
-
+#endif

@@ -17,10 +17,10 @@
 
 
 `ros2_description_bolt` - contains files necessary to describe, create and visualize Bolt with Rviz and Gazebo. It stores URDF-description files, rviz configurations and meshes for the demo robots.
- 
+
 `ros2_hardware_interface_bolt` - a ROS2 package in which a hardware interface for Bolt is implemented.
 
- 
+
 ## Quick Hints
 
 These are some quick hints, especially for those coming from a ROS1 control background:
@@ -34,34 +34,34 @@ These are some quick hints, especially for those coming from a ROS1 control back
   The most common (position, velocity, acceleration, effort) are already defined as constants in hardware_interface/types/hardware_interface_type_values.hpp.
 * Joint names in <ros2_control> tags in the URDF must be compatible with the controller's configuration.
 * In ros2_control, all parameters for the driver are specified in the URDF.
-  
- 
 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

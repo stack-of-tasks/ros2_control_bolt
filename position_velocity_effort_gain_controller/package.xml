@@ -16,7 +16,7 @@
 
   <depend>ros2_hardware_interface_bolt</depend>
   <depend>odri_control_interface</depend>
-  <depend>master_board_sdk</depend> 
+  <depend>master_board_sdk</depend>
   <depend>controller_interface</depend>
   <depend>hardware_interface</depend>
   <depend>pluginlib</depend>

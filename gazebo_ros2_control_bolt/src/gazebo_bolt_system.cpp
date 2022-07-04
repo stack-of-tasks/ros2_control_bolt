@@ -64,7 +64,7 @@ public:
 
   /// \brief vector with the current joint kp
   std::vector<double> joint_kp_;
-  
+
   /// \brief vector with the current joint kd
   std::vector<double> joint_kd_;
 
@@ -472,7 +472,7 @@ hardware_interface::return_type GazeboBoltSystem::read()
 
 hardware_interface::return_type GazeboBoltSystem::write()
 {
-  
+
   // Get the simulation time and period
   gazebo::common::Time gz_time_now = this->dataPtr->parent_model_->GetWorld()->SimTime();
   rclcpp::Time sim_time_ros(gz_time_now.sec, gz_time_now.nsec);
@@ -495,7 +495,7 @@ hardware_interface::return_type GazeboBoltSystem::write()
       }
       if (this->dataPtr->joint_control_methods_[j] & EFFORT) {
         RCLCPP_DEBUG_STREAM(this->nh_->get_logger(), "effort");   //"\tis controlled in EFFORT"
-        this->dataPtr->joint_effort_[j] = this->dataPtr->joint_effort_cmd_[j] + 
+        this->dataPtr->joint_effort_[j] = this->dataPtr->joint_effort_cmd_[j] +
           this->dataPtr->joint_kp_cmd_[j]*(this->dataPtr->joint_position_cmd_[j] - this->dataPtr->joint_position_[j]) +
           this->dataPtr->joint_kd_cmd_[j]*(this->dataPtr->joint_velocity_cmd_[j] - this->dataPtr->joint_velocity_[j]);
         this->dataPtr->sim_joints_[j]->SetForce(0,  this->dataPtr->joint_effort_[j]);

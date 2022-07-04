@@ -148,7 +148,7 @@ namespace position_velocity_effort_gain_controller{
         rt_command_ptr_ = realtime_tools::RealtimeBuffer<std::shared_ptr<CmdType>>(nullptr);
         return CallbackReturn::SUCCESS;
     }
-    
+
 
     controller_interface :: return_type PosVelTorGainsController::update(){
         auto joint_commands = rt_command_ptr_.readFromRT();
@@ -172,7 +172,7 @@ namespace position_velocity_effort_gain_controller{
 
         return controller_interface::return_type::OK;
     }
-   
+
 }
 
 #include "pluginlib/class_list_macros.hpp"
