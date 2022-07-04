@@ -51,9 +51,13 @@ pluginlib_export_plugin_description_file(${PROJECT_NAME} position_velocity_effor
 target_compile_definitions(${PROJECT_NAME} PUBLIC "PLUGINLIB__DISABLE_BOOST_FUNCTIONS")
 pluginlib_export_plugin_description_file(controller_interface position_velocity_effort_gain_controller_plugins.xml)
 
-#6. install directives for targets and include directory.
+#6. install directives for targets, include and config directories.
 install(DIRECTORY include/
   DESTINATION include
+)
+
+install(DIRECTORY config/
+  DESTINATION config
 )
 
 install(TARGETS
@@ -62,6 +66,7 @@ install(TARGETS
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
 )
+
 
 #7. Test
 option(BUILD_TESTING "Building tests" OFF)
