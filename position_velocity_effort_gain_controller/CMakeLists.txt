@@ -56,8 +56,8 @@ install(DIRECTORY include/
   DESTINATION include
 )
 
-install(DIRECTORY config/
-  DESTINATION config
+install(DIRECTORY config
+  DESTINATION share/${PROJECT_NAME}
 )
 
 install(TARGETS
