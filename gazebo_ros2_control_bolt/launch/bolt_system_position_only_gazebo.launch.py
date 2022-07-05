@@ -62,10 +62,10 @@ def generate_launch_description():
         output="screen",
     )
 
-    spawn_controller_effort = Node(
+    spawn_forward_command_controller = Node(
         package="controller_manager",
         executable="spawner.py",
-        arguments=["effort_controllers"],
+        arguments=["forward_command_controller"],
         output="screen",
     )
 
@@ -75,6 +75,6 @@ def generate_launch_description():
             node_robot_state_publisher,
             spawn_entity,
             spawn_controller,
-            spawn_controller_effort,
+            spawn_forward_command_controller,
         ]
     )
