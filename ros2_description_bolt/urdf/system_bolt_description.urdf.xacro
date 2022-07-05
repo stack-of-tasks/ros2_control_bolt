@@ -37,7 +37,7 @@ https://github.com/open-dynamic-robot-initiative/robot_properties_bolt/blob/mast
   <!-- ros_control plugin -->
   <gazebo>
     <plugin name="gazebo_ros2_bolt" filename="libgazebo_ros2_control_bolt.so">
-      <parameters>$(find position_velocity_effort_gain_controler)/config/bolt_gazebo_pveg_controller.yaml</parameters>
+      <parameters>$(find position_velocity_effort_gain_controller)/config/bolt_gazebo_pveg_controller.yaml</parameters>
     </plugin>
   </gazebo>
 
