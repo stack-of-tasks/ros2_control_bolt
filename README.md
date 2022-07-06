@@ -34,4 +34,3 @@ The install procedure is described in details [here](doc/Start.md).
  * Benjamin Amsellem (10/2021-02/2022) - First working version of ros2_hardware_bolt
  * Paul Rouanet - (03/2021-09/2021) - Building the LAAS Bolt, starting this repo
  * Olivier Stasse (03/2021 - Supervision)
- 
