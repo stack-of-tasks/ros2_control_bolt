@@ -11,13 +11,15 @@ To start Gazerbo with bolt you can start with:
 A Gazebo client window should open.
 
 Then to control the robot towards a specific configuration:
-`ros2 topic pub /forward_command_controller/commands std_msgs/msg/Float64MultiArray "data:
+```
+ros2 topic pub /forward_command_controller/commands std_msgs/msg/Float64MultiArray "data:
 - 0.5
 - -0.5
 - 0.0
 - 0.0
 - 0.0
-- 0.0"`
+- 0.0"
+```
 
 This should give the following output:
 <img src="./doc/pictures/gazebo_bolt_position_controlled.jpg" width="800" alt="Display " align="center"/>
