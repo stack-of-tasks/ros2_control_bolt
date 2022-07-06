@@ -20,4 +20,4 @@ Then to control the robot towards a specific configuration:
 - 0.0"`
 
 This should give the following output:
-<img src="./doc/images/gazebo_bolt_position_controlled.jpg" width="800" alt="Display " align="center"/>
+<img src="./doc/pictures/gazebo_bolt_position_controlled.jpg" width="800" alt="Display " align="center"/>
