@@ -28,4 +28,10 @@ The install procedure is described in details [here](doc/Start.md).
 
 [ros2_hardware_interface_bolt](ros2_hardware_interface_bolt) - a ROS2 package in which a hardware interface for Bolt is implemented.
 
+## Credits
 
+ * Maxime-Ulrich Fansi (04/2022-09/2022) - First working version of gazebo_bolt_ros2_control
+ * Benjamin Amsellem (10/2021-02/2022) - First working version of ros2_hardware_bolt
+ * Paul Rouanet - (03/2021-09/2021) - Building the LAAS Bolt, starting this repo
+ * Olivier Stasse (03/2021 - Supervision)
+ 
