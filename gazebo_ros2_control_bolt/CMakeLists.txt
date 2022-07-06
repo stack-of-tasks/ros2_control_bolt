@@ -79,6 +79,10 @@ install(DIRECTORY include/${PROJECT_NAME}/
   DESTINATION include/${PROJECT_NAME}
 )
 
+install(DIRECTORY config
+  DESTINATION share/${PROJECT_NAME}
+)
+
 install(
   DIRECTORY launch world
   DESTINATION share/${PROJECT_NAME}

@@ -255,8 +255,32 @@ void GazeboBoltSystem::registerJoints(
           &this->dataPtr->joint_kd_[j]);
       }
     }
+
+
   }
+
+  /// Gain
+  // Last 8.3125
+  this->dataPtr->joint_kp_cmd_[0]=8.35;
+  this->dataPtr->joint_kd_cmd_[0]=0.01;
+
+  this->dataPtr->joint_kp_cmd_[1]=8.35;
+  this->dataPtr->joint_kd_cmd_[1]=0.01;
+
+  this->dataPtr->joint_kp_cmd_[2]=0.2255;
+  this->dataPtr->joint_kd_cmd_[2]=0.01;
+
+  this->dataPtr->joint_kp_cmd_[3]=0.2255;
+  this->dataPtr->joint_kd_cmd_[3]=0.01;
+
+  this->dataPtr->joint_kp_cmd_[4]=0.2255;
+  this->dataPtr->joint_kd_cmd_[4]=0.01;
+
+  this->dataPtr->joint_kp_cmd_[5]=0.2255;
+  this->dataPtr->joint_kd_cmd_[5]=0.01;
+
 }
+
 
 void GazeboBoltSystem::registerSensors(
   const hardware_interface::HardwareInfo & hardware_info,
@@ -409,17 +433,8 @@ std::vector<hardware_interface::StateInterface>
 GazeboBoltSystem::export_state_interfaces()
 {
   RCLCPP_INFO(this->nh_->get_logger(), "GazeboBoltSystem gazebo_ros2_control: export_state_interfaces");
-  for (auto it_hw=info_.hardware_parameters.begin();
-       it_hw!=info_.hardware_parameters.end(); it_hw++)
-    RCLCPP_INFO(this->nh_->get_logger(), "%s",it_hw->second);
-  if (info_.hardware_parameters.find("default_kp")!=info_.hardware_parameters.end()) {
-    for (unsigned int j = 0; j < this->dataPtr->n_dof_; j++) {
-      this->dataPtr->joint_kp_cmd_[j] =  this->dataPtr->joint_kp_[j] =
-	std::stod(info_.hardware_parameters["default_kp"]);
-      RCLCPP_INFO(this->nh_->get_logger(), "%s : %f",this->dataPtr->joint_names_[j].c_str(),
-		  this->dataPtr->joint_kp_[j]);
-    }
-  }
+  RCLCPP_INFO(this->nh_->get_logger(), "GazeboBoltSystem gazebo_ros2_control: hardware_parameters.size()=%d",
+	      info_.hardware_parameters.size());
   return std::move(this->dataPtr->state_interfaces_);
 }
 
@@ -496,10 +511,20 @@ hardware_interface::return_type GazeboBoltSystem::write()
 
     if (this->dataPtr->sim_joints_[j]) {
       if (this->dataPtr->joint_control_methods_[j] & POSITION) {
-        RCLCPP_DEBUG_STREAM(this->nh_->get_logger(), "position");   //"\tis controlled in POSITION"
+
+	double err_pos = this->dataPtr->joint_position_cmd_[j] - this->dataPtr->joint_position_[j];
+	double err_vel = this->dataPtr->joint_velocity_cmd_[j] - this->dataPtr->joint_velocity_[j];
+        RCLCPP_DEBUG_STREAM(this->nh_->get_logger(),
+			   "joint_name :" << this->dataPtr->joint_names_[j] <<
+			   " position kp:" << this->dataPtr->joint_kp_cmd_[j] <<
+			   " kd: " << this->dataPtr->joint_kd_cmd_[j] <<
+			   " err_pos: " << err_pos <<
+			   " err_vel: " << err_vel
+			   );   //"\tis controlled in POSITION"
         /*this->dataPtr->sim_joints_[j]->SetPosition(0, this->dataPtr->joint_position_cmd_[j],true);*/
 	this->dataPtr->joint_effort_[j] =
-          this->dataPtr->joint_kp_cmd_[j]*(this->dataPtr->joint_position_cmd_[j] - this->dataPtr->joint_position_[j]);
+          this->dataPtr->joint_kp_cmd_[j]*err_pos +
+	  this->dataPtr->joint_kp_cmd_[j]*err_vel ;
         this->dataPtr->sim_joints_[j]->SetForce(0,  this->dataPtr->joint_effort_[j]);
 
 	RCLCPP_DEBUG_STREAM(this->nh_->get_logger(),"");

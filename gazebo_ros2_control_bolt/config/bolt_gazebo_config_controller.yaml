@@ -1,0 +1,24 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 500  # Hz
+    default_kp: 1000.0
+    default_kd: 10.0
+
+    forward_command_controller:
+      type: forward_command_controller/ForwardCommandController
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+forward_command_controller:
+  ros__parameters:
+    joints:
+      - FL_HAA
+      - FR_HAA
+      - FL_KFE
+      - FL_HFE
+      - FR_KFE
+      - FR_HFE
+    origin: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+    interface_name: position

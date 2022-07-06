@@ -16,7 +16,7 @@ https://github.com/open-dynamic-robot-initiative/robot_properties_bolt/blob/mast
   <xacro:property name="color" value="0.8 0.8 0.8" />
   <xacro:property name="opacity" value="1.0" />
   <xacro:property name="new_leg" value="true" />
-  <xacro:property name="has_passive_ankle" value="true" />
+  <xacro:property name="has_passive_ankle" value="false" />
   <xacro:arg name="prefix" default="" />
   <xacro:arg name="use_crane" default="true" />
   <xacro:arg name="use_sim" default="false" />
@@ -37,7 +37,7 @@ https://github.com/open-dynamic-robot-initiative/robot_properties_bolt/blob/mast
   <!-- ros_control plugin -->
   <gazebo>
     <plugin name="gazebo_ros2_bolt" filename="libgazebo_ros2_control_bolt.so">
-      <parameters>$(find position_velocity_effort_gain_controller)/config/bolt_gazebo_pveg_controller.yaml</parameters>
+      <parameters>$(find gazebo_ros2_control_bolt)/config/bolt_gazebo_config_controller.yaml</parameters>
     </plugin>
   </gazebo>
 
