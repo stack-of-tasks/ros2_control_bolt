@@ -10,7 +10,7 @@ controller_manager:
 
     position_trajectory_controller:
       type: joint_trajectory_controller/JointTrajectoryController
-  
+
     position_velocity_effort_gain_controller:
       type: position_velocity_effort_gain_controller/PosVelTorGainsController
 
