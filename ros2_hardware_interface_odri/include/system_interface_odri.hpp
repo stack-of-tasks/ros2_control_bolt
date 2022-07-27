@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef ROS2_CONTROL_BOLT__SYSTEM_INTERFACE_BOLT_HPP_
-#define ROS2_CONTROL_BOLT__SYSTEM_INTERFACE_BOLT_HPP_
+#ifndef ROS2_CONTROL_ODRI__SYSTEM_INTERFACE_ODRI_HPP_
+#define ROS2_CONTROL_ODRI__SYSTEM_INTERFACE_ODRI_HPP_
 
-namespace ros2_control_bolt
+namespace ros2_control_odri
 {
 
 struct PosVelEffortGains
@@ -50,7 +50,7 @@ struct GyroAccLineEulerQuater
 constexpr const auto HW_IF_GAIN_KP = "gain_kp";
 constexpr const auto HW_IF_GAIN_KD = "gain_kd";
 
-std::set<std::string> bolt_list_of_cmd_inter {
+std::set<std::string> odri_list_of_cmd_inter {
   "position",
   "velocity",
   "effort",
@@ -58,7 +58,7 @@ std::set<std::string> bolt_list_of_cmd_inter {
   "gain_kd"
 };
 
-std::set<std::string> bolt_list_of_state_inter {
+std::set<std::string> odri_list_of_state_inter {
   "position",
   "velocity",
   "effort",
@@ -74,6 +74,6 @@ enum control_mode_t {
   NO_VALID_MODE
 };
 
-}  // namespace ros2_control_bolt
+}  // namespace ros2_control_odri
 
-#endif  // ROS2_CONTROL_BOLT__SYSTEM_BOLT_HPP_
+#endif  // ROS2_CONTROL_ODRI__SYSTEM_ODRI_HPP_

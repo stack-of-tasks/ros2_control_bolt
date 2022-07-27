@@ -13,7 +13,7 @@ The meshes of each actuators and of the body are in "meshes".
 
 system_bolt.ros2_control.xacro :
 
-Definition of all data useful for system_bolt.cpp (ros2_hardware_interface_bolt) :
+Definition of all data useful for system_bolt.cpp (<author email="prouanet@laas.fr">Paul Rouanet</author>) :
 
    - Ethernet connection name
    - Each joint with :

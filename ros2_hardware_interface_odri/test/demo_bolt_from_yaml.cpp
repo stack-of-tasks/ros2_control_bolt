@@ -1,11 +1,8 @@
-/*Inspiré de demo_solo12_from_yaml.cpp*/
-
-
 /*Modifs :
 
    Vector12d --> Vector6d
-   Boucles for pour les couples : i<12 --> i<6
-   CONFIG_SOLO12_YAML --> CONFIG_BOLT_YAML
+   Loop for the torques : i<12 --> i<6
+   CONFIG_ROBOT_YAML
 
 */
 
@@ -28,18 +25,19 @@ int main()
     nice(-20);  // Give the process a high priority.
 
     // Define the robot from a yaml file.
-    auto robot = RobotFromYamlFile(CONFIG_BOLT_YAML);
+    auto robot = RobotFromYamlFile(CONFIG_ROBOT_YAML);
 
     // Start the robot.
     robot->Start();
 
     // Define controller to calibrate the joints from yaml file.
     auto calib_ctrl = JointCalibratorFromYamlFile(
-        CONFIG_BOLT_YAML, robot->joints);
-    Eigen::Matrix<double,6,1> zero6=Eigen::Matrix<double,6,1>::Zero();
-    calib_ctrl->UpdatePositionOffsets(zero6);
+        CONFIG_ROBOT_YAML, robot->joints);
+
     // Initialize simple pd controller.
     Vector6d torques;
+    double kp = 3.;
+    double kd = 0.05;
     int c = 0;
     std::chrono::time_point<std::chrono::system_clock> last =
         std::chrono::system_clock::now();
@@ -71,7 +69,7 @@ int main()
                     // Reverse the positions;
                     for (int i = 0; i < 6; i++)
                     {
-                        torques[i] = 0.0; //-kp * pos[i] - kd * vel[i]
+                        torques[i] = -kp * pos[i] - kd * vel[i];
                     }
                     robot->joints->SetTorques(torques);
                 }
@@ -86,7 +84,7 @@ int main()
             if (c % 1000 == 0)
             {
                 std::cout << "Joints: ";
-                robot->joints->PrintVector(-robot->joints->GetPositions());
+                robot->joints->PrintVector(robot->joints->GetPositions());
                 std::cout << std::endl;
             }
         }

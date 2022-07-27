@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "system_bolt.hpp"
+#include "system_odri.hpp"
 
 #include <chrono>
 #include <cmath>
@@ -25,7 +25,7 @@
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "rclcpp/rclcpp.hpp"
 
-#include <system_interface_bolt.hpp>
+#include <system_interface_odri.hpp>
 
 /*Connection to ODRI for read sensors and write commands*/
 #include "odri_control_interface/utils.hpp"
@@ -44,16 +44,129 @@ using namespace semantic_components;
 
 
 
-namespace ros2_control_bolt
+namespace ros2_control_odri
 {
 
-/* Code issue from demo_bolt_actuator_control.cpp (ODRI)*/
+/* Code issue from demo_odri_actuator_control.cpp (ODRI)*/
 
 Eigen::Vector6d desired_joint_position = Eigen::Vector6d::Zero();
 Eigen::Vector6d desired_torque = Eigen::Vector6d::Zero();
 
 
-return_type SystemBoltHardware::configure(const hardware_interface::HardwareInfo & info)
+return_type SystemOdriHardware::read_default_cmd_state_value(std::string &default_joint_cs)
+{
+  // Hardware parameters provides a string
+  std::string str_des_start_pos = info_.hardware_parameters[default_joint_cs];
+
+  typedef std::shared_ptr<std::map<std::string,PosVelEffortGains> > shr_ptr_map_pveg;
+  shr_ptr_map_pveg  hw_cs;
+  if (default_joint_cs=="default_joint_cmd")
+    hw_cs = shr_ptr_map_pveg(&hw_commands_);
+  else if (default_joint_cs=="default_joint_state")
+    hw_cs = shr_ptr_map_pveg(&hw_states_);
+  else
+    return return_type::ERROR;
+
+  // Read the parameter through a stream of strings.
+  std::istringstream iss_def_cmd_val;
+  iss_def_cmd_val.str(str_des_start_pos);
+
+  while (!iss_def_cmd_val.eof()) {
+    // Find joint name.
+    std::string joint_name;
+    iss_def_cmd_val >> joint_name;
+
+    // Find the associate joint
+    bool found_joint=false;
+    for (const hardware_interface::ComponentInfo & joint : info_.joints) {
+
+      if (joint.name==joint_name) {
+	auto handle_dbl_and_msg = [] (std::istringstream &iss_def_cmd_val,
+				      std::string &joint_name,
+				      double &adbl, std::string &msg) {
+	  if (!iss_def_cmd_val.eof())
+	    iss_def_cmd_val >> adbl;
+	  else
+	  {
+	    RCLCPP_FATAL(
+			 rclcpp::get_logger("SystemOdriHardware"),
+			 "default_joint_cmd '%s' no '%s'.",
+			 joint_name.c_str(), msg.c_str());
+	    return return_type::ERROR;
+	  }
+	  return return_type::OK;
+	};
+
+        std::string amsg("position");
+        if (handle_dbl_and_msg(iss_def_cmd_val, joint_name,
+			       hw_cs->at(joint_name).position,amsg)==return_type::ERROR)
+	  return return_type::ERROR;
+
+	amsg = "velocity";
+        if (handle_dbl_and_msg(iss_def_cmd_val, joint_name,
+			       hw_cs->at(joint_name).velocity,amsg)==return_type::ERROR)
+	  return return_type::ERROR;
+
+	amsg = "effort";
+        if (handle_dbl_and_msg(iss_def_cmd_val, joint_name,
+			       hw_cs->at(joint_name).effort,amsg)==return_type::ERROR)
+	  return return_type::ERROR;
+
+	amsg = "Kp";
+        if (handle_dbl_and_msg(iss_def_cmd_val, joint_name,
+			       hw_cs->at(joint_name).Kp,amsg)==return_type::ERROR)
+	  return return_type::ERROR;
+
+	amsg = "Kd";
+        if (handle_dbl_and_msg(iss_def_cmd_val, joint_name,
+			       hw_cs->at(joint_name).Kd,amsg)==return_type::ERROR)
+	  return return_type::ERROR;
+
+	found_joint=true;
+	break; // Found the joint break the loop
+      }
+    }
+
+    if (!found_joint)  {
+      RCLCPP_FATAL(
+		   rclcpp::get_logger("SystemOdriHardware"),
+		   "Joint '%s' not found in '%s'.",
+		   joint_name.c_str(), default_joint_cs.c_str());
+      return return_type::ERROR;
+    }
+  }
+  return return_type::OK;
+}
+
+/// Reading desired position
+return_type SystemOdriHardware::read_desired_starting_position()
+{
+  std::vector<double> vec_des_start_pos;
+
+  // Hardware parameters provides a string
+  std::string str_des_start_pos = info_.hardware_parameters["desired_starting_position"];
+
+  // Read the parameter through a stream of strings.
+  std::istringstream iss_des_start_pos;
+  iss_des_start_pos.str(str_des_start_pos);
+
+  // From istringstream to std::vector
+  while (!iss_des_start_pos.eof()) {
+    double apos;
+    iss_des_start_pos >> apos;
+    vec_des_start_pos.push_back(apos);
+  }
+
+  // From std::vector to VectorXd
+  int idx_dsp=0;
+  for (auto apos : vec_des_start_pos)
+    eig_des_start_pos_[idx_dsp++] = apos;
+
+  return return_type::OK;
+}
+
+
+return_type SystemOdriHardware::configure(const hardware_interface::HardwareInfo & info)
 {
   if (configure_default(info) != return_type::OK) {
     return return_type::ERROR;
@@ -102,13 +215,13 @@ return_type SystemBoltHardware::configure(const hardware_interface::HardwareInfo
 
 
 
-    // SystemBolt has exactly 5 doubles for the state and
+    // SystemOdri has exactly 5 doubles for the state and
     // 5 doubles for the command interface on each joint
     if (joint.command_interfaces.size() !=
-      bolt_list_of_cmd_inter.size())
+      odri_list_of_cmd_inter.size())
     {
       RCLCPP_FATAL(
-        rclcpp::get_logger("SystemBoltHardware"),
+        rclcpp::get_logger("SystemOdriHardware"),
         "Joint '%s' has %d command interfaces found.",             // 5 expected.",
         joint.name.c_str(), joint.command_interfaces.size());
       return return_type::ERROR;
@@ -119,19 +232,19 @@ return_type SystemBoltHardware::configure(const hardware_interface::HardwareInfo
     for (const auto & a_joint_cmd_inter : joint.command_interfaces)
     {
       // Check if the command interface is inside the list
-      if (bolt_list_of_cmd_inter.find(a_joint_cmd_inter.name) ==
-        bolt_list_of_cmd_inter.end())
+      if (odri_list_of_cmd_inter.find(a_joint_cmd_inter.name) ==
+        odri_list_of_cmd_inter.end())
       {
         // If not then generate an error message
         RCLCPP_FATAL(
-          rclcpp::get_logger("SystemBoltHardware"),
+          rclcpp::get_logger("SystemOdriHardware"),
           "Joint '%s' have %s command interfaces found. One of the following values is expected",
           joint.name.c_str(),
           a_joint_cmd_inter.name.c_str());
-        for (const auto & a_cmd_inter : bolt_list_of_cmd_inter)
+        for (const auto & a_cmd_inter : odri_list_of_cmd_inter)
         {
           RCLCPP_FATAL(
-            rclcpp::get_logger("SystemBoltHardware"),
+            rclcpp::get_logger("SystemOdriHardware"),
             "'%s' expected.", a_cmd_inter.c_str());
         }
         return return_type::ERROR;
@@ -140,10 +253,10 @@ return_type SystemBoltHardware::configure(const hardware_interface::HardwareInfo
 
     // Check if the state interface list is of the right size
     if (joint.state_interfaces.size() !=
-      bolt_list_of_state_inter.size())
+      odri_list_of_state_inter.size())
     {
       RCLCPP_FATAL(
-        rclcpp::get_logger("SystemBoltHardware"),
+        rclcpp::get_logger("SystemOdriHardware"),
         "Joint '%s' has %d state interface.",                      // 5 expected.",
         joint.name.c_str(), joint.state_interfaces.size());
       return return_type::ERROR;
@@ -155,19 +268,19 @@ return_type SystemBoltHardware::configure(const hardware_interface::HardwareInfo
       std::string joint_state_inter_name = a_joint_state_inter.name;
 
       // Check if the state interface is inside the list
-      if (bolt_list_of_state_inter.find(joint_state_inter_name) ==
-        bolt_list_of_state_inter.end())
+      if (odri_list_of_state_inter.find(joint_state_inter_name) ==
+        odri_list_of_state_inter.end())
       {
         RCLCPP_FATAL(
-          rclcpp::get_logger("SystemBoltHardware"),
+          rclcpp::get_logger("SystemOdriHardware"),
           "Joint '%s' have %s state interface. One of the following was expected: ",
           joint.name.c_str(),
           a_joint_state_inter.name.c_str());
 
-        for (const auto & a_state_inter : bolt_list_of_state_inter)
+        for (const auto & a_state_inter : odri_list_of_state_inter)
         {
           RCLCPP_FATAL(
-            rclcpp::get_logger("SystemBoltHardware"),
+            rclcpp::get_logger("SystemOdriHardware"),
             "'%s' expected.", a_state_inter.c_str());
         }
         return return_type::ERROR;
@@ -181,7 +294,7 @@ return_type SystemBoltHardware::configure(const hardware_interface::HardwareInfo
   return return_type::OK;
 }
 
-void SystemBoltHardware::display_robot_state()
+void SystemOdriHardware::display_robot_state()
 {
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {
     std::cout << "joint " << joint.name << " "
@@ -194,7 +307,7 @@ void SystemBoltHardware::display_robot_state()
   std::cout <<" **************************" << std::endl;
 }
 
-return_type SystemBoltHardware::prepare_command_mode_switch
+return_type SystemOdriHardware::prepare_command_mode_switch
 (
  const std::vector<std::string> & start_interfaces,
  const std::vector<std::string> & stop_interfaces
@@ -224,10 +337,10 @@ return_type SystemBoltHardware::prepare_command_mode_switch
 	      new_modes_[joint.name]=control_mode_t::EFFORT;
       }
 
-      if (key == joint.name + "/" + ros2_control_bolt::HW_IF_GAIN_KP){
+      if (key == joint.name + "/" + ros2_control_odri::HW_IF_GAIN_KP){
 	      new_modes_[joint.name]=control_mode_t::POS_VEL_EFF_GAINS;
       }
-      if (key == joint.name + "/" + ros2_control_bolt::HW_IF_GAIN_KD){
+      if (key == joint.name + "/" + ros2_control_odri::HW_IF_GAIN_KD){
 	      new_modes_[joint.name]=control_mode_t::POS_VEL_EFF_GAINS;
       }
     }
@@ -251,7 +364,7 @@ return_type SystemBoltHardware::prepare_command_mode_switch
     {
       // Something else is using the joint! Abort!
       RCLCPP_ERROR(
-        rclcpp::get_logger("SystemBoltHardware"),
+        rclcpp::get_logger("SystemOdriHardware"),
       	"Joint '%s' has no valid control mode %d %d",
 	      joint.name.c_str(),
 	      control_mode_[joint.name],
@@ -269,7 +382,7 @@ return_type SystemBoltHardware::prepare_command_mode_switch
 
 
 std::vector<hardware_interface::StateInterface>
-SystemBoltHardware::export_state_interfaces()
+SystemOdriHardware::export_state_interfaces()
 {
 
   std::vector<hardware_interface::StateInterface> state_interfaces;
@@ -385,7 +498,7 @@ SystemBoltHardware::export_state_interfaces()
 }
 
 std::vector<hardware_interface::CommandInterface>
-SystemBoltHardware::export_command_interfaces()
+SystemOdriHardware::export_command_interfaces()
 {
   std::vector<hardware_interface::CommandInterface> command_interfaces;
 
@@ -417,26 +530,39 @@ SystemBoltHardware::export_command_interfaces()
 }
 
 
-return_type SystemBoltHardware::start()
+return_type SystemOdriHardware::start()
 {
 
+  //// Read Parameters ////
+
+  /// Read odri_config_yaml
   // Initialize Robot
-  robot_ = RobotFromYamlFile(info_.hardware_parameters["bolt_config_yaml"]);
+  robot_ = RobotFromYamlFile(info_.hardware_parameters["odri_config_yaml"]);
 
-  Vector6d des_pos;
-  des_pos << 0.0, 0.0, 0.0, 0.0 ,0.0 ,0.0 ;
+  /// Read hardware parameter "desired_starting_position"
+  if (read_desired_starting_position()==return_type::ERROR)
+    return return_type::ERROR;
 
-  robot_->Initialize(des_pos);
+  /// Read hardware parameter "default_joint_cmd"
+  std::string default_joint_cs("default_joint_cmd");
+  if (read_default_cmd_state_value(default_joint_cs)==return_type::ERROR)
+    return return_type::ERROR;
 
-  // set some default values
+  /// Read hardware parameter "default_joint_state"
+  default_joint_cs = "default_joint_state";
+  if (read_default_cmd_state_value(default_joint_cs)==return_type::ERROR)
+    return return_type::ERROR;
+
+  /// Initialize the robot to the desired starting position.
+  robot_->Initialize(eig_des_start_pos_);
+
+  /// Build the map from name to index.
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {
-    if (std::isnan(hw_states_[joint.name].position)) {
-      hw_states_[joint.name] = {0.0, 0.0, 0.0, 3.0, 0.05};
-      hw_commands_[joint.name] = {0.0, 0.0, 0.0, 3.0, 0.05};
-    }
+    // First set the key
     joint_name_to_array_index_[joint.name]=0;
   }
 
+  // Then build the index.
   uint idx=0;
   for (auto it = joint_name_to_array_index_.begin();
             it != joint_name_to_array_index_.end(); ++it) {
@@ -451,7 +577,7 @@ return_type SystemBoltHardware::start()
 }
 
 
-return_type SystemBoltHardware::stop()
+return_type SystemOdriHardware::stop()
 {
 
   // Stop the MasterBoard
@@ -461,7 +587,7 @@ return_type SystemBoltHardware::stop()
 }
 
 
-hardware_interface::return_type SystemBoltHardware::read()
+hardware_interface::return_type SystemOdriHardware::read()
 {
   // Data acquisition (with ODRI)
   robot_->ParseSensorData();
@@ -515,7 +641,7 @@ hardware_interface::return_type SystemBoltHardware::read()
 
 
 hardware_interface::return_type
-SystemBoltHardware::write()
+SystemOdriHardware::write()
 {
 
   Eigen::Vector6d positions;
@@ -561,11 +687,11 @@ SystemBoltHardware::write()
 
 
 
-}  // namespace ros2_control_bolt
+}  // namespace ros2_control_odri
 
 #include "pluginlib/class_list_macros.hpp"
 
 PLUGINLIB_EXPORT_CLASS(
-  ros2_control_bolt::SystemBoltHardware,
+  ros2_control_odri::SystemOdriHardware,
   hardware_interface::SystemInterface
 )

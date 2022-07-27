@@ -14,7 +14,7 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <depend>ros2_hardware_interface_bolt</depend>
+  <depend>ros2_hardware_interface_odri</depend>
   <depend>odri_control_interface</depend>
   <depend>master_board_sdk</depend>
   <depend>controller_interface</depend>
@@ -32,7 +32,7 @@
   <test_depend>controller_manager</test_depend>
   <test_depend>hardware_interface</test_depend>
   <test_depend>ros2_control_test_assets</test_depend>
-  <test_depend>ros2_hardware_interface_bolt</test_depend>
+  <test_depend>ros2_hardware_interface_odri</test_depend>
 
   <exec_depend>forward_command_controller</exec_depend>
   <exec_depend>joint_state_broadcaster</exec_depend>

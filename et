@@ -1,0 +1,68 @@
+* [1;34m8c8f906[m - [1;36mWed, 27 Jul 2022 15:31:50 +0200[m [1;32m(il y a 4 minutes)[m[1;33m (HEAD -> maxime_branch_odri, gh-mf/master, maxime_branch)[m
+[31m|[m           [37mChanging order of joints[m [2;37m- Maxime Fansi[m
+* [1;34m084c343[m - [1;36mTue, 26 Jul 2022 18:38:54 +0200[m [1;32m(il y a 21 heures)[m[1;33m[m
+[31m|[m           [37mPVEG controller - 5 controllers at the same time - All done[m [2;37m- Maxime Fansi[m
+* [1;34me60c1df[m - [1;36mTue, 26 Jul 2022 16:32:23 +0200[m [1;32m(il y a 23 heures)[m[1;33m[m
+[31m|[m           [37m5 controllers at the same time - Almost done[m [2;37m- Maxime Fansi[m
+* [1;34m14afd92[m - [1;36mFri, 22 Jul 2022 19:18:55 +0200[m [1;32m(il y a 5 jours)[m[1;33m (gh-mf/maxime_branch)[m
+[31m|[m           [37mChanges on pveg_controller (not finished) 3[m [2;37m- Maxime Fansi[m
+* [1;34m0b27f63[m - [1;36mThu, 21 Jul 2022 18:11:50 +0200[m [1;32m(il y a 6 jours)[m[1;33m[m
+[31m|[m           [37mChanges on pveg_controller (not finished) 2[m [2;37m- Maxime Fansi[m
+* [1;34m15782c5[m - [1;36mThu, 21 Jul 2022 18:09:41 +0200[m [1;32m(il y a 6 jours)[m[1;33m[m
+[31m|[m           [37mChanges on pveg_controller (not finished)[m [2;37m- Maxime Fansi[m
+* [1;34m35a118e[m - [1;36mWed, 20 Jul 2022 17:03:19 +0200[m [1;32m(il y a 7 jours)[m[1;33m (master)[m
+[31m|[m           [37mSpecification of bolt_pveg_controller.yaml on bolt_pveg.launch.py[m [2;37m- Maxime Fansi[m
+* [1;34m8fa9dfb[m - [1;36mWed, 20 Jul 2022 16:49:20 +0200[m [1;32m(il y a 7 jours)[m[1;33m[m
+[31m|[m           [37mAdding bolt bolt_system_pveg.launch.py and bolt_pveg.launch.py to pveg package[m [2;37m- Maxime Fansi[m
+* [1;34ma35e6cf[m - [1;36mWed, 20 Jul 2022 16:00:04 +0200[m [1;32m(il y a 7 jours)[m[1;33m[m
+[31m|[m           [37mTest of pveg_controller on rviz + launch files for each controller[m [2;37m- Maxime Fansi[m
+*   [1;34ma12b72b[m - [1;36mWed, 20 Jul 2022 15:29:26 +0200[m [1;32m(il y a 7 jours)[m[1;33m[m
+[32m|[m[33m\[m            [37mMerge remote-tracking branch 'origin/master', local repository update, 3 commits behinds (1fc2fae 23f8b20 3921d03)[m [2;37m- Maxime Fansi[m
+[32m|[m * [1;34m1fc2fae[m - [1;36mThu, 7 Jul 2022 12:48:22 +0200[m [1;32m(il y a 3 semaines)[m[1;33m (origin/master, origin/HEAD)[m
+[32m|[m [33m|[m           [37m[ros2_hardware_interface] Makes POSITON control works on Bolt.[m [2;37m- Maxime Fansi[m
+[32m|[m * [1;34m23f8b20[m - [1;36mThu, 7 Jul 2022 12:25:22 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[32m|[m [33m|[m           [37m[ros2_description_bolt] Fix wrong inclusion when not in simulation Fixes includes crane when not in simulation Fixes search for gazebo_ros2_control_bolt even when not in simulation.[m [2;37m- Maxime Fansi[m
+[32m|[m * [1;34m3921d03[m - [1;36mThu, 7 Jul 2022 12:19:43 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[32m|[m [33m|[m           [37m[ros2_description_bolt] Changed default port to communicate with bolt.[m [2;37m- Maxime-Ulrich Fansi-Tchameni[m
+* [33m|[m [1;34m74723ef[m - [1;36mTue, 19 Jul 2022 18:35:56 +0200[m [1;32m(il y a 8 jours)[m[1;33m[m
+[33m|[m [33m|[m           [37mTest of pveg_controller with gazebo + correction of a mistake on gazebo_bolt_system.cpp[m [2;37m- Maxime Fansi[m
+* [33m|[m [1;34mcf4aa8a[m - [1;36mThu, 7 Jul 2022 12:48:22 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[33m|[m [33m|[m           [37m[ros2_hardware_interface] Makes POSITON control works on Bolt.[m [2;37m- Maxime Fansi[m
+* [33m|[m [1;34mb612e57[m - [1;36mThu, 7 Jul 2022 12:25:22 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[33m|[m [33m|[m           [37m[ros2_description_bolt] Fix wrong inclusion when not in simulation Fixes includes crane when not in simulation Fixes search for gazebo_ros2_control_bolt even when not in simulation.[m [2;37m- Maxime Fansi[m
+* [33m|[m [1;34m13d60b4[m - [1;36mThu, 7 Jul 2022 12:19:43 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[33m|[m[33m/[m            [37m[ros2_description_bolt] Changed default port to communicate with bolt.[m [2;37m- Maxime-Ulrich Fansi-Tchameni[m
+* [1;34meb2e4f7[m - [1;36mWed, 6 Jul 2022 14:08:44 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[33m|[m           [37mFix README.md to go through CI.[m [2;37m- Olivier Stasse[m
+* [1;34m6576e08[m - [1;36mWed, 6 Jul 2022 12:43:10 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[33m|[m           [37m[gazebo_ros2_control_bolt] Fix line example.[m [2;37m- Olivier Stasse[m
+* [1;34m6f3df14[m - [1;36mWed, 6 Jul 2022 12:40:32 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[33m|[m           [37m[gazebo_ros2_control] Getting back the image instead of being at the upper level.[m [2;37m- Olivier Stasse[m
+* [1;34m1b377e1[m - [1;36mWed, 6 Jul 2022 12:38:10 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[33m|[m           [37m[gazebo_ros2_control_bolt] Add image + fix link[m [2;37m- Olivier Stasse[m
+* [1;34m6105e48[m - [1;36mWed, 6 Jul 2022 12:36:07 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[33m|[m           [37m[gazebo_ros2_control_bolt] Adding commands to use and result image.[m [2;37m- Olivier Stasse[m
+* [1;34m791cb2a[m - [1;36mWed, 6 Jul 2022 12:17:02 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[33m|[m           [37mAdd credits[m [2;37m- Olivier Stasse[m
+* [1;34mae491f3[m - [1;36mWed, 6 Jul 2022 12:10:20 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[33m|[m           [37m[README.md] Reorganize documentation.[m [2;37m- Olivier Stasse[m
+* [1;34m1c32f68[m - [1;36mWed, 6 Jul 2022 08:12:10 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[33m|[m           [37mAdd position control in simulation with hard-coded values. Right motor seems to be unstable.[m [2;37m- Olivier Stasse[m
+* [1;34m7a342d0[m - [1;36mTue, 5 Jul 2022 15:15:45 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[33m|[m           [37m[ros2_description_bolt] Add correct path name for controller parameters.[m [2;37m- Olivier Stasse[m
+* [1;34m55da3f4[m - [1;36mTue, 5 Jul 2022 15:14:54 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[33m|[m           [37m[ros2_description_bolt] Add default parameters for position control[m [2;37m- Olivier Stasse[m
+* [1;34mffe6860[m - [1;36mTue, 5 Jul 2022 15:03:28 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[33m|[m           [37m[position_velocity_effort_gain_controller] Add info for forward_command_controller too This should probably put somewhere else (TO BE CLEANED)[m [2;37m- Olivier Stasse[m
+* [1;34ma5aacca[m - [1;36mTue, 5 Jul 2022 15:02:47 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[33m|[m           [37m[position_velocity_effort_gain_controller] Fix install of config directory.[m [2;37m- Olivier Stasse[m
+* [1;34m64ce5c2[m - [1;36mTue, 5 Jul 2022 15:02:05 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[33m|[m           [37m[gazebo_ros2_control_bolt] Implements position and speed control.[m [2;37m- Olivier Stasse[m
+* [1;34mbcaa5db[m - [1;36mTue, 5 Jul 2022 15:00:49 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[33m|[m           [37mUse forward_command_controller instead of effort_controller.[m [2;37m- Olivier Stasse[m
+* [1;34mab02ca3[m - [1;36mMon, 4 Jul 2022 17:13:49 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[33m|[m           [37mFix pb with pveg_controller yaml file.[m [2;37m- Olivier Stasse[m
+* [1;34m7c78151[m - [1;36mMon, 4 Jul 2022 17:08:19 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[33m|[m           [37mpre-commit[m [2;37m- Guilhem Saurel[m
+* [1;34m4fc8d18[m - [1;36mMon, 4 Jul 2022 12:08:11 +0200[m [1;32m(il y a 3 semaines)[m[1;33m[m
+[33m|[m           [37mcodespell[m [2;37m- Guilhem Saurel[m

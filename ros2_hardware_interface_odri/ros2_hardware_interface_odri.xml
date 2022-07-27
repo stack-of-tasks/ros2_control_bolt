@@ -1,0 +1,9 @@
+<library path="ros2_hardware_interface_odri">
+  <class name="ros2_control_odri/SystemOdriHardware"
+         type="ros2_control_odri::SystemOdriHardware"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      The ROS2 Control Odri protocol.
+    </description>
+  </class>
+</library>

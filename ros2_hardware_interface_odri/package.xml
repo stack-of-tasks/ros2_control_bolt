@@ -7,15 +7,16 @@
 
 <package format="3">
 
-    <name>ros2_hardware_interface_bolt</name>
+    <name>ros2_hardware_interface_odri</name>
     <version>1.0.0</version>
 
     <description>
 	Common interface for controlling robots build with the odri master board.
-	Here its a test version for Bolt.
+	Here its a test version for Odri.
     </description>
 
     <maintainer email="prouanet@laas.fr">Paul Rouanet</maintainer>
+    <maintainer email="olivier.stasse@laas.fr">Olivier Stasse</maintainer>
 
     <license>BSD 3-clause</license>
 
@@ -33,7 +34,7 @@
     <depend>eigenpy</depend>
 
 
-    <!-- Modules useful for system_bolt -->
+    <!-- Modules useful for system_odri -->
     <depend>hardware_interface</depend>
     <depend>pluginlib</depend>
     <depend>rclcpp</depend>

@@ -5,6 +5,7 @@
   <description>Metapackage for `ros2_control` demos packages</description>
 
   <author email="prouanet@laas.fr">Paul Rouanet</author>
+  <author email="olivier.stasse@laas.fr">Olivier Stasse</author>
 
   <maintainer email="prouanet@laas.fr">Paul Rouanet</maintainer>
 
@@ -14,7 +15,7 @@
 
   <exec_depend>ros2_control_bolt_bringup</exec_depend>
   <exec_depend>ros2_description_bolt</exec_depend>
-  <exec_depend>ros2_hardware_interface_bolt</exec_depend>
+  <exec_depend>ros2_hardware_interface_odri</exec_depend>
   <exec_depend>ros2_control_test_nodes</exec_depend>
   <exec_depend>gazebo_ros2_control_bolt</exec_depend>
   <export>

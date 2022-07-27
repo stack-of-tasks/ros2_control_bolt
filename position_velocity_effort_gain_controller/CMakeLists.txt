@@ -14,7 +14,7 @@ endif()
   find_package(ament_cmake REQUIRED)
   find_package(controller_interface REQUIRED)
   find_package(hardware_interface REQUIRED)
-  find_package(ros2_hardware_interface_bolt REQUIRED)
+  find_package(ros2_hardware_interface_odri REQUIRED)
   find_package(pluginlib REQUIRED)
   find_package(rclcpp REQUIRED)
   find_package(rclcpp_lifecycle REQUIRED)
@@ -36,7 +36,7 @@ ament_target_dependencies(${PROJECT_NAME}
   builtin_interfaces
   controller_interface
   hardware_interface
-  ros2_hardware_interface_bolt
+  ros2_hardware_interface_odri
   pluginlib
   rclcpp_lifecycle
   rcutils
@@ -75,7 +75,7 @@ if(BUILD_TESTING)
   find_package(controller_manager REQUIRED)
   find_package(hardware_interface REQUIRED)
   find_package(ros2_control_test_assets REQUIRED)
-  find_package(ros2_hardware_interface_bolt REQUIRED)
+  find_package(ros2_hardware_interface_odri REQUIRED)
 
   ament_add_gmock(
     test_load_position_velocity_effort_gain_controller
@@ -112,7 +112,7 @@ ament_export_include_directories(
 ament_export_dependencies(
   controller_interface
   hardware_interface
-  ros2_hardware_interface_bolt
+  ros2_hardware_interface_odri
   pluginlib
   rclcpp
   rclcpp_lifecycle
