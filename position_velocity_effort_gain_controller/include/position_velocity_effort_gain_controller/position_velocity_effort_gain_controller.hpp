@@ -45,7 +45,7 @@ namespace position_velocity_effort_gain_controller{
             std::vector<std::string> command_interface_types_;
 
             //if we want a matrix instead of a long vector, since we have several joints and interfaces :
-            //std::vector<std::vector<std::string>> command_interface_types_; 
+            //std::vector<std::vector<std::string>> command_interface_types_;
 
             realtime_tools::RealtimeBuffer<std::shared_ptr<CmdType>> rt_command_ptr_;
             rclcpp::Subscription<CmdType>::SharedPtr joints_command_subscriber_;

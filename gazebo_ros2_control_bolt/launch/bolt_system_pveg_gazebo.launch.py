@@ -75,6 +75,6 @@ def generate_launch_description():
             node_robot_state_publisher,
             spawn_entity,
             spawn_controller,
-            spawn_pveg_controller, 
+            spawn_pveg_controller,
         ]
     )

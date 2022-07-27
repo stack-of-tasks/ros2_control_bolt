@@ -116,7 +116,7 @@ TEST_F(PosVelTorGainsControllerTest, JointsParameterNotSet)
   // configure failed, 'joint' parameter not set
   ASSERT_EQ(
   controller_->on_configure(rclcpp_lifecycle::State()), CallbackReturn::ERROR);
-  
+
 }
 
 TEST_F(PosVelTorGainsControllerTest, InterfaceParameterNotSet)
@@ -214,7 +214,7 @@ TEST_F(PosVelTorGainsControllerTest, ActivateSuccess)
   ASSERT_EQ(joint_1_kp_cmd_.get_value(), 4.1);
   ASSERT_EQ(joint_2_kp_cmd_.get_value(), 4.1);
   ASSERT_EQ(joint_3_kp_cmd_.get_value(), 4.1);
-  
+
   ASSERT_EQ(joint_1_kd_cmd_.get_value(), 5.1);
   ASSERT_EQ(joint_2_kd_cmd_.get_value(), 5.1);
   ASSERT_EQ(joint_3_kd_cmd_.get_value(), 5.1);
@@ -247,7 +247,7 @@ TEST_F(PosVelTorGainsControllerTest, CommandSuccessTest)
   ASSERT_EQ(joint_1_kp_cmd_.get_value(), 4.1);
   ASSERT_EQ(joint_2_kp_cmd_.get_value(), 4.1);
   ASSERT_EQ(joint_3_kp_cmd_.get_value(), 4.1);
-  
+
   ASSERT_EQ(joint_1_kd_cmd_.get_value(), 5.1);
   ASSERT_EQ(joint_2_kd_cmd_.get_value(), 5.1);
   ASSERT_EQ(joint_3_kd_cmd_.get_value(), 5.1);
@@ -276,7 +276,7 @@ TEST_F(PosVelTorGainsControllerTest, CommandSuccessTest)
   ASSERT_EQ(joint_1_kp_cmd_.get_value(), 40.0);
   ASSERT_EQ(joint_2_kp_cmd_.get_value(), 40.0);
   ASSERT_EQ(joint_3_kp_cmd_.get_value(), 40.0);
-  
+
   ASSERT_EQ(joint_1_kd_cmd_.get_value(), 50.0);
   ASSERT_EQ(joint_2_kd_cmd_.get_value(), 50.0);
   ASSERT_EQ(joint_3_kd_cmd_.get_value(), 50.0);
@@ -314,10 +314,10 @@ TEST_F(PosVelTorGainsControllerTest, WrongCommandCheckTest)
   ASSERT_EQ(joint_1_kp_cmd_.get_value(), 4.1);
   ASSERT_EQ(joint_2_kp_cmd_.get_value(), 4.1);
   ASSERT_EQ(joint_3_kp_cmd_.get_value(), 4.1);
-  
+
   ASSERT_EQ(joint_1_kd_cmd_.get_value(), 5.1);
   ASSERT_EQ(joint_2_kd_cmd_.get_value(), 5.1);
-  ASSERT_EQ(joint_3_kd_cmd_.get_value(), 5.1);  
+  ASSERT_EQ(joint_3_kd_cmd_.get_value(), 5.1);
 }
 
 TEST_F(PosVelTorGainsControllerTest, NoCommandCheckTest)
@@ -347,7 +347,7 @@ TEST_F(PosVelTorGainsControllerTest, NoCommandCheckTest)
   ASSERT_EQ(joint_1_kp_cmd_.get_value(), 4.1);
   ASSERT_EQ(joint_2_kp_cmd_.get_value(), 4.1);
   ASSERT_EQ(joint_3_kp_cmd_.get_value(), 4.1);
-  
+
   ASSERT_EQ(joint_1_kd_cmd_.get_value(), 5.1);
   ASSERT_EQ(joint_2_kd_cmd_.get_value(), 5.1);
   ASSERT_EQ(joint_3_kd_cmd_.get_value(), 5.1);
@@ -375,7 +375,7 @@ TEST_F(PosVelTorGainsControllerTest, CommandCallbackTest)
   ASSERT_EQ(joint_1_kp_cmd_.get_value(), 4.1);
   ASSERT_EQ(joint_2_kp_cmd_.get_value(), 4.1);
   ASSERT_EQ(joint_3_kp_cmd_.get_value(), 4.1);
-  
+
   ASSERT_EQ(joint_1_kd_cmd_.get_value(), 5.1);
   ASSERT_EQ(joint_2_kd_cmd_.get_value(), 5.1);
   ASSERT_EQ(joint_3_kd_cmd_.get_value(), 5.1);
@@ -419,7 +419,7 @@ TEST_F(PosVelTorGainsControllerTest, CommandCallbackTest)
   ASSERT_EQ(joint_1_kp_cmd_.get_value(), 40.0);
   ASSERT_EQ(joint_2_kp_cmd_.get_value(), 40.0);
   ASSERT_EQ(joint_3_kp_cmd_.get_value(), 40.0);
-  
+
   ASSERT_EQ(joint_1_kd_cmd_.get_value(), 50.0);
   ASSERT_EQ(joint_2_kd_cmd_.get_value(), 50.0);
   ASSERT_EQ(joint_3_kd_cmd_.get_value(), 50.0);
@@ -449,7 +449,7 @@ TEST_F(PosVelTorGainsControllerTest, CommandCallbackTest)
 //   ASSERT_EQ(joint_1_kp_cmd_.get_value(), 4.1);
 //   ASSERT_EQ(joint_2_kp_cmd_.get_value(), 4.1);
 //   ASSERT_EQ(joint_3_kp_cmd_.get_value(), 4.1);
-  
+
 //   ASSERT_EQ(joint_1_kd_cmd_.get_value(), 5.1);
 //   ASSERT_EQ(joint_2_kd_cmd_.get_value(), 5.1);
 //   ASSERT_EQ(joint_3_kd_cmd_.get_value(), 5.1);
@@ -489,7 +489,7 @@ TEST_F(PosVelTorGainsControllerTest, ActivateDeactivateCommandsResetSuccess)
   ASSERT_EQ(joint_1_kp_cmd_.get_value(), 4.1);
   ASSERT_EQ(joint_2_kp_cmd_.get_value(), 4.1);
   ASSERT_EQ(joint_3_kp_cmd_.get_value(), 4.1);
-  
+
   ASSERT_EQ(joint_1_kd_cmd_.get_value(), 5.1);
   ASSERT_EQ(joint_2_kd_cmd_.get_value(), 5.1);
   ASSERT_EQ(joint_3_kd_cmd_.get_value(), 5.1);
@@ -524,7 +524,7 @@ TEST_F(PosVelTorGainsControllerTest, ActivateDeactivateCommandsResetSuccess)
   ASSERT_EQ(joint_1_kp_cmd_.get_value(), 40.0);
   ASSERT_EQ(joint_2_kp_cmd_.get_value(), 40.0);
   ASSERT_EQ(joint_3_kp_cmd_.get_value(), 40.0);
-  
+
   ASSERT_EQ(joint_1_kd_cmd_.get_value(), 50.0);
   ASSERT_EQ(joint_2_kd_cmd_.get_value(), 50.0);
   ASSERT_EQ(joint_3_kd_cmd_.get_value(), 50.0);
@@ -582,7 +582,7 @@ TEST_F(PosVelTorGainsControllerTest, ActivateDeactivateCommandsResetSuccess)
   ASSERT_EQ(joint_1_kp_cmd_.get_value(), 40.0);
   ASSERT_EQ(joint_2_kp_cmd_.get_value(), 40.0);
   ASSERT_EQ(joint_3_kp_cmd_.get_value(), 40.0);
-  
+
   ASSERT_EQ(joint_1_kd_cmd_.get_value(), 50.0);
   ASSERT_EQ(joint_2_kd_cmd_.get_value(), 50.0);
   ASSERT_EQ(joint_3_kd_cmd_.get_value(), 50.0);
@@ -609,7 +609,7 @@ TEST_F(PosVelTorGainsControllerTest, ActivateDeactivateCommandsResetSuccess)
   ASSERT_EQ(joint_1_kp_cmd_.get_value(), 8.8);
   ASSERT_EQ(joint_2_kp_cmd_.get_value(), 8.8);
   ASSERT_EQ(joint_3_kp_cmd_.get_value(), 8.8);
-  
+
   ASSERT_EQ(joint_1_kd_cmd_.get_value(), 9.9);
   ASSERT_EQ(joint_2_kd_cmd_.get_value(), 9.9);
   ASSERT_EQ(joint_3_kd_cmd_.get_value(), 9.9);

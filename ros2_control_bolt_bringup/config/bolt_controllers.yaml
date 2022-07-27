@@ -10,7 +10,7 @@ controller_manager:
 
     position_trajectory_controller:
       type: joint_trajectory_controller/JointTrajectoryController
-  
+
 
 forward_position_controller:
   ros__parameters:
@@ -22,4 +22,3 @@ forward_position_controller:
       - FR_KFE
       - FR_HFE
     interface_name: position
-
