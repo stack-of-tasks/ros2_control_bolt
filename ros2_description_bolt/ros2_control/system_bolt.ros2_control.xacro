@@ -23,8 +23,11 @@
             <plugin>ros2_control_bolt/SystemBoltHardware</plugin>
             <param name="bolt_yaml">2.0</param>
             <xacro:property name="prop_bolt_config_yaml" value="$(find ros2_description_bolt)/config/bolt_config.yaml" />
-            <param name="bolt_config_yaml">${prop_bolt_config_yaml}</param>
-            </xacro:unless>
+            <param name="odri_config_yaml">${prop_bolt_config_yaml}</param>
+            <param name="desired_starting_position">0.0 0.0 0.0 0.0 0.0 0.0</param>
+            <param name="default_joint_cmd">FL_HAA 0.0 0.0 0.0 3.0 0.05 FR_HAA 0.0 0.0 0.0 3.0 0.05 FL_KFE 0.0 0.0 0.0 3.0 0.05 FL_HFE 0.0 0.0 0.0 3.0 0.05 FR_KFE 0.0 0.0 0.0 3.0 0.05 FR_HFE 0.0 0.0 0.0 3.0 0.05</param>
+            <param name="default_joint_state">FL_HAA 0.0 0.0 0.0 3.0 0.05 FR_HAA 0.0 0.0 0.0 3.0 0.05 FL_KFE 0.0 0.0 0.0 3.0 0.05 FL_HFE 0.0 0.0 0.0 3.0 0.05 FR_KFE 0.0 0.0 0.0 3.0 0.05 FR_HFE 0.0 0.0 0.0 3.0 0.05</param>
+         </xacro:unless>
         </hardware>
       </xacro:unless>
 
