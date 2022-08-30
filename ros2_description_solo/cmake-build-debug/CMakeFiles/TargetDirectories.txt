@@ -1,0 +1,9 @@
+/home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo/cmake-build-debug/CMakeFiles/uninstall.dir
+/home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo/cmake-build-debug/CMakeFiles/ros2_description_solo_uninstall.dir
+/home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo/cmake-build-debug/CMakeFiles/test.dir
+/home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo/cmake-build-debug/CMakeFiles/list_install_components.dir
+/home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo/cmake-build-debug/CMakeFiles/install.dir
+/home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo/cmake-build-debug/CMakeFiles/install/local.dir
+/home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo/cmake-build-debug/CMakeFiles/install/strip.dir

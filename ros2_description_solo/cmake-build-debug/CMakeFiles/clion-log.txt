@@ -1,0 +1,6 @@
+/snap/clion/204/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo -B /home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo/cmake-build-debug
+-- Found ament_cmake: 0.9.9 (/opt/ros/foxy/share/ament_cmake/cmake)
+-- Using PYTHON_EXECUTABLE: /usr/bin/python3
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo/cmake-build-debug

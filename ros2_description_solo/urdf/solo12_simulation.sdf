@@ -1,0 +1,1034 @@
+<sdf version='1.7'>
+  <model name='solo'>
+    <link name='base_link'>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>1.16115</mass>
+        <inertia>
+          <ixx>0.00578574</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0193811</iyy>
+          <iyz>0</iyz>
+          <izz>0.0247612</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/solo12/solo_12_base.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='base_link_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/solo12/solo_12_base.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='FL_HAA' type='revolute'>
+      <pose relative_to='base_link'>0.1946 0.0875 0 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>FL_SHOULDER</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-3.14159</lower>
+          <upper>3.14159</upper>
+          <effort>1000</effort>
+          <velocity>2</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='FL_SHOULDER'>
+      <pose relative_to='FL_HAA'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.078707 0.01 0 0 -0 0</pose>
+        <mass>0.148538</mass>
+        <inertia>
+          <ixx>3.024e-05</ixx>
+          <ixy>4.671e-05</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00041193</iyy>
+          <iyz>0</iyz>
+          <izz>0.00041107</izz>
+        </inertia>
+      </inertial>
+      <collision name='FL_SHOULDER_collision'>
+        <pose>0.0195 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/solo12/solo12_hip_fe_fl.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='FL_SHOULDER_visual'>
+        <pose>0.0195 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/solo12/solo12_hip_fe_fl.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='FL_HFE' type='revolute'>
+      <pose relative_to='FL_SHOULDER'>0 0.014 0 0 -0 0</pose>
+      <parent>FL_SHOULDER</parent>
+      <child>FL_UPPER_LEG</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-3.14159</lower>
+          <upper>3.14159</upper>
+          <effort>1000</effort>
+          <velocity>2</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='FL_UPPER_LEG'>
+      <pose relative_to='FL_HFE'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>1.4e-05 0.019359 -0.078707 0 -0 0</pose>
+        <mass>0.148538</mass>
+        <inertia>
+          <ixx>0.00041107</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00041193</iyy>
+          <iyz>4.671e-05</iyz>
+          <izz>3.024e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='FL_UPPER_LEG_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_upper_leg_left_side.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='FL_UPPER_LEG_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_upper_leg_left_side.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='FL_KFE' type='revolute'>
+      <pose relative_to='FL_UPPER_LEG'>0 0.03745 -0.16 0 -0 0</pose>
+      <parent>FL_UPPER_LEG</parent>
+      <child>FL_LOWER_LEG</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-3.14159</lower>
+          <upper>3.14159</upper>
+          <effort>1000</effort>
+          <velocity>2</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='FL_LOWER_LEG'>
+      <pose relative_to='FL_KFE'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0.007899 -0.102249 0 -0 0</pose>
+        <mass>0.0376361</mass>
+        <inertia>
+          <ixx>0.000148819</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000149139</iyy>
+          <iyz>3.09919e-06</iyz>
+          <izz>2.69009e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='FL_LOWER_LEG_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_lower_leg_left_side.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='FL_LOWER_LEG_fixed_joint_lump__FL_FOOT_collision_1'>
+        <pose>0 0.008 -0.16 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_foot.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <soft_cfm>0.0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>100000.0</kp>
+              <kd>1.0</kd>
+              <max_vel>100.0</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+          <bounce>
+            <restitution_coefficient>0.0</restitution_coefficient>
+            <threshold>100000.0</threshold>
+          </bounce>
+          <friction>
+            <ode>
+              <mu>0.7</mu>
+              <mu2>0.7</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='FL_LOWER_LEG_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_lower_leg_left_side.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <visual name='FL_LOWER_LEG_fixed_joint_lump__FL_FOOT_visual_1'>
+        <pose>0 0.008 -0.16 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_foot.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='FR_HAA' type='revolute'>
+      <pose relative_to='base_link'>0.1946 -0.0875 0 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>FR_SHOULDER</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-3.14159</lower>
+          <upper>3.14159</upper>
+          <effort>1000</effort>
+          <velocity>2</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='FR_SHOULDER'>
+      <pose relative_to='FR_HAA'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.078707 -0.01 0 0 -0 0</pose>
+        <mass>0.148538</mass>
+        <inertia>
+          <ixx>3.024e-05</ixx>
+          <ixy>-4.671e-05</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00041193</iyy>
+          <iyz>0</iyz>
+          <izz>0.00041107</izz>
+        </inertia>
+      </inertial>
+      <collision name='FR_SHOULDER_collision'>
+        <pose>0.0195 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/solo12/solo12_hip_fe_fr.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='FR_SHOULDER_visual'>
+        <pose>0.0195 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/solo12/solo12_hip_fe_fr.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='FR_HFE' type='revolute'>
+      <pose relative_to='FR_SHOULDER'>0 -0.014 0 0 -0 0</pose>
+      <parent>FR_SHOULDER</parent>
+      <child>FR_UPPER_LEG</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-3.14159</lower>
+          <upper>3.14159</upper>
+          <effort>1000</effort>
+          <velocity>2</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='FR_UPPER_LEG'>
+      <pose relative_to='FR_HFE'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-1.4e-05 -0.019359 -0.078707 0 -0 0</pose>
+        <mass>0.148538</mass>
+        <inertia>
+          <ixx>0.00041107</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00041193</iyy>
+          <iyz>-4.671e-05</iyz>
+          <izz>3.024e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='FR_UPPER_LEG_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_upper_leg_right_side.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='FR_UPPER_LEG_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_upper_leg_right_side.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='FR_KFE' type='revolute'>
+      <pose relative_to='FR_UPPER_LEG'>0 -0.03745 -0.16 0 -0 0</pose>
+      <parent>FR_UPPER_LEG</parent>
+      <child>FR_LOWER_LEG</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-3.14159</lower>
+          <upper>3.14159</upper>
+          <effort>1000</effort>
+          <velocity>2</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='FR_LOWER_LEG'>
+      <pose relative_to='FR_KFE'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0.004951 -0.102249 0 -0 0</pose>
+        <mass>0.0376361</mass>
+        <inertia>
+          <ixx>0.000150245</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000149139</iyy>
+          <iyz>-9.37015e-06</iyz>
+          <izz>4.11611e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='FR_LOWER_LEG_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_lower_leg_right_side.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='FR_LOWER_LEG_fixed_joint_lump__FR_FOOT_collision_1'>
+        <pose>0 -0.008 -0.16 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_foot.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <soft_cfm>0.0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>100000.0</kp>
+              <kd>1.0</kd>
+              <max_vel>100.0</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+          <bounce>
+            <restitution_coefficient>0.0</restitution_coefficient>
+            <threshold>100000.0</threshold>
+          </bounce>
+          <friction>
+            <ode>
+              <mu>0.7</mu>
+              <mu2>0.7</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='FR_LOWER_LEG_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_lower_leg_right_side.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <visual name='FR_LOWER_LEG_fixed_joint_lump__FR_FOOT_visual_1'>
+        <pose>0 -0.008 -0.16 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_foot.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='HL_HAA' type='revolute'>
+      <pose relative_to='base_link'>-0.1946 0.0875 0 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>HL_SHOULDER</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-3.14159</lower>
+          <upper>3.14159</upper>
+          <effort>1000</effort>
+          <velocity>2</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='HL_SHOULDER'>
+      <pose relative_to='HL_HAA'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.078707 0.01 0 0 -0 0</pose>
+        <mass>0.148538</mass>
+        <inertia>
+          <ixx>3.024e-05</ixx>
+          <ixy>4.671e-05</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00041193</iyy>
+          <iyz>0</iyz>
+          <izz>0.00041107</izz>
+        </inertia>
+      </inertial>
+      <collision name='HL_SHOULDER_collision'>
+        <pose>-0.0195 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/solo12/solo12_hip_fe_hl.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='HL_SHOULDER_visual'>
+        <pose>-0.0195 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/solo12/solo12_hip_fe_hl.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='HL_HFE' type='revolute'>
+      <pose relative_to='HL_SHOULDER'>0 0.014 0 0 -0 0</pose>
+      <parent>HL_SHOULDER</parent>
+      <child>HL_UPPER_LEG</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-3.14159</lower>
+          <upper>3.14159</upper>
+          <effort>1000</effort>
+          <velocity>2</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='HL_UPPER_LEG'>
+      <pose relative_to='HL_HFE'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>1.4e-05 0.019359 -0.078707 0 -0 0</pose>
+        <mass>0.148538</mass>
+        <inertia>
+          <ixx>0.00041107</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00041193</iyy>
+          <iyz>4.671e-05</iyz>
+          <izz>3.024e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='HL_UPPER_LEG_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_upper_leg_left_side.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='HL_UPPER_LEG_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_upper_leg_left_side.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='HL_KFE' type='revolute'>
+      <pose relative_to='HL_UPPER_LEG'>0 0.03745 -0.16 0 -0 0</pose>
+      <parent>HL_UPPER_LEG</parent>
+      <child>HL_LOWER_LEG</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-3.14159</lower>
+          <upper>3.14159</upper>
+          <effort>1000</effort>
+          <velocity>2</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='HL_LOWER_LEG'>
+      <pose relative_to='HL_KFE'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0.007899 -0.102249 0 -0 0</pose>
+        <mass>0.0376361</mass>
+        <inertia>
+          <ixx>0.000148819</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000149139</iyy>
+          <iyz>3.09919e-06</iyz>
+          <izz>2.69009e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='HL_LOWER_LEG_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_lower_leg_left_side.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='HL_LOWER_LEG_fixed_joint_lump__HL_FOOT_collision_1'>
+        <pose>0 0.008 -0.16 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_foot.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <soft_cfm>0.0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>100000.0</kp>
+              <kd>1.0</kd>
+              <max_vel>100.0</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+          <bounce>
+            <restitution_coefficient>0.0</restitution_coefficient>
+            <threshold>100000.0</threshold>
+          </bounce>
+          <friction>
+            <ode>
+              <mu>0.7</mu>
+              <mu2>0.7</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='HL_LOWER_LEG_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_lower_leg_left_side.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <visual name='HL_LOWER_LEG_fixed_joint_lump__HL_FOOT_visual_1'>
+        <pose>0 0.008 -0.16 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_foot.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='HR_HAA' type='revolute'>
+      <pose relative_to='base_link'>-0.1946 -0.0875 0 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>HR_SHOULDER</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-3.14159</lower>
+          <upper>3.14159</upper>
+          <effort>1000</effort>
+          <velocity>2</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='HR_SHOULDER'>
+      <pose relative_to='HR_HAA'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.078707 -0.01 0 0 -0 0</pose>
+        <mass>0.148538</mass>
+        <inertia>
+          <ixx>3.024e-05</ixx>
+          <ixy>-4.671e-05</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00041193</iyy>
+          <iyz>0</iyz>
+          <izz>0.00041107</izz>
+        </inertia>
+      </inertial>
+      <collision name='HR_SHOULDER_collision'>
+        <pose>-0.0195 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/solo12/solo12_hip_fe_hr.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='HR_SHOULDER_visual'>
+        <pose>-0.0195 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/solo12/solo12_hip_fe_hr.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='HR_HFE' type='revolute'>
+      <pose relative_to='HR_SHOULDER'>0 -0.014 0 0 -0 0</pose>
+      <parent>HR_SHOULDER</parent>
+      <child>HR_UPPER_LEG</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-3.14159</lower>
+          <upper>3.14159</upper>
+          <effort>1000</effort>
+          <velocity>2</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='HR_UPPER_LEG'>
+      <pose relative_to='HR_HFE'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-1.4e-05 -0.019359 -0.078707 0 -0 0</pose>
+        <mass>0.148538</mass>
+        <inertia>
+          <ixx>0.00041107</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00041193</iyy>
+          <iyz>-4.671e-05</iyz>
+          <izz>3.024e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='HR_UPPER_LEG_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_upper_leg_right_side.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='HR_UPPER_LEG_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_upper_leg_right_side.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='HR_KFE' type='revolute'>
+      <pose relative_to='HR_UPPER_LEG'>0 -0.03745 -0.16 0 -0 0</pose>
+      <parent>HR_UPPER_LEG</parent>
+      <child>HR_LOWER_LEG</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-3.14159</lower>
+          <upper>3.14159</upper>
+          <effort>1000</effort>
+          <velocity>2</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='HR_LOWER_LEG'>
+      <pose relative_to='HR_KFE'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0.004951 -0.102249 0 -0 0</pose>
+        <mass>0.0376361</mass>
+        <inertia>
+          <ixx>0.000150245</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000149139</iyy>
+          <iyz>-9.37015e-06</iyz>
+          <izz>4.11611e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='HR_LOWER_LEG_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_lower_leg_right_side.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='HR_LOWER_LEG_fixed_joint_lump__HR_FOOT_collision_1'>
+        <pose>0 -0.008 -0.16 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_foot.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <soft_cfm>0.0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>100000.0</kp>
+              <kd>1.0</kd>
+              <max_vel>100.0</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+          <bounce>
+            <restitution_coefficient>0.0</restitution_coefficient>
+            <threshold>100000.0</threshold>
+          </bounce>
+          <friction>
+            <ode>
+              <mu>0.7</mu>
+              <mu2>0.7</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='HR_LOWER_LEG_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_lower_leg_right_side.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <visual name='HR_LOWER_LEG_fixed_joint_lump__HR_FOOT_visual_1'>
+        <pose>0 -0.008 -0.16 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>/with_foot/solo_foot.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <static>0</static>
+    <plugin name='gazebo_ros2_control' filename='libgazebo_ros2_control.so'>
+      <parameters>/home/stanley/Documents/McGill/robotics/foxy_ws/install/ros2_control_solo_bringup/share/ros2_control_solo_bringup/config/solo_gazebo_test_controllers.yaml</parameters>
+    </plugin>
+  </model>
+</sdf>
