@@ -1,7 +1,7 @@
 {
-	"backtraceGraph" : 
+	"backtraceGraph" :
 	{
-		"commands" : 
+		"commands" :
 		[
 			"install",
 			"ament_index_register_resource",
@@ -15,7 +15,7 @@
 			"ament_index_register_package",
 			"_ament_package"
 		],
-		"files" : 
+		"files" :
 		[
 			"CMakeLists.txt",
 			"/opt/ros/foxy/share/ament_cmake_core/cmake/index/ament_index_register_resource.cmake",
@@ -28,7 +28,7 @@
 			"/opt/ros/foxy/share/ament_cmake_core/cmake/index/ament_index_register_package.cmake",
 			"/opt/ros/foxy/share/ament_cmake_core/cmake/index/ament_cmake_index_package_hook.cmake"
 		],
-		"nodes" : 
+		"nodes" :
 		[
 			{
 				"file" : 0
@@ -221,13 +221,13 @@
 			}
 		]
 	},
-	"installers" : 
+	"installers" :
 	[
 		{
 			"backtrace" : 1,
 			"component" : "Unspecified",
 			"destination" : "share/ros2_description_solo",
-			"paths" : 
+			"paths" :
 			[
 				"meshes",
 				"ros2_control",
@@ -241,7 +241,7 @@
 			"backtrace" : 8,
 			"component" : "Unspecified",
 			"destination" : "share/ament_index/resource_index/package_run_dependencies",
-			"paths" : 
+			"paths" :
 			[
 				"cmake-build-debug/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/ros2_description_solo"
 			],
@@ -251,7 +251,7 @@
 			"backtrace" : 11,
 			"component" : "Unspecified",
 			"destination" : "share/ament_index/resource_index/parent_prefix_path",
-			"paths" : 
+			"paths" :
 			[
 				"cmake-build-debug/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/ros2_description_solo"
 			],
@@ -261,7 +261,7 @@
 			"backtrace" : 15,
 			"component" : "Unspecified",
 			"destination" : "share/ros2_description_solo/environment",
-			"paths" : 
+			"paths" :
 			[
 				"/opt/ros/foxy/share/ament_cmake_core/cmake/environment_hooks/environment/ament_prefix_path.sh"
 			],
@@ -271,7 +271,7 @@
 			"backtrace" : 16,
 			"component" : "Unspecified",
 			"destination" : "share/ros2_description_solo/environment",
-			"paths" : 
+			"paths" :
 			[
 				"cmake-build-debug/ament_cmake_environment_hooks/ament_prefix_path.dsv"
 			],
@@ -281,7 +281,7 @@
 			"backtrace" : 17,
 			"component" : "Unspecified",
 			"destination" : "share/ros2_description_solo/environment",
-			"paths" : 
+			"paths" :
 			[
 				"/opt/ros/foxy/share/ament_cmake_core/cmake/environment_hooks/environment/path.sh"
 			],
@@ -291,7 +291,7 @@
 			"backtrace" : 18,
 			"component" : "Unspecified",
 			"destination" : "share/ros2_description_solo/environment",
-			"paths" : 
+			"paths" :
 			[
 				"cmake-build-debug/ament_cmake_environment_hooks/path.dsv"
 			],
@@ -301,7 +301,7 @@
 			"backtrace" : 20,
 			"component" : "Unspecified",
 			"destination" : "share/ros2_description_solo",
-			"paths" : 
+			"paths" :
 			[
 				"cmake-build-debug/ament_cmake_environment_hooks/local_setup.bash"
 			],
@@ -311,7 +311,7 @@
 			"backtrace" : 21,
 			"component" : "Unspecified",
 			"destination" : "share/ros2_description_solo",
-			"paths" : 
+			"paths" :
 			[
 				"cmake-build-debug/ament_cmake_environment_hooks/local_setup.sh"
 			],
@@ -321,7 +321,7 @@
 			"backtrace" : 22,
 			"component" : "Unspecified",
 			"destination" : "share/ros2_description_solo",
-			"paths" : 
+			"paths" :
 			[
 				"cmake-build-debug/ament_cmake_environment_hooks/local_setup.zsh"
 			],
@@ -331,7 +331,7 @@
 			"backtrace" : 23,
 			"component" : "Unspecified",
 			"destination" : "share/ros2_description_solo",
-			"paths" : 
+			"paths" :
 			[
 				"cmake-build-debug/ament_cmake_environment_hooks/local_setup.dsv"
 			],
@@ -341,7 +341,7 @@
 			"backtrace" : 24,
 			"component" : "Unspecified",
 			"destination" : "share/ros2_description_solo",
-			"paths" : 
+			"paths" :
 			[
 				"cmake-build-debug/ament_cmake_environment_hooks/package.dsv"
 			],
@@ -351,7 +351,7 @@
 			"backtrace" : 29,
 			"component" : "Unspecified",
 			"destination" : "share/ament_index/resource_index/packages",
-			"paths" : 
+			"paths" :
 			[
 				"cmake-build-debug/ament_cmake_index/share/ament_index/resource_index/packages/ros2_description_solo"
 			],
@@ -361,7 +361,7 @@
 			"backtrace" : 31,
 			"component" : "Unspecified",
 			"destination" : "share/ros2_description_solo/cmake",
-			"paths" : 
+			"paths" :
 			[
 				"cmake-build-debug/ament_cmake_core/ros2_description_soloConfig.cmake",
 				"cmake-build-debug/ament_cmake_core/ros2_description_soloConfig-version.cmake"
@@ -372,14 +372,14 @@
 			"backtrace" : 32,
 			"component" : "Unspecified",
 			"destination" : "share/ros2_description_solo",
-			"paths" : 
+			"paths" :
 			[
 				"package.xml"
 			],
 			"type" : "file"
 		}
 	],
-	"paths" : 
+	"paths" :
 	{
 		"build" : ".",
 		"source" : "."

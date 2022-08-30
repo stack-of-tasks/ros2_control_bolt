@@ -1,15 +1,15 @@
 {
 	"backtrace" : 9,
-	"backtraceGraph" : 
+	"backtraceGraph" :
 	{
-		"commands" : 
+		"commands" :
 		[
 			"add_custom_target",
 			"include",
 			"find_package",
 			"add_dependencies"
 		],
-		"files" : 
+		"files" :
 		[
 			"/opt/ros/foxy/share/ament_cmake_core/cmake/ament_cmake_uninstall_target-extras.cmake",
 			"/opt/ros/foxy/share/ament_cmake_core/cmake/ament_cmake_coreConfig.cmake",
@@ -17,7 +17,7 @@
 			"/opt/ros/foxy/share/ament_cmake/cmake/ament_cmakeConfig.cmake",
 			"CMakeLists.txt"
 		],
-		"nodes" : 
+		"nodes" :
 		[
 			{
 				"file" : 4
@@ -76,7 +76,7 @@
 			}
 		]
 	},
-	"dependencies" : 
+	"dependencies" :
 	[
 		{
 			"backtrace" : 10,
@@ -85,7 +85,7 @@
 	],
 	"id" : "uninstall::@6890427a1f51a3e7e1df",
 	"name" : "uninstall",
-	"paths" : 
+	"paths" :
 	{
 		"build" : ".",
 		"source" : "."

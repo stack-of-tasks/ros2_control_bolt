@@ -1,20 +1,20 @@
 {
-	"configurations" : 
+	"configurations" :
 	[
 		{
-			"directories" : 
+			"directories" :
 			[
 				{
 					"build" : ".",
 					"hasInstallRule" : true,
 					"jsonFile" : "directory-.-Debug-749820d5d115b07c11e7.json",
-					"minimumCMakeVersion" : 
+					"minimumCMakeVersion" :
 					{
 						"string" : "3.5"
 					},
 					"projectIndex" : 0,
 					"source" : ".",
-					"targetIndexes" : 
+					"targetIndexes" :
 					[
 						0,
 						1
@@ -22,22 +22,22 @@
 				}
 			],
 			"name" : "Debug",
-			"projects" : 
+			"projects" :
 			[
 				{
-					"directoryIndexes" : 
+					"directoryIndexes" :
 					[
 						0
 					],
 					"name" : "ros2_description_solo",
-					"targetIndexes" : 
+					"targetIndexes" :
 					[
 						0,
 						1
 					]
 				}
 			],
-			"targets" : 
+			"targets" :
 			[
 				{
 					"directoryIndex" : 0,
@@ -57,12 +57,12 @@
 		}
 	],
 	"kind" : "codemodel",
-	"paths" : 
+	"paths" :
 	{
 		"build" : "/home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo/cmake-build-debug",
 		"source" : "/home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo"
 	},
-	"version" : 
+	"version" :
 	{
 		"major" : 2,
 		"minor" : 4

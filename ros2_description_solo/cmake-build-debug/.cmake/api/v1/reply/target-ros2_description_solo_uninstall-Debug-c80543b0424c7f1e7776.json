@@ -1,14 +1,14 @@
 {
 	"backtrace" : 9,
-	"backtraceGraph" : 
+	"backtraceGraph" :
 	{
-		"commands" : 
+		"commands" :
 		[
 			"add_custom_target",
 			"include",
 			"find_package"
 		],
-		"files" : 
+		"files" :
 		[
 			"/opt/ros/foxy/share/ament_cmake_core/cmake/ament_cmake_uninstall_target-extras.cmake",
 			"/opt/ros/foxy/share/ament_cmake_core/cmake/ament_cmake_coreConfig.cmake",
@@ -16,7 +16,7 @@
 			"/opt/ros/foxy/share/ament_cmake/cmake/ament_cmakeConfig.cmake",
 			"CMakeLists.txt"
 		],
-		"nodes" : 
+		"nodes" :
 		[
 			{
 				"file" : 4
@@ -71,29 +71,29 @@
 	},
 	"id" : "ros2_description_solo_uninstall::@6890427a1f51a3e7e1df",
 	"name" : "ros2_description_solo_uninstall",
-	"paths" : 
+	"paths" :
 	{
 		"build" : ".",
 		"source" : "."
 	},
-	"sourceGroups" : 
+	"sourceGroups" :
 	[
 		{
 			"name" : "",
-			"sourceIndexes" : 
+			"sourceIndexes" :
 			[
 				0
 			]
 		},
 		{
 			"name" : "CMake Rules",
-			"sourceIndexes" : 
+			"sourceIndexes" :
 			[
 				1
 			]
 		}
 	],
-	"sources" : 
+	"sources" :
 	[
 		{
 			"backtrace" : 9,

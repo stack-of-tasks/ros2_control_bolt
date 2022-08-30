@@ -26,7 +26,7 @@
         </hardware>
       </xacro:unless>
 
-      <!-- HAA -->
+      <!-- HAS -->
       <joint name="FL_HAA">
         <command_interface name="effort">
           <param name="min">-1000</param>
@@ -292,4 +292,3 @@
     </ros2_control>
   </xacro:macro>
 </robot>
-

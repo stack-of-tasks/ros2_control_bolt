@@ -1,21 +1,21 @@
 {
 	"kind" : "toolchains",
-	"toolchains" : 
+	"toolchains" :
 	[
 		{
-			"compiler" : 
+			"compiler" :
 			{
 				"id" : "GNU",
-				"implicit" : 
+				"implicit" :
 				{
-					"includeDirectories" : 
+					"includeDirectories" :
 					[
 						"/usr/lib/gcc/x86_64-linux-gnu/9/include",
 						"/usr/local/include",
 						"/usr/include/x86_64-linux-gnu",
 						"/usr/include"
 					],
-					"linkDirectories" : 
+					"linkDirectories" :
 					[
 						"/usr/lib/gcc/x86_64-linux-gnu/9",
 						"/usr/lib/x86_64-linux-gnu",
@@ -24,7 +24,7 @@
 						"/lib"
 					],
 					"linkFrameworkDirectories" : [],
-					"linkLibraries" : 
+					"linkLibraries" :
 					[
 						"gcc",
 						"gcc_s",
@@ -37,19 +37,19 @@
 				"version" : "9.4.0"
 			},
 			"language" : "C",
-			"sourceFileExtensions" : 
+			"sourceFileExtensions" :
 			[
 				"c",
 				"m"
 			]
 		},
 		{
-			"compiler" : 
+			"compiler" :
 			{
 				"id" : "GNU",
-				"implicit" : 
+				"implicit" :
 				{
-					"includeDirectories" : 
+					"includeDirectories" :
 					[
 						"/usr/include/c++/9",
 						"/usr/include/x86_64-linux-gnu/c++/9",
@@ -59,7 +59,7 @@
 						"/usr/include/x86_64-linux-gnu",
 						"/usr/include"
 					],
-					"linkDirectories" : 
+					"linkDirectories" :
 					[
 						"/usr/lib/gcc/x86_64-linux-gnu/9",
 						"/usr/lib/x86_64-linux-gnu",
@@ -68,7 +68,7 @@
 						"/lib"
 					],
 					"linkFrameworkDirectories" : [],
-					"linkLibraries" : 
+					"linkLibraries" :
 					[
 						"stdc++",
 						"m",
@@ -83,7 +83,7 @@
 				"version" : "9.4.0"
 			},
 			"language" : "CXX",
-			"sourceFileExtensions" : 
+			"sourceFileExtensions" :
 			[
 				"C",
 				"M",
@@ -99,7 +99,7 @@
 			]
 		}
 	],
-	"version" : 
+	"version" :
 	{
 		"major" : 1,
 		"minor" : 0

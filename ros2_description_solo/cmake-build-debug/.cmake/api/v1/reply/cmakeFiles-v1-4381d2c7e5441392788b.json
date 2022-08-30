@@ -1,5 +1,5 @@
 {
-	"inputs" : 
+	"inputs" :
 	[
 		{
 			"path" : "CMakeLists.txt"
@@ -625,12 +625,12 @@
 		}
 	],
 	"kind" : "cmakeFiles",
-	"paths" : 
+	"paths" :
 	{
 		"build" : "/home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo/cmake-build-debug",
 		"source" : "/home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo"
 	},
-	"version" : 
+	"version" :
 	{
 		"major" : 1,
 		"minor" : 0

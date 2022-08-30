@@ -35,7 +35,7 @@
         <color rgba="0.8 0.8 0.8 1.0"/>
       </material>
     </collision>
-    <!-- Bullet specific paramters -->
+    <!-- Bullet specific parameters -->
     <contact>
       <lateral_friction value="1.0"/>
       <restitution value="0.5"/>
@@ -62,7 +62,7 @@
   <link name="FL_SHOULDER">
     <!-- TODO Update inertias. -->
     <!-- create a dummy shoulder link to join the two joints -->
-    <!-- HAA VISUAL -->
+    <!-- HAS VISUAL -->
     <visual>
       <origin rpy="0 0 0" xyz="0.01950 0 0"/>
       <geometry>
@@ -72,7 +72,7 @@
         <color rgba="0.8 0.8 0.8 1.0"/>
       </material>
     </visual>
-    <!-- HAA LINK COLLISION -->
+    <!-- HAS LINK COLLISION -->
     <collision>
       <origin rpy="0 0 0" xyz="0.01950 0 0"/>
       <geometry>
@@ -84,7 +84,7 @@
     </collision>
     <inertial>
       <mass value="0.14853845"/>
-      <!-- HAA body inertia -->
+      <!-- HAS body inertia -->
       <origin rpy="0 0 0" xyz="-0.07870700 0.01 0."/>
       <inertia ixx="0.00003024" ixy="0.00004671" ixz="0.0" iyy="0.00041193" iyz="0.0" izz="0.00041107"/>
     </inertial>
@@ -126,7 +126,7 @@
         <color rgba="0.8 0.8 0.8 1.0"/>
       </material>
     </collision>
-    <!-- Bullet specific paramters -->
+    <!-- Bullet specific parameters -->
     <contact>
       <lateral_friction value="1.0"/>
       <restitution value="0.5"/>
@@ -171,7 +171,7 @@
         <color rgba="0.8 0.8 0.8 1.0"/>
       </material>
     </collision>
-    <!-- Bullet specific paramters -->
+    <!-- Bullet specific parameters -->
     <contact>
       <lateral_friction value="1.0"/>
       <restitution value="0.5"/>
@@ -183,7 +183,7 @@
     <parent link="FL_LOWER_LEG"/>
     <child link="FL_FOOT"/>
     <origin rpy="0 0 0" xyz="0 0.008 -0.16"/>
-    <!-- Limits (usefull?) -->
+    <!-- Limits (useful?) -->
     <limit effort="1000" lower="-3.14159" upper="3.14159" velocity="2"/>
     <!-- pybullet simulation parameters -->
     <!--            <dynamics damping="0.0" friction="0.0"/>-->
@@ -224,7 +224,7 @@
         </friction>
       </surface>
     </collision>
-    <!-- Bullet specific paramters -->
+    <!-- Bullet specific parameters -->
     <contact>
       <lateral_friction value="1.0"/>
       <restitution value="0.5"/>
@@ -265,7 +265,7 @@
   <link name="FR_SHOULDER">
     <!-- TODO Update inertias. -->
     <!-- create a dummy shoulder link to join the two joints -->
-    <!-- HAA VISUAL -->
+    <!-- HAS VISUAL -->
     <visual>
       <origin rpy="0 0 0" xyz="0.01950 0 0"/>
       <geometry>
@@ -275,7 +275,7 @@
         <color rgba="0.8 0.8 0.8 1.0"/>
       </material>
     </visual>
-    <!-- HAA LINK COLLISION -->
+    <!-- HAS LINK COLLISION -->
     <collision>
       <origin rpy="0 0 0" xyz="0.01950 0 0"/>
       <geometry>
@@ -287,7 +287,7 @@
     </collision>
     <inertial>
       <mass value="0.14853845"/>
-      <!-- HAA body inertia -->
+      <!-- HAS body inertia -->
       <origin rpy="0 0 0" xyz="-0.07870700 -0.01 0."/>
       <inertia ixx="0.00003024" ixy="-0.00004671" ixz="0.0" iyy="0.00041193" iyz="0.0" izz="0.00041107"/>
     </inertial>
@@ -329,7 +329,7 @@
         <color rgba="0.8 0.8 0.8 1.0"/>
       </material>
     </collision>
-    <!-- Bullet specific paramters -->
+    <!-- Bullet specific parameters -->
     <contact>
       <lateral_friction value="1.0"/>
       <restitution value="0.5"/>
@@ -374,7 +374,7 @@
         <color rgba="0.8 0.8 0.8 1.0"/>
       </material>
     </collision>
-    <!-- Bullet specific paramters -->
+    <!-- Bullet specific parameters -->
     <contact>
       <lateral_friction value="1.0"/>
       <restitution value="0.5"/>
@@ -386,7 +386,7 @@
     <parent link="FR_LOWER_LEG"/>
     <child link="FR_FOOT"/>
     <origin rpy="0 0 0" xyz="0 -0.008 -0.16"/>
-    <!-- Limits (usefull?) -->
+    <!-- Limits (useful?) -->
     <limit effort="1000" lower="-3.14159" upper="3.14159" velocity="2"/>
     <!-- pybullet simulation parameters -->
     <!--            <dynamics damping="0.0" friction="0.0"/>-->
@@ -427,7 +427,7 @@
         </friction>
       </surface>
     </collision>
-    <!-- Bullet specific paramters -->
+    <!-- Bullet specific parameters -->
     <contact>
       <lateral_friction value="1.0"/>
       <restitution value="0.5"/>
@@ -468,7 +468,7 @@
   <link name="HL_SHOULDER">
     <!-- TODO Update inertias. -->
     <!-- create a dummy shoulder link to join the two joints -->
-    <!-- HAA VISUAL -->
+    <!-- HAS VISUAL -->
     <visual>
       <origin rpy="0 0 0" xyz="-0.01950 0 0"/>
       <geometry>
@@ -478,7 +478,7 @@
         <color rgba="0.8 0.8 0.8 1.0"/>
       </material>
     </visual>
-    <!-- HAA LINK COLLISION -->
+    <!-- HAS LINK COLLISION -->
     <collision>
       <origin rpy="0 0 0" xyz="-0.01950 0 0"/>
       <geometry>
@@ -490,7 +490,7 @@
     </collision>
     <inertial>
       <mass value="0.14853845"/>
-      <!-- HAA body inertia -->
+      <!-- HAS body inertia -->
       <origin rpy="0 0 0" xyz="0.07870700 0.01 0."/>
       <inertia ixx="0.00003024" ixy="0.00004671" ixz="0.0" iyy="0.00041193" iyz="0.0" izz="0.00041107"/>
     </inertial>
@@ -532,7 +532,7 @@
         <color rgba="0.8 0.8 0.8 1.0"/>
       </material>
     </collision>
-    <!-- Bullet specific paramters -->
+    <!-- Bullet specific parameters -->
     <contact>
       <lateral_friction value="1.0"/>
       <restitution value="0.5"/>
@@ -577,7 +577,7 @@
         <color rgba="0.8 0.8 0.8 1.0"/>
       </material>
     </collision>
-    <!-- Bullet specific paramters -->
+    <!-- Bullet specific parameters -->
     <contact>
       <lateral_friction value="1.0"/>
       <restitution value="0.5"/>
@@ -589,7 +589,7 @@
     <parent link="HL_LOWER_LEG"/>
     <child link="HL_FOOT"/>
     <origin rpy="0 0 0" xyz="0 0.008 -0.16"/>
-    <!-- Limits (usefull?) -->
+    <!-- Limits (useful?) -->
     <limit effort="1000" lower="-3.14159" upper="3.14159" velocity="2"/>
     <!-- pybullet simulation parameters -->
     <!--            <dynamics damping="0.0" friction="0.0"/>-->
@@ -630,7 +630,7 @@
         </friction>
       </surface>
     </collision>
-    <!-- Bullet specific paramters -->
+    <!-- Bullet specific parameters -->
     <contact>
       <lateral_friction value="1.0"/>
       <restitution value="0.5"/>
@@ -671,7 +671,7 @@
   <link name="HR_SHOULDER">
     <!-- TODO Update inertias. -->
     <!-- create a dummy shoulder link to join the two joints -->
-    <!-- HAA VISUAL -->
+    <!-- HAS VISUAL -->
     <visual>
       <origin rpy="0 0 0" xyz="-0.01950 0 0"/>
       <geometry>
@@ -681,7 +681,7 @@
         <color rgba="0.8 0.8 0.8 1.0"/>
       </material>
     </visual>
-    <!-- HAA LINK COLLISION -->
+    <!-- HAS LINK COLLISION -->
     <collision>
       <origin rpy="0 0 0" xyz="-0.01950 0 0"/>
       <geometry>
@@ -693,7 +693,7 @@
     </collision>
     <inertial>
       <mass value="0.14853845"/>
-      <!-- HAA body inertia -->
+      <!-- HAS body inertia -->
       <origin rpy="0 0 0" xyz="0.07870700 -0.01 0."/>
       <inertia ixx="0.00003024" ixy="-0.00004671" ixz="0.0" iyy="0.00041193" iyz="0.0" izz="0.00041107"/>
     </inertial>
@@ -735,7 +735,7 @@
         <color rgba="0.8 0.8 0.8 1.0"/>
       </material>
     </collision>
-    <!-- Bullet specific paramters -->
+    <!-- Bullet specific parameters -->
     <contact>
       <lateral_friction value="1.0"/>
       <restitution value="0.5"/>
@@ -780,7 +780,7 @@
         <color rgba="0.8 0.8 0.8 1.0"/>
       </material>
     </collision>
-    <!-- Bullet specific paramters -->
+    <!-- Bullet specific parameters -->
     <contact>
       <lateral_friction value="1.0"/>
       <restitution value="0.5"/>
@@ -792,7 +792,7 @@
     <parent link="HR_LOWER_LEG"/>
     <child link="HR_FOOT"/>
     <origin rpy="0 0 0" xyz="0 -0.008 -0.16"/>
-    <!-- Limits (usefull?) -->
+    <!-- Limits (useful?) -->
     <limit effort="1000" lower="-3.14159" upper="3.14159" velocity="2"/>
     <!-- pybullet simulation parameters -->
     <!--            <dynamics damping="0.0" friction="0.0"/>-->
@@ -833,7 +833,7 @@
         </friction>
       </surface>
     </collision>
-    <!-- Bullet specific paramters -->
+    <!-- Bullet specific parameters -->
     <contact>
       <lateral_friction value="1.0"/>
       <restitution value="0.5"/>
@@ -865,7 +865,7 @@
     <hardware>
       <plugin>gazebo_ros2_control/GazeboSystem</plugin>
     </hardware>
-    <!-- HAA -->
+    <!-- HAS -->
     <joint name="FL_HAA">
       <!--        <command_interface name="position">-->
       <!--          <param name="min">-3.1415</param>-->

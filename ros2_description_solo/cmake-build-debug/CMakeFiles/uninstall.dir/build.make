@@ -80,4 +80,3 @@ CMakeFiles/uninstall.dir/clean:
 CMakeFiles/uninstall.dir/depend:
 	cd /home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo /home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo /home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo/cmake-build-debug /home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo/cmake-build-debug /home/stanley/Documents/McGill/robotics/solo12/ros2_description_solo/cmake-build-debug/CMakeFiles/uninstall.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/uninstall.dir/depend
-
