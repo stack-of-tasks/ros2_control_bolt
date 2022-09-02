@@ -29,7 +29,7 @@
     - An `emergency stop button`,
     - A `power cable`.
 
-2) Take your `power supply`, turn it on and adjust behind the power supply the port (P1/P2/P3) and set the mode to `SET` then set the voltage to `20V` and the amperage to `5A` on the front. Finally, set the mode to `NORMAL`.
+2) Take your `power supply`, turn it on and behind the power supply, adjust the port (P1/P2/P3) and set the mode to `SET` then set the voltage to `20V` and the amperage to `5A` on the front. Finally, set the mode to `NORMAL`.
 
 ![Behind alimentation](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Setup_Bolt_1-R.jpeg?raw=true "Behind alimentation")
 
@@ -66,28 +66,41 @@
 
           ifconfig
 
-2) All the name ports starting with `"en"` you can see them on the left of your terminal.
+2) All the ports names start with `"en"`. You can see them on the left of your terminal. You will have to try them
+in order to find the correct port. To do that :
 
-    - Power ON Bolt.
+   - Power ON Bolt.
 
-    - Open a new Terminal, go to your `Bolt_ws` file and `source` your ROS 2 :
-
+   - Open a new Terminal, go to your `Bolt_ws` workspace and `source` your ROS 2 :
+          
+          source /opt/ros/foxy/setup.bash
+          
           source install/setup.bash
 
-     - Try one by one all the port with this command,  `<PORT>` is a value where you change the `port name` :
-
-            ros2 run --prefix="sudo -E env PATH=${PATH} LD_LIBRARY_PATH=${LD_LIBRARY_PATH} PYTHONPATH=${PYTHONPATH}" ros2_hardware_interface_bolt demo_bolt_sensor_reading <PORT>
-
-3) When you have no errors, and you have some  `returned values`, you have found the correct port.
-
-      - Copy and paste the right port in the file :
+   - Copy and past the name of a port in the file :
 
              Bolt_ws/src/ros2_control_bolt/ros2_description_bolt/config/bolt_config.yaml
         at :
+             interface : <PORT_NAME>     (line 4)
 
-              interface : <PORT>     (line 4)
+   - Save the file and run :
+   
+             colcon build
+             
+            
 
-4) Save your file and now you don’t need to put the port name in every command you send to Bolt.
+3) Then run the following commands (you have to be in your `Bolt_ws/` workspace) :
+
+             bolt_config_path=src/ros2_control_bolt/ros2_description_bolt/config/bolt_config.yaml
+             
+             ros2 run --prefix="sudo -E env PATH=${PATH} LD_LIBRARY_PATH=${LD_LIBRARY_PATH} PYTHONPATH=${PYTHONPATH}" ros2_hardware_interface_odri demo_bolt_sensor_reading $bolt_config_path
+             
+   - The correct port is found when you have some `returned values` and no errors. You should also see Bolt moving. If it doesn't work, try another port.
+   - To stop the execution, press `Ctrl-C`.
+            
+
+
+4) Now you don’t need to put the port name in every command you send to Bolt.
 
     **Now you have seen how you put the right Ethernet Port in the code.**
 

@@ -29,7 +29,7 @@ You may need to setup 2 things to run a launch file :
 
 		    ros2 node list
 
-       And you see a `ghost node` (if nothing is running, you should see nothing, if the command return something it's a ghost). You need to add this in your `bashrc` :
+       And you see a `ghost node` (if nothing is running, you should see nothing, if the command return something it's a ghost). You need to add this in your `/home/<User_name>/.bashrc` :
 
 		        export ROS_DOMAIN_ID=10
 
@@ -37,13 +37,13 @@ You may need to setup 2 things to run a launch file :
 
     When you run a launch file with a node in sudo (in real time), the sudo user and your user can't talk to each other. To resolve this problem, you have to add a file inside your directory.
 
-    Don't panic, the file is already add in the bolt directory [FastRTPS.xml](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_description_bolt/config/FastRTPS.xml). But you have to call him every time you run a launch file, for that add this command in your `bashrc` :
+    Don't panic, the file is already add in the bolt directory [FastRTPS.xml](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_description_bolt/config/FastRTPS.xml). But you have to call him every time you run a launch file, for that add this command in your `/home/<User_name>/.bashrc` file :
 
-		    export FASTRTPS_DEFAULT_PROFILES_FILE=<PATH_TO_THE_FILE>
+        export FASTRTPS_DEFAULT_PROFILES_FILE=<PATH_TO_THE_FILE>
 
     Where `<PATH_TO_THE_FILE>` is your path to the file `FasrRTPS.xml` from the root `"cd /"`. For example for bolt the right command is :
 
-    		export FASTRTPS_DEFAULT_PROFILES_FILE=users/local/<User_Name>/Bolt_ws/src/ros2_control_bolt/ros2_description_bolt/config/FastRTPS.xml
+        export FASTRTPS_DEFAULT_PROFILES_FILE=users/local/<User_Name>/Bolt_ws/src/ros2_control_bolt/ros2_description_bolt/config/FastRTPS.xml
 
     **After that, you know every thing, and you have set every thing to run your first launch file.**
 
@@ -54,17 +54,19 @@ Now you can really play with Bolt, if you have followed correctly each tutorial 
 
 1)  Open a new Terminal and source ros, go to the `Bolt_ws` directory :
 
-	    source install/setup.bash
+          source /opt/ros/foxy/setup.bash
+          
+          source install/setup.bash
 
 2)  Colcon build if you have made some modifications, open a new Terminal go on Bolt_ws directory and do :
 
-	    colcon build
+        colcon build
 
 3)  Run your first Ros2 launch, in the Terminal where you have sourced Ros, do :
 
-	    sudo ls
+        sudo ls
 
-	    ros2 launch ros2_control_bolt_bringup bolt_system_position_only.launch.py
+        ros2 launch ros2_control_bolt_bringup bolt_system_position_only.launch.py
 
     You have first do a `sudo ls` since you need to  be in `sudo mode`.
 

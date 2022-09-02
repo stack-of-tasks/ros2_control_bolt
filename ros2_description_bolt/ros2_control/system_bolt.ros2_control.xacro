@@ -25,8 +25,8 @@
             <xacro:property name="prop_bolt_config_yaml" value="$(find ros2_description_bolt)/config/bolt_config.yaml" />
             <param name="odri_config_yaml">${prop_bolt_config_yaml}</param>
             <param name="desired_starting_position">0.0 0.0 0.0 0.0 0.0 0.0</param>
-            <param name="default_joint_cmd">FL_HAA 0.0 0.0 0.0 3.0 0.05 FR_HAA 0.0 0.0 0.0 3.0 0.05 FL_KFE 0.0 0.0 0.0 3.0 0.05 FL_HFE 0.0 0.0 0.0 3.0 0.05 FR_KFE 0.0 0.0 0.0 3.0 0.05 FR_HFE 0.0 0.0 0.0 3.0 0.05</param>
-            <param name="default_joint_state">FL_HAA 0.0 0.0 0.0 3.0 0.05 FR_HAA 0.0 0.0 0.0 3.0 0.05 FL_KFE 0.0 0.0 0.0 3.0 0.05 FL_HFE 0.0 0.0 0.0 3.0 0.05 FR_KFE 0.0 0.0 0.0 3.0 0.05 FR_HFE 0.0 0.0 0.0 3.0 0.05</param>
+            <param name="default_joint_cmd">FL_HAA 0.0 0.0 0.0 3.0 0.05 FR_HAA 0.0 0.0 0.0 3.0 0.05 FL_HFE 0.0 0.0 0.0 3.0 0.05 FR_HFE 0.0 0.0 0.0 3.0 0.05 FL_KFE 0.0 0.0 0.0 3.0 0.05 FR_KFE 0.0 0.0 0.0 3.0 0.05</param>
+            <param name="default_joint_state">FL_HAA 0.0 0.0 0.0 3.0 0.05 FR_HAA 0.0 0.0 0.0 3.0 0.05 FL_HFE 0.0 0.0 0.0 3.0 0.05 FR_HFE 0.0 0.0 0.0 3.0 0.05 FL_KFE 0.0 0.0 0.0 3.0 0.05 FR_KFE 0.0 0.0 0.0 3.0 0.05</param>
          </xacro:unless>
         </hardware>
       </xacro:unless>
@@ -87,62 +87,6 @@
         <state_interface name="gain_kd"/>
       </joint>
 
-      <joint name="FL_KFE">
-        <command_interface name="position">
-          <param name="min">-3.4</param>
-          <param name="max">3.4</param>
-        </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-1</param>
-          <param name="max">1</param>
-        </command_interface>
-        <command_interface name="effort">
-          <param name="min">-1</param>
-          <param name="max">1</param>
-        </command_interface>
-        <command_interface name="gain_kp">
-          <param name="min">-1000</param>
-          <param name="max">1000</param>
-        </command_interface>
-        <command_interface name="gain_kd">
-          <param name="min">-1000</param>
-          <param name="max">1000</param>
-        </command_interface>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
-        <state_interface name="effort"/>
-        <state_interface name="gain_kp"/>
-        <state_interface name="gain_kd"/>
-      </joint>
-
-      <joint name="FR_KFE">
-        <command_interface name="position">
-          <param name="min">-1.7</param>
-          <param name="max">1.7</param>
-        </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-1</param>
-          <param name="max">1</param>
-        </command_interface>
-        <command_interface name="effort">
-          <param name="min">-1</param>
-          <param name="max">1</param>
-        </command_interface>
-        <command_interface name="gain_kp">
-          <param name="min">-1000</param>
-          <param name="max">1000</param>
-        </command_interface>
-        <command_interface name="gain_kd">
-          <param name="min">-1000</param>
-          <param name="max">1000</param>
-        </command_interface>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
-        <state_interface name="effort"/>
-        <state_interface name="gain_kp"/>
-        <state_interface name="gain_kd"/>
-      </joint>
-
       <joint name="FL_HFE">
         <command_interface name="position">
           <param name="min">-3.4</param>
@@ -172,6 +116,62 @@
       </joint>
 
       <joint name="FR_HFE">
+        <command_interface name="position">
+          <param name="min">-1.7</param>
+          <param name="max">1.7</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">-1</param>
+          <param name="max">1</param>
+        </command_interface>
+        <command_interface name="effort">
+          <param name="min">-1</param>
+          <param name="max">1</param>
+        </command_interface>
+        <command_interface name="gain_kp">
+          <param name="min">-1000</param>
+          <param name="max">1000</param>
+        </command_interface>
+        <command_interface name="gain_kd">
+          <param name="min">-1000</param>
+          <param name="max">1000</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+        <state_interface name="gain_kp"/>
+        <state_interface name="gain_kd"/>
+      </joint>      
+
+      <joint name="FL_KFE">
+        <command_interface name="position">
+          <param name="min">-3.4</param>
+          <param name="max">3.4</param>
+        </command_interface>
+        <command_interface name="velocity">
+          <param name="min">-1</param>
+          <param name="max">1</param>
+        </command_interface>
+        <command_interface name="effort">
+          <param name="min">-1</param>
+          <param name="max">1</param>
+        </command_interface>
+        <command_interface name="gain_kp">
+          <param name="min">-1000</param>
+          <param name="max">1000</param>
+        </command_interface>
+        <command_interface name="gain_kd">
+          <param name="min">-1000</param>
+          <param name="max">1000</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+        <state_interface name="gain_kp"/>
+        <state_interface name="gain_kd"/>
+      </joint>
+
+      <joint name="FR_KFE">
         <command_interface name="position">
           <param name="min">-1.7</param>
           <param name="max">1.7</param>

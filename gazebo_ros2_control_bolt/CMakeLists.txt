@@ -10,6 +10,7 @@ find_package(hardware_interface REQUIRED)
 find_package(pluginlib REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(yaml_cpp_vendor REQUIRED)
+#find_package(ros2_hardware_interface_odri REQUIRED)
 
 # Default to C++14
 if(NOT CMAKE_CXX_STANDARD)

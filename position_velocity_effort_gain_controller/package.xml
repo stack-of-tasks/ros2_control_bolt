@@ -46,6 +46,6 @@
 
   <export>
     <build_type>ament_cmake</build_type>
-    <!-- <position_velocity_effort_gain_controller plugin="${prefix}/position_velocity_effort_gain_controller_plugins.xml"/> -->
+    <position_velocity_effort_gain_controller plugin="${prefix}/position_velocity_effort_gain_controller_plugins.xml"/>
   </export>
 </package>
