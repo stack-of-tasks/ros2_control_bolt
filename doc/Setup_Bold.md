@@ -10,7 +10,7 @@
 
 
 
-##  1)  Bolt Skeleton :
+## 1 - Bolt Skeleton :
 
 
  Bolt is a small robot that has been totally built in our laboratories. We assembled its components, modeled its bones with a `3D printer` and gave it the appearance of real robots.
@@ -20,7 +20,7 @@
 
      - ' TUTORIAL FOR BOLT 3D PRINTING '
 
-##  2)  Plug Bolt properly :
+## 2 - Plug Bolt properly :
 
 1) For any command that needs Bolt, you must first have it properly connected. The process is simple, and for that you would need:
 
@@ -58,13 +58,13 @@
 **Now Bolt is connected properly to your computer.**
 
 
-## 3) Set some important information on Bolt :
+## 3 - Set some important information on Bolt :
 
 1) You need to set the `internet port` of Bolt in the code.
 
    - Open a Terminal and run :
 
-          ifconfig
+        ifconfig
 
 2) All the ports names start with `"en"`. You can see them on the left of your terminal. You will have to try them
 in order to find the correct port. To do that :
@@ -73,9 +73,9 @@ in order to find the correct port. To do that :
 
    - Open a new Terminal, go to your `Bolt_ws` workspace and `source` your ROS 2 :
           
-          source /opt/ros/foxy/setup.bash
+        source /opt/ros/foxy/setup.bash
           
-          source install/setup.bash
+        source install/setup.bash
 
    - Copy and past the name of a port in the file :
 
@@ -85,17 +85,17 @@ in order to find the correct port. To do that :
 
    - Save the file and run :
    
-             colcon build
+        colcon build
              
             
-
 3) Then run the following commands (you have to be in your `Bolt_ws/` workspace) :
 
-             bolt_config_path=src/ros2_control_bolt/ros2_description_bolt/config/bolt_config.yaml
+        bolt_config_path=src/ros2_control_bolt/ros2_description_bolt/config/bolt_config.yaml
              
-             ros2 run --prefix="sudo -E env PATH=${PATH} LD_LIBRARY_PATH=${LD_LIBRARY_PATH} PYTHONPATH=${PYTHONPATH}" ros2_hardware_interface_odri demo_bolt_sensor_reading $bolt_config_path
+        ros2 run --prefix="sudo -E env PATH=${PATH} LD_LIBRARY_PATH=${LD_LIBRARY_PATH} PYTHONPATH=${PYTHONPATH}" ros2_hardware_interface_odri demo_bolt_sensor_reading $bolt_config_path
              
    - The correct port is found when you have some `returned values` and no errors. You should also see Bolt moving. If it doesn't work, try another port.
+   
    - To stop the execution, press `Ctrl-C`.
             
 
@@ -104,4 +104,4 @@ in order to find the correct port. To do that :
 
     **Now you have seen how you put the right Ethernet Port in the code.**
 
-### Your next step is to run some tests to see how the Bolt works.
+### Your next step is to run some tests to see [how the Bolt works](https://github.com/Maxime-Fansi-laas/ros2_control_bolt/blob/maxime_branch/doc/Calibration.md).

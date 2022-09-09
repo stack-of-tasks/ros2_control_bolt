@@ -50,9 +50,7 @@ You need to have a `clear workspace` to do some tests or find your files easily.
         mkdir -p Bolt_ws/src
         cd Bolt_ws/src
 
-4) Add the `Bolt project` (in the src file) :
-
-   You need to have `git tool install`
+4) Add the `Bolt project` (in the src file) (You need to have `git tool install`) :
 
         git clone --recursive https://github.com/stack-of-tasks/ros2_control_bolt.git
 
@@ -77,6 +75,8 @@ Every time you change something in your code you need to upload with a `colcon b
 2) Go to the `Bolt_ws` workspace :
 
         cd ..
+        
+This command allows to go from the current directory to the previous one. Here, we go from `Bolt_ws/src` to `Bolt_ws/`
 
 3) Do your first `Colcon Build` :
 
@@ -84,21 +84,21 @@ Every time you change something in your code you need to upload with a `colcon b
         
    We won't go into details here, but this command creates `install`, `log` and `build` folders. 
 
-4) If everything installs properly you must come to this end when you do your `first colcon build` :
+4) If everything installs properly you must come to this end when you do your first `colcon build` :
 
 ![Colcon Build](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Start_Bolt_1-R.png?raw=true "Colcon Build")
 
-   These are the names of the packahes that have been compiled.
+   These are the names of the packages that have been compiled.
 
 5) To only `update a part` of your code you changed, you can do this :
 
-        colcon build --packages-select ros2_hardware_interface_bolt
+        colcon build --packages-select ros2_hardware_interface_odri
 
-    This example is only here for updating the package ros2_hardware_interface_bolt
+   This example is only here for updating the package ros2_hardware_interface_odri
 
 
 **Now you have all you need for the project and you know how to do Colcon Build**
 
 
 
-### That's all for the first Tutorial on Bolt, I hope it could help you and go to the next Tutorial for the next part.
+### That's all for the first Tutorial on Bolt, I hope it could help you and go to the [next Tutorial for the next part](https://github.com/Maxime-Fansi-laas/ros2_control_bolt/blob/master/doc/Setup_Bold.md).

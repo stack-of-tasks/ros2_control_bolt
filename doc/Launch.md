@@ -25,13 +25,13 @@ You may need to setup 2 things to run a launch file :
 
 1.  Problem with a ghost node :
 
-    - If you do this command when nothing is run :
+   - If you do this command when nothing is run :
 
-		    ros2 node list
+        ros2 node list
 
-       And you see a `ghost node` (if nothing is running, you should see nothing, if the command return something it's a ghost). You need to add this in your `/home/<User_name>/.bashrc` :
+     And you see a `ghost node` (if nothing is running, you should see nothing, if the command return something it's a ghost). You need to add this in your `/home/<User_name>/.bashrc` :
 
-		        export ROS_DOMAIN_ID=10
+        export ROS_DOMAIN_ID=10
 
 2.  Sudo / User talk :
 
@@ -54,9 +54,9 @@ Now you can really play with Bolt, if you have followed correctly each tutorial 
 
 1)  Open a new Terminal and source ros, go to the `Bolt_ws` directory :
 
-          source /opt/ros/foxy/setup.bash
+        source /opt/ros/foxy/setup.bash
           
-          source install/setup.bash
+        source install/setup.bash
 
 2)  Colcon build if you have made some modifications, open a new Terminal go on Bolt_ws directory and do :
 
@@ -74,21 +74,21 @@ Now you can really play with Bolt, if you have followed correctly each tutorial 
 
 4) Normally `rviz` it's open, you can see the robot in `real time`.
 
-    Play with it to see all these functionalities.
+   Play with it to see all these functionalities.
 
 5) You can run a topic to see all the parameters of Bolt :
 
-    - open a new Terminal, source ros and do :
+   - Open a new Terminal, source ros and do :
 
-            ros2 topic list
+        ros2 topic list
 
-        you will see that list :
+   You will see that list :
 
 	![Topic List](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Launch_Bolt_1-R.png?raw=true "Topic List")
 
-    -  run the topic `/joint_states` :
+   - Then run the topic `/joint_states` :
 
-			ros2 topic echo /joint_states
+        ros2 topic echo /joint_states
 
 	![/join_states](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Launch_Bolt_2-R.png?raw=true "/join_states")
 
@@ -97,4 +97,4 @@ Now you can really play with Bolt, if you have followed correctly each tutorial 
 
    **If you want, you can play with all others Topics to see what they published.**
 
-### Now you can start the last tutorial for know how to give some position to Bolt.
+### Now you can start the last tutorial for know how to give some position to Bolt. [Click here for the next step] (https://github.com/Maxime-Fansi-laas/ros2_control_bolt/blob/maxime_branch/doc/Forward_Position_Bolt.md).

@@ -71,10 +71,9 @@ You know a lot of things about Bolt, but now let see the change you have operate
 
 8) For example, run file `demo_bolt_from_yaml.cpp` and observe Bolt be positioned at the position calibrated :
 
-        bolt_config_path=src/ros2_control_bolt/ros2_description_bolt/config/bolt_config.yaml
 
         ros2 run --prefix="sudo -E env PATH=${PATH} LD_LIBRARY_PATH=${LD_LIBRARY_PATH} PYTHONPATH=${PYTHONPATH}" ros2_hardware_interface_odri demo_bolt_from_yaml $bolt_config_path
 
     **Now you know how to Start Bolt and have a good Calibration.**
 
-### Next step is to see how to use ros2 launch and have a modeling of Bolt in Rviz.
+### Next step is to see how to use ros2 launch and have a modeling of Bolt in Rviz. [Click here for the next step](https://github.com/Maxime-Fansi-laas/ros2_control_bolt/blob/maxime_branch/doc/Launch.md).
