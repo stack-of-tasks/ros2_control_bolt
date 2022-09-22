@@ -26,8 +26,6 @@ The install procedure is described in details [here](doc/Start.md).
 
 [ros2_description_bolt](ros2_description_bolt) - contains files necessary to describe, create and visualize Bolt with Rviz and Gazebo. It stores URDF-description files, rviz configurations and meshes for the demo robots.
 
-[ros2_hardware_interface_bolt](ros2_hardware_interface_bolt) - a ROS2 package in which a hardware interface for Bolt is implemented.
-
 ## Credits
 
  * Maxime-Ulrich Fansi (04/2022-09/2022) - First working version of gazebo_bolt_ros2_control
