@@ -22,4 +22,3 @@ pveg_controller:
     origin: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 
     interface_names: [position,velocity,effort,gain_kp,gain_kd]
-
