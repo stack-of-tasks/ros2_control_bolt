@@ -423,15 +423,11 @@ void GazeboBoltSystem::registerSensors(
 CallbackReturn
 GazeboBoltSystem::on_init(const hardware_interface::HardwareInfo & hardware_info)
 {
-<<<<<<< HEAD
-  RCLCPP_INFO_STREAM(this->nh_->get_logger(), "GazeboBoltSystem gazebo_ros2_control: configure");
-  if (configure_default(hardware_info) != hardware_interface::return_type::OK) {
-    return hardware_interface::return_type::ERROR;
-=======
+
   RCLCPP_INFO(this->nh_->get_logger(), "GazeboBoltSystem gazebo_ros2_control: configure");
   if (hardware_interface::SystemInterface::on_init(hardware_info) != CallbackReturn::SUCCESS) {
     return CallbackReturn::ERROR;
->>>>>>> caf548f1d7da2e1cde70e1e87e7e2928e351e663
+
   }
 
   return CallbackReturn::SUCCESS;

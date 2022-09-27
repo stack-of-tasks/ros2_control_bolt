@@ -43,36 +43,36 @@ ros2 topic pub /forward_command_controller/commands std_msgs/msg/Float64MultiArr
       
    - Open a new Terminal, source ros and do :
 
-              ros2 control load_controller forward_position_controller
+        ros2 control load_controller forward_position_controller
 
    - Check if the controller is loaded properly:
 
-              ros2 control list_controllers
+        ros2 control list_controllers
 
    - Then configure it:
 
-              ros2 control set_controller_state forward_position_controller configure
+        ros2 control set_controller_state forward_position_controller configure
 
    - Check if the controller is loaded properly:
 
-              ros2 control list_controllers
+        ros2 control list_controllers
 
        You should get the response:
 
-              forward_position_controller[forward_command_controller/ForwardCommandController] inactive
+        forward_position_controller[forward_command_controller/ForwardCommandController] inactive
 
    - Now start the controller:
 
-              ros2 control switch_controllers --start forward_position_controller
+        ros2 control switch_controllers --start forward_position_controller
 
    - Check if the controller is activated:
 
-              ros2 control list_controllers
+        ros2 control list_controllers
 
        You should get active in the response:
 
-              joint_state_controller[joint_state_controller/JointStateController] active
-              forward_position_controller[forward_command_controller/ForwardCommandController] active
+        joint_state_controller[joint_state_controller/JointStateController] active
+        forward_position_controller[forward_command_controller/ForwardCommandController] active
 
    - Now that the controller is active, you can run this command :
 
@@ -111,42 +111,42 @@ As previously, you have two ways to use `position_velocity_effort_gain_controlle
 
    - Open a new Terminal, go to your `Bolt_ws/` workspace, source ROS and load the controller :
 
-              ros2 control load_controller pveg_controller
+        ros2 control load_controller pveg_controller
 
    - Check if the controller is loaded properly:
 
-              ros2 control list_controllers
+        ros2 control list_controllers
 
        You should get the response:
        
-              joint_state_controller[joint_state_controller/JointStateController] active
-              pveg_controller[position_velocity_effort_gain_controller/PosVelTorGainsController]inactive        
+        joint_state_controller[joint_state_controller/JointStateController] active
+        pveg_controller[position_velocity_effort_gain_controller/PosVelTorGainsController]inactive        
 
    - Then configure it:
 
-              ros2 control set_controller_state pveg_controller configure
+        ros2 control set_controller_state pveg_controller configure
 
    - Check if the controller is loaded properly:
 
-              ros2 control list_controllers
+        ros2 control list_controllers
 
        You should get the response:
 
-              joint_state_controller[joint_state_controller/JointStateController] active
-              pveg_controller[position_velocity_effort_gain_controller/PosVelTorGainsController]inactive
+        joint_state_controller[joint_state_controller/JointStateController] active
+        pveg_controller[position_velocity_effort_gain_controller/PosVelTorGainsController]inactive
 
    - Now start the controller:
 
-              ros2 control switch_controllers --start pveg_controller
+        ros2 control switch_controllers --start pveg_controller
 
    - Check if the controller is activated:
 
-              ros2 control list_controllers
+        ros2 control list_controllers
 
        You should get active in the response:
 
-              joint_state_controller[joint_state_controller/JointStateController] active
-              pveg_controller[position_velocity_effort_gain_controller/PosVelTorGainsController] active
+        joint_state_controller[joint_state_controller/JointStateController] active
+        pveg_controller[position_velocity_effort_gain_controller/PosVelTorGainsController] active
          
  
 If another controller, [name]_controller, is specified in the in the `default_value`, and if this controller claims the same interfaces as yours,
@@ -154,23 +154,23 @@ there will be conflicts. To solve them, you have to :
     
    - Stop [name]_controller :
    
-              ros2 control switch_controllers --stop [name]_controller
+        ros2 control switch_controllers --stop [name]_controller
     
    - Then load pveg_controller :
    
-              ros2 control load_controller [name]_controller
+        ros2 control load_controller pveg_controller
         
    - Configure it :
    
-              ros2 control set_controller_state [name]_controller
+        ros2 control set_controller_state pveg_controller
         
    - And then start it :
    
-              ros2 control switch_controllers --start [name]_controller
+        ros2 control switch_controllers --start pveg_controller
               
 3)At this point, everyting should work correctly. You can now publish some data by running this [script](https://github.com/Maxime-Fansi-laas/ros2_control_bolt/blob/master/ros_command_interface_script.sh) (make sure to be in your workspace `Bolt_ws/`):
 
-              source src/ros2_control_bolt/ros_command_interface_script.sh
+        source src/ros2_control_bolt/ros_command_interface_script.sh
               
 If you look closely at it, you'll see that there are 30 values divided in 5 blocks (interfaces) of 6 values (joints). The first block is for positions, the second for velocities,
 the third for torques, the fourth for kp gains and the fifth for kd gains. You'll also see that everything is set to 0. 
