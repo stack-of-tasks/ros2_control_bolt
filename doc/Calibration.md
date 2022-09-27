@@ -13,9 +13,9 @@ Calibration is the step where the robot finds a point that we have predetermined
 
 For each motor, we define a way for it to find  its Index :
 
-  -  `POS` : the motor search the first index in his **positive** axe
-  -  `NEG` : the motor search the first index in his **negative** axe
-  -  `ALT` : the search is in **positive and negative** axe
+  -  `POS` : the motor search the first index in his **positive** axis
+  -  `NEG` : the motor search the first index in his **negative** axis
+  -  `ALT` : the search is in **positive and negative** axis
   -  `AUTO` : find **automatically** the way (positive or negative) some bugs may occur
 
 Calibration is called when you launch the CPP file and when you call the function initialize.
