@@ -21,19 +21,21 @@ When you have configured all the positions, you should run the new controller. :
 
    - You can see that the controller is already running:
 
-        ros2 control list_controllers
+              ros2 control list_controllers
 
-        [PHOTOS LIST_CONTROLLERS]
+              [PHOTOS LIST_CONTROLLERS]
 
    - Then you just need to run this command in the terminal :
 
-        ros2 topic pub /forward_command_controller/commands std_msgs/msg/Float64MultiArray "data:
-        - 0.5
-        - -0.5
-        - 0.0
-        - 0.0
-        - 0.0
-        - 0.0"
+```
+ros2 topic pub /forward_command_controller/commands std_msgs/msg/Float64MultiArray "data:
+- 0.5
+- -0.5
+- 0.0
+- 0.0
+- 0.0
+- 0.0"
+```
 
           **Now you can see bolt moving accordingly.**
 
@@ -74,32 +76,34 @@ When you have configured all the positions, you should run the new controller. :
 
    - Now that the controller is active, you can run this command :
 
-        ros2 topic pub /forward_command_controller/commands std_msgs/msg/Float64MultiArray "data:
-        - 0.5
-        - -0.5
-        - 0.0
-        - 0.0
-        - 0.0
-        - 0.0"
+```
+ros2 topic pub /forward_command_controller/commands std_msgs/msg/Float64MultiArray "data:
+- 0.5
+- -0.5
+- 0.0
+- 0.0
+- 0.0
+- 0.0"
+```
 
           **Now you can see bolt moving accordingly.**
           
 ## Controlling Bolt position, velocity, effort and gains at the same time
 
 Doing that is almost similar to the previous part. The differences are :
-   - You need a specific controller '[position_velocity_effort_gain_controller]'(https://github.com/stack-of-tasks/ros2_control_bolt/tree/master/position_velocity_effort_gain_controller)
+   - You need a specific controller [position_velocity_effort_gain_controller](https://github.com/stack-of-tasks/ros2_control_bolt/tree/master/position_velocity_effort_gain_controller)
    - You need to send 30 values instead of just 6 for position control.
 
-'position_velocity_effort_gain_controller' includes :
+`position_velocity_effort_gain_controller` includes :
 
-   - a 'config' folder which is made of '[bolt_pveg_controller.yaml]'(https://github.com/stack-of-tasks/ros2_control_bolt/blob/master/position_velocity_effort_gain_controller/config/bolt_pveg_controller.yaml) in which you specify 
+   - a `config` folder which is made of [bolt_pveg_controller.yaml](https://github.com/stack-of-tasks/ros2_control_bolt/blob/master/position_velocity_effort_gain_controller/config/bolt_pveg_controller.yaml) in which you specify 
      your pveg_controller, all the joints you want to control (6 in this case), their order, and the 5 interfaces you want to use : position, velocity, effort, gain_kp and gain_kd
    
-   - 'launch' folder which is made of launch files that allows you to launch Bolt with Rviz and test it in real-time.
+   - `launch` folder which is made of launch files that allows you to launch Bolt with Rviz and test it in real-time.
    
-As previously, you have two ways to use 'position_velocity_effort_gain_controller' :
+As previously, you have two ways to use `position_velocity_effort_gain_controller` :
 
-1) If 'pveg_controller' is specified in the file `bolt_system_pveg.launch.py` at `DeclareLaunchArgument` line 54 in the 'default_value', run this command :
+1) If `pveg_controller` is specified in the file `bolt_system_pveg.launch.py` at `DeclareLaunchArgument` line 54 in the `default_value`, run this command :
 
         ros2 launch gazebo_ros2_control_bolt bolt_system_position_only_gazebo.launch.py 
         
@@ -145,7 +149,7 @@ As previously, you have two ways to use 'position_velocity_effort_gain_controlle
               pveg_controller[position_velocity_effort_gain_controller/PosVelTorGainsController] active
          
  
-If another controller [name]_controller is specified in the in the 'default_value', and if this controller claims the same interfaces as yours,
+If another controller, [name]_controller, is specified in the in the `default_value`, and if this controller claims the same interfaces as yours,
 there will be conflicts. To solve them, you have to :
     
    - Stop [name]_controller :
@@ -164,7 +168,7 @@ there will be conflicts. To solve them, you have to :
    
               ros2 control switch_controllers --start [name]_controller
               
-3)At this point, everyting should work correctly. You can now publish some data by running this [script] (make sure to be in your workspace `Bolt_ws/`):
+3)At this point, everyting should work correctly. You can now publish some data by running this [script](https://github.com/Maxime-Fansi-laas/ros2_control_bolt/blob/master/ros_command_interface_script.sh) (make sure to be in your workspace `Bolt_ws/`):
 
               source src/ros2_control_bolt/ros_command_interface_script.sh
               
@@ -176,7 +180,7 @@ try to run pveg_controller on Gazebo.
 
 If you want the robot to move (on Gazebo or in real-time), you just need to change those values. However, tests them on Gazebo before applying them on the real robot.
 
-          **Now you can see bolt moving accordingly.**
+       Now you can see bolt moving accordingly.
    
 
 **Be careful, when you start the controller, you must always have the emergency stop button nearby.**
