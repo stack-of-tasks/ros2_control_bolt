@@ -29,7 +29,7 @@ joint_calibrator:
     ]
     position_offsets: [ # [ FLHAA, FLHFE, FLKFE, FRHAA, FRHFE, FRKFE ]
             0.2403, 0.3996, 0.2668, 0.5836, 0.1053, 0.4465
-  
+
     ]                                             #Calibration cpp codes made
     Kp: 3.
     Kd: 0.05

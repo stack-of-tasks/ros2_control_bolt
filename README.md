@@ -23,10 +23,9 @@ The install procedure is described in details [here](doc/Start.md).
 
 [ros2_control_bolt_bringup](ros2_control_bolt_bringup) - contains files that enable to launch Bolt within its GUIs, and with it hardware interfaces and controllers.
 
-
 [ros2_description_bolt](ros2_description_bolt) - contains files necessary to describe, create and visualize Bolt with Rviz and Gazebo. It stores URDF-description files, rviz configurations and meshes for the demo robots.
 
-[ros2_hardware_interface_bolt](ros2_hardware_interface_bolt) - a ROS2 package in which a hardware interface for Bolt is implemented.
+This repository relies on the [ros2_hardware_interface_odri](https://github.com/stack-of-tasks/ros2_hardware_interface_odri) which is a ros2_control driver for the ODRI board.
 
 ## Credits
 

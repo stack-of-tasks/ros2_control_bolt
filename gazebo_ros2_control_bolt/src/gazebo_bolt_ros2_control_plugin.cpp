@@ -267,10 +267,10 @@ void GazeboBoltRosControlPlugin::Load(gazebo::physics::ModelPtr parent, sdf::Ele
   // setup actuators and mechanism control node.
   // This call will block if ROS is not properly initialized.
   std::string urdf_string;
-  std::vector<hardware_interface::HardwareInfo> control_hardware;
+  std::vector<hardware_interface::HardwareInfo> control_hardware_info;
   try {
     urdf_string = impl_->getURDF(impl_->robot_description_);
-    control_hardware = hardware_interface::parse_control_resources_from_urdf(urdf_string);
+    control_hardware_info = hardware_interface::parse_control_resources_from_urdf(urdf_string);
   } catch (const std::runtime_error & ex) {
     RCLCPP_ERROR_STREAM(
       impl_->model_nh_->get_logger(),
@@ -295,8 +295,8 @@ void GazeboBoltRosControlPlugin::Load(gazebo::physics::ModelPtr parent, sdf::Ele
   RCLCPP_INFO(impl_->model_nh_->get_logger(),
 	      "Created robot simulation interface loader");
 
-  for (unsigned int i = 0; i < control_hardware.size(); i++) {
-    std::string robot_hw_sim_type_str_ = control_hardware[i].hardware_class_type;
+  for (unsigned int i = 0; i < control_hardware_info.size(); i++) {
+    std::string robot_hw_sim_type_str_ = control_hardware_info[i].hardware_class_type;
     RCLCPP_INFO(impl_->model_nh_->get_logger(),
 		"%s",robot_hw_sim_type_str_.c_str());
 
@@ -310,7 +310,7 @@ void GazeboBoltRosControlPlugin::Load(gazebo::physics::ModelPtr parent, sdf::Ele
     if (!gazeboSystem->initSim(
         node_ros2,
         impl_->parent_model_,
-        control_hardware[i],
+        control_hardware_info[i],
         sdf))
     {
       RCLCPP_FATAL(
@@ -322,7 +322,14 @@ void GazeboBoltRosControlPlugin::Load(gazebo::physics::ModelPtr parent, sdf::Ele
 		"Initialized Simulation for %s",
 		robot_hw_sim_type_str_.c_str());
 
-    resource_manager_->import_component(std::move(gazeboSystem));
+    resource_manager_->import_component(std::move(gazeboSystem),control_hardware_info[i]);
+
+    // activate all components
+    rclcpp_lifecycle::State state(
+      lifecycle_msgs::msg::State::PRIMARY_STATE_ACTIVE,
+      hardware_interface::lifecycle_state_names::ACTIVE);
+    resource_manager_->set_component_state(control_hardware_info[i].name, state);
+
   }
 
 
@@ -386,18 +393,18 @@ void GazeboRosControlPrivate::Update()
 {
   // Get the simulation time and period
   gazebo::common::Time gz_time_now = parent_model_->GetWorld()->SimTime();
-  rclcpp::Time sim_time_ros(gz_time_now.sec, gz_time_now.nsec);
+  rclcpp::Time sim_time_ros(gz_time_now.sec, gz_time_now.nsec, RCL_ROS_TIME);
   rclcpp::Duration sim_period = sim_time_ros - last_update_sim_time_ros_;
 
   if (sim_period >= control_period_) {
+    controller_manager_->read(sim_time_ros,sim_period);
+    controller_manager_->update(sim_time_ros, sim_period);
     last_update_sim_time_ros_ = sim_time_ros;
-    controller_manager_->read();
-    controller_manager_->update();
   }
 
   // Always set commands on joints, otherwise at low control frequencies the joints tremble
   // as they are updated at a fraction of gazebo sim time
-  controller_manager_->write();
+  controller_manager_->write(sim_time_ros,sim_period);
 }
 
 // Called on world reset

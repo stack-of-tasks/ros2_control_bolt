@@ -420,22 +420,28 @@ void GazeboBoltSystem::registerSensors(
   }
 }
 
-hardware_interface::return_type
-GazeboBoltSystem::configure(const hardware_interface::HardwareInfo & hardware_info)
+CallbackReturn
+GazeboBoltSystem::on_init(const hardware_interface::HardwareInfo & hardware_info)
 {
+<<<<<<< HEAD
   RCLCPP_INFO_STREAM(this->nh_->get_logger(), "GazeboBoltSystem gazebo_ros2_control: configure");
   if (configure_default(hardware_info) != hardware_interface::return_type::OK) {
     return hardware_interface::return_type::ERROR;
+=======
+  RCLCPP_INFO(this->nh_->get_logger(), "GazeboBoltSystem gazebo_ros2_control: configure");
+  if (hardware_interface::SystemInterface::on_init(hardware_info) != CallbackReturn::SUCCESS) {
+    return CallbackReturn::ERROR;
+>>>>>>> caf548f1d7da2e1cde70e1e87e7e2928e351e663
   }
 
-  return hardware_interface::return_type::OK;
+  return CallbackReturn::SUCCESS;
 }
 
 std::vector<hardware_interface::StateInterface>
 GazeboBoltSystem::export_state_interfaces()
 {
   RCLCPP_INFO(this->nh_->get_logger(), "GazeboBoltSystem gazebo_ros2_control: export_state_interfaces");
-  RCLCPP_INFO(this->nh_->get_logger(), "GazeboBoltSystem gazebo_ros2_control: hardware_parameters.size()=%d",
+  RCLCPP_INFO(this->nh_->get_logger(), "GazeboBoltSystem gazebo_ros2_control: hardware_parameters.size()=%ld",
 	      info_.hardware_parameters.size());
   return std::move(this->dataPtr->state_interfaces_);
 }
@@ -447,20 +453,20 @@ GazeboBoltSystem::export_command_interfaces()
   return std::move(this->dataPtr->command_interfaces_);
 }
 
-hardware_interface::return_type GazeboBoltSystem::start()
+CallbackReturn GazeboBoltSystem::on_activate(const rclcpp_lifecycle::State & previous_state)
 {
   RCLCPP_INFO(this->nh_->get_logger(), "GazeboBoltSystem gazebo_ros2_control: start");
-  status_ = hardware_interface::status::STARTED;
-  return hardware_interface::return_type::OK;
+  return CallbackReturn::SUCCESS;
 }
 
-hardware_interface::return_type GazeboBoltSystem::stop()
+CallbackReturn GazeboBoltSystem::on_deactivate(const rclcpp_lifecycle::State & previous_state)
 {
-  status_ = hardware_interface::status::STOPPED;
-  return hardware_interface::return_type::OK;
+  return CallbackReturn::SUCCESS;
 }
 
-hardware_interface::return_type GazeboBoltSystem::read()
+hardware_interface::return_type
+GazeboBoltSystem::read(const rclcpp::Time & time,
+		       const rclcpp::Duration & period)
 {
   for (unsigned int j = 0; j < this->dataPtr->joint_names_.size(); j++) {
     if (this->dataPtr->sim_joints_[j]) {
@@ -499,7 +505,9 @@ hardware_interface::return_type GazeboBoltSystem::read()
   return hardware_interface::return_type::OK;
 }
 
-hardware_interface::return_type GazeboBoltSystem::write()
+hardware_interface::return_type
+GazeboBoltSystem::write(const rclcpp::Time & time,
+			const rclcpp::Duration & period)
 {
 
   // Get the simulation time and period

@@ -1,5 +1,6 @@
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
+from launch.actions import ExecuteProcess, IncludeLaunchDescription, RegisterEventHandler
+from launch.event_handlers import OnProcessExit
 from launch.substitutions import Command, FindExecutable, PathJoinSubstitution
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
@@ -55,26 +56,47 @@ def generate_launch_description():
         arguments=["-topic", "robot_description", "-entity", "bolt", "-x 0", "-y 0", "-z 1"],
         output="screen",
     )
-    spawn_controller = Node(
-        package="controller_manager",
-        executable="spawner.py",
-        arguments=["joint_state_broadcaster"],
+
+    load_joint_state_controller = ExecuteProcess(
+        cmd=[
+            "ros2",
+            "control",
+            "load_controller",
+            "--set-state",
+            "active",
+            "joint_state_broadcaster",
+        ],
         output="screen",
     )
 
-    spawn_forward_command_controller = Node(
-        package="controller_manager",
-        executable="spawner.py",
-        arguments=["forward_position_controller"],
+    load_joint_trajectory_controller = ExecuteProcess(
+        cmd=[
+            "ros2",
+            "control",
+            "load_controller",
+            "--set-state",
+            "active",
+            "joint_trajectory_controller",
+        ],
         output="screen",
     )
 
     return LaunchDescription(
         [
+            RegisterEventHandler(
+                event_handler=OnProcessExit(
+                    target_action=spawn_entity,
+                    on_exit=[load_joint_state_controller],
+                )
+            ),
+            RegisterEventHandler(
+                event_handler=OnProcessExit(
+                    target_action=load_joint_state_controller,
+                    on_exit=[load_joint_trajectory_controller],
+                )
+            ),
             gazebo,
             node_robot_state_publisher,
             spawn_entity,
-            spawn_controller,
-            spawn_forward_command_controller,
         ]
     )

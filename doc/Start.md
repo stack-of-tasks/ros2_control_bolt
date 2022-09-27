@@ -14,8 +14,13 @@ ROS 2 is the big brother of ROS 1. He adapts the changes of robotics community s
 
 ### 1) Download ROS2 :
 
+<<<<<<< HEAD
 - You need a local setup with `Ubuntu 20.04`.
 - If you have one go to this link for [ROS 2 Foxy Installation](https://docs.ros.org/en/foxy/Installation.html)
+=======
+- You need a local setup with `Ubuntu 22.04`
+- If you have one go to this link for [ROS 2 Humble Installation](https://docs.ros.org/en/humble/Installation.html)
+>>>>>>> caf548f1d7da2e1cde70e1e87e7e2928e351e663
 
 ### 2) Download ROS2 CONTROL :
 
@@ -23,9 +28,15 @@ ROS 2 is the big brother of ROS 1. He adapts the changes of robotics community s
 
 - Type that on your Terminal :
 
+<<<<<<< HEAD
         sudo apt update
         sudo apt install ros-foxy-ros2-control
         sudo apt install ros-foxy-ros2-controllers
+=======
+      sudo apt update
+      sudo apt install ros-humble-ros2-control
+      sudo apt install ros-humble-ros2-controllers
+>>>>>>> caf548f1d7da2e1cde70e1e87e7e2928e351e663
 
 
 ## 2 - Second step, Workspace :
@@ -58,8 +69,12 @@ You need to have a `clear workspace` to do some tests or find your files easily.
 
         git clone --recursive https://github.com/open-dynamic-robot-initiative/master-board.git
         git clone --recursive https://github.com/open-dynamic-robot-initiative/odri_control_interface.git
+<<<<<<< HEAD
         git clone --recursive https://github.com/stack-of-tasks/ros2_hardware_interface_odri.git
         sudo apt install python3-sphinx python3-pybind11 ros-foxy-xacro
+=======
+        sudo apt install python3-sphinx python3-pybind11 ros-humble-xacro
+>>>>>>> caf548f1d7da2e1cde70e1e87e7e2928e351e663
 
 
 
@@ -92,9 +107,15 @@ This command allows to go from the current directory to the previous one. Here, 
 
 5) To only `update a part` of your code you changed, you can do this :
 
+<<<<<<< HEAD
         colcon build --packages-select ros2_hardware_interface_odri
 
    This example is only here for updating the package ros2_hardware_interface_odri
+=======
+        colcon build --packages-select ros2_description_bolt
+
+    This example is only here for updating the package ros2_description_bolt
+>>>>>>> caf548f1d7da2e1cde70e1e87e7e2928e351e663
 
 
 **Now you have all you need for the project and you know how to do Colcon Build**

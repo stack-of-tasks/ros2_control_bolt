@@ -25,7 +25,6 @@
 #include "gazebo/physics/Model.hh"
 #include "gazebo/physics/physics.hh"
 
-#include "hardware_interface/base_interface.hpp"
 #include "hardware_interface/system_interface.hpp"
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 
@@ -59,7 +58,7 @@ protected:
 
 // SystemInterface provides API-level access to read and command joint properties.
 class GazeboBoltSystemInterface
-  : public hardware_interface::BaseInterface<hardware_interface::SystemInterface>
+  : public hardware_interface::SystemInterface
 {
 public:
   /// \brief Initialize the system interface

@@ -96,7 +96,7 @@ protected:
   CommandInterface joint_1_kd_cmd_{joint_names_[0], HW_IF_GAIN_KD, &kd_cmd_};
   CommandInterface joint_2_kd_cmd_{joint_names_[1], HW_IF_GAIN_KD, &kd_cmd_};
   CommandInterface joint_3_kd_cmd_{joint_names_[2], HW_IF_GAIN_KD, &kd_cmd_};
-  
+
 };
 
 #endif  // TEST_POSITION_VELOCITY_EFFORT_GAIN_CONTROLLER_HPP_
