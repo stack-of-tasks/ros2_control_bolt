@@ -72,9 +72,9 @@ in order to find the correct port. To do that :
    - Power ON Bolt.
 
    - Open a new Terminal, go to your `Bolt_ws` workspace and `source` your ROS 2 :
-          
+
         source /opt/ros/foxy/setup.bash
-          
+
         source install/setup.bash
 
    - Copy and past the name of a port in the file :
@@ -84,20 +84,20 @@ in order to find the correct port. To do that :
              interface : <PORT_NAME>     (line 4)
 
    - Save the file and run :
-   
+
         colcon build
-             
-            
+
+
 3) Then run the following commands (you have to be in your `Bolt_ws/` workspace) :
 
         bolt_config_path=src/ros2_control_bolt/ros2_description_bolt/config/bolt_config.yaml
-             
+
         ros2 run --prefix="sudo -E env PATH=${PATH} LD_LIBRARY_PATH=${LD_LIBRARY_PATH} PYTHONPATH=${PYTHONPATH}" ros2_hardware_interface_odri demo_bolt_sensor_reading $bolt_config_path
-             
+
    - The correct port is found when you have some `returned values` and no errors. You should also see Bolt moving. If it doesn't work, try another port.
-   
+
    - To stop the execution, press `Ctrl-C`.
-            
+
 
 
 4) Now you don’t need to put the port name in every command you send to Bolt.

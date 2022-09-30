@@ -13,7 +13,7 @@ To move Bolt as you wish, you can use a `controller`. For this you will just nee
 1) Open a Terminal, go to your `Bolt_ws/` workspace and source ROS :
 
         source /opt/ros/foxy/setup.bash
-          
+
         source install/setup.bash
 
 2) Run the demo sensor reading file :
@@ -67,7 +67,7 @@ When you have configured all the positions, you should run the new controller. :
 
 
    3.2) Secondly, if you haven't the `forward_position_controller` to `default_value` for the `DeclareLaunchArgument` and you don't want to put it on for whatever reason . You can start the controller by another method, **manually**:
-      
+
    - Open a new Terminal, source ros and do :
 
               ros2 control load_controller forward_position_controller
@@ -110,12 +110,12 @@ When you have configured all the positions, you should run the new controller. :
 
 **Be careful, when you start the controller, you must always have the emergency stop button nearby.**
 
-If you are tired of sourcing ros2 everytime you open a new terminal, you can add the following commands in your `/home/<User_name>/.bashrc` file :
+If you are tired of sourcing ros2 every time you open a new terminal, you can add the following commands in your `/home/<User_name>/.bashrc` file :
 
         cd /users/local/<User_Name>/Bolt_ws/
         source /opt/ros/foxy/setup.bash
         source install/setup.bash
-        
-Those three commands will be return everytime you open a new terminal.
+
+Those three commands will be return every time you open a new terminal.
 
 ### Thank you for following the entire tutorial and good luck.

@@ -75,14 +75,14 @@ Every time you change something in your code you need to upload with a `colcon b
 2) Go to the `Bolt_ws` workspace :
 
         cd ..
-        
+
 This command allows to go from the current directory to the previous one. Here, we go from `Bolt_ws/src` to `Bolt_ws/`
 
 3) Do your first `Colcon Build` :
 
         colcon build
-        
-   We won't go into details here, but this command creates `install`, `log` and `build` folders. 
+
+   We won't go into details here, but this command creates `install`, `log` and `build` folders.
 
 4) If everything installs properly you must come to this end when you do your first `colcon build` :
 

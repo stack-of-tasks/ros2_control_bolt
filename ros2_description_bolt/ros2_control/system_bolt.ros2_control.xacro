@@ -141,7 +141,7 @@
         <state_interface name="effort"/>
         <state_interface name="gain_kp"/>
         <state_interface name="gain_kd"/>
-      </joint>      
+      </joint>
 
       <joint name="FL_KFE">
         <command_interface name="position">

@@ -55,7 +55,7 @@ Now you can really play with Bolt, if you have followed correctly each tutorial 
 1)  Open a new Terminal and source ros, go to the `Bolt_ws` directory :
 
         source /opt/ros/foxy/setup.bash
-          
+
         source install/setup.bash
 
 2)  Colcon build if you have made some modifications, open a new Terminal go on Bolt_ws directory and do :

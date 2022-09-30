@@ -205,7 +205,7 @@ void GazeboBoltSystem::registerJoints(
         this->dataPtr->joint_control_methods_[j] |= POS_VEL_EFF_GAINS;
         RCLCPP_INFO_STREAM(this->nh_->get_logger(), "\t\t gain_kp");
         this->dataPtr->command_interfaces_.emplace_back(
-          joint_name, 
+          joint_name,
           ros2_control_odri::HW_IF_GAIN_KP,
           &this->dataPtr->joint_kp_cmd_[j]);
       }
@@ -213,7 +213,7 @@ void GazeboBoltSystem::registerJoints(
         this->dataPtr->joint_control_methods_[j] |= POS_VEL_EFF_GAINS;
         RCLCPP_INFO_STREAM(this->nh_->get_logger(), "\t\t gain_kd");
         this->dataPtr->command_interfaces_.emplace_back(
-          joint_name, 
+          joint_name,
           ros2_control_odri::HW_IF_GAIN_KD,
           &this->dataPtr->joint_kd_cmd_[j]);
       }
@@ -531,10 +531,10 @@ GazeboBoltSystem::write(const rclcpp::Time & time,
         this->dataPtr->sim_joints_[j]->SetForce(0,  this->dataPtr->joint_effort_[j]);
 	      RCLCPP_DEBUG_STREAM(this->nh_->get_logger(),"");
       }
-      
+
       if (this->dataPtr->joint_control_methods_[j] & VELOCITY) {
             RCLCPP_DEBUG_STREAM(this->nh_->get_logger(), "velocity");    //\tis controlled in VELOCITY
-	      this->dataPtr->joint_effort_[j] = this->dataPtr->joint_kd_cmd_[j]*(this->dataPtr->joint_velocity_cmd_[j] - 
+	      this->dataPtr->joint_effort_[j] = this->dataPtr->joint_kd_cmd_[j]*(this->dataPtr->joint_velocity_cmd_[j] -
                                           this->dataPtr->joint_velocity_[j]);
         this->dataPtr->sim_joints_[j]->SetForce(0,  this->dataPtr->joint_effort_[j]);
 	      RCLCPP_DEBUG_STREAM(this->nh_->get_logger(),  "");

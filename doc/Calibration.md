@@ -29,7 +29,7 @@ For this step, you must have configured all the parameters mentioned in the prev
 2)  Open a new Terminal, go to your `Bolt_ws/` workspace and source ROS :
 
           source /opt/ros/foxy/setup.bash
-          
+
           source install/setup.bash
 
 3)  Run in your Terminal :
