@@ -76,4 +76,4 @@ You know a lot of things about Bolt, but now let see the change you have operate
 
     **Now you know how to Start Bolt and have a good Calibration.**
 
-### Next step is to see how to use ros2 launch and have a modeling of Bolt in Rviz. [Click here for the next step](https://github.com/Maxime-Fansi-laas/ros2_control_bolt/blob/maxime_branch/doc/Launch.md).
+### Next step is to see how to use ros2 launch and have a modeling of Bolt in Rviz. [Click here for the next step](https://github.com/Maxime-Fansi-laas/ros2_control_bolt/blob/master/doc/Launch.md).
