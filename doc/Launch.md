@@ -97,4 +97,4 @@ Now you can really play with Bolt, if you have followed correctly each tutorial 
 
    **If you want, you can play with all others Topics to see what they published.**
 
-### Now you can start the last tutorial for know how to give some position to Bolt. [Click here for the next step] (https://github.com/Maxime-Fansi-laas/ros2_control_bolt/blob/maxime_branch/doc/Forward_Position_Bolt.md).
+### Now you can start the last tutorial for know how to give some position to Bolt. [Click here for the next step](https://github.com/Maxime-Fansi-laas/ros2_control_bolt/blob/maxime_branch/doc/Forward_Position_Bolt.md).
