@@ -24,7 +24,7 @@
 #include "gazebo/sensors/ImuSensor.hh"
 #include "gazebo/sensors/ForceTorqueSensor.hh"
 #include "gazebo/sensors/SensorManager.hh"
-#include "gazebo_ros2_control_bolt/system_interface_bolt.hpp"
+#include "gazebo_ros2_control_bolt/system_interface_odri.hpp"
 class gazebo_ros2_control_bolt::GazeboBoltSystemPrivate
 {
 public:
@@ -205,14 +205,16 @@ void GazeboBoltSystem::registerJoints(
         this->dataPtr->joint_control_methods_[j] |= POS_VEL_EFF_GAINS;
         RCLCPP_INFO_STREAM(this->nh_->get_logger(), "\t\t gain_kp");
         this->dataPtr->command_interfaces_.emplace_back(
-          joint_name, ros2_control_bolt::HW_IF_GAIN_KP,
+          joint_name,
+          ros2_control_odri::HW_IF_GAIN_KP,
           &this->dataPtr->joint_kp_cmd_[j]);
       }
       if (hardware_info.joints[j].command_interfaces[i].name == "gain_kd") {
         this->dataPtr->joint_control_methods_[j] |= POS_VEL_EFF_GAINS;
         RCLCPP_INFO_STREAM(this->nh_->get_logger(), "\t\t gain_kd");
         this->dataPtr->command_interfaces_.emplace_back(
-          joint_name, ros2_control_bolt::HW_IF_GAIN_KD,
+          joint_name,
+          ros2_control_odri::HW_IF_GAIN_KD,
           &this->dataPtr->joint_kd_cmd_[j]);
       }
     }
@@ -245,13 +247,13 @@ void GazeboBoltSystem::registerJoints(
       if (hardware_info.joints[j].state_interfaces[i].name == "gain_kp") {
         RCLCPP_INFO_STREAM(this->nh_->get_logger(), "\t\t gain_kp");
         this->dataPtr->state_interfaces_.emplace_back(
-          joint_name, ros2_control_bolt::HW_IF_GAIN_KP,
+          joint_name, ros2_control_odri::HW_IF_GAIN_KP,
           &this->dataPtr->joint_kp_[j]);
       }
       if (hardware_info.joints[j].state_interfaces[i].name == "gain_kd") {
         RCLCPP_INFO_STREAM(this->nh_->get_logger(), "\t\t gain_kd");
         this->dataPtr->state_interfaces_.emplace_back(
-          joint_name, ros2_control_bolt::HW_IF_GAIN_KD,
+          joint_name, ros2_control_odri::HW_IF_GAIN_KD,
           &this->dataPtr->joint_kd_[j]);
       }
     }
@@ -421,9 +423,11 @@ void GazeboBoltSystem::registerSensors(
 CallbackReturn
 GazeboBoltSystem::on_init(const hardware_interface::HardwareInfo & hardware_info)
 {
+
   RCLCPP_INFO(this->nh_->get_logger(), "GazeboBoltSystem gazebo_ros2_control: configure");
   if (hardware_interface::SystemInterface::on_init(hardware_info) != CallbackReturn::SUCCESS) {
     return CallbackReturn::ERROR;
+
   }
 
   return CallbackReturn::SUCCESS;
@@ -513,40 +517,36 @@ GazeboBoltSystem::write(const rclcpp::Time & time,
 
     if (this->dataPtr->sim_joints_[j]) {
       if (this->dataPtr->joint_control_methods_[j] & POSITION) {
-
-	double err_pos = this->dataPtr->joint_position_cmd_[j] - this->dataPtr->joint_position_[j];
-	double err_vel = this->dataPtr->joint_velocity_cmd_[j] - this->dataPtr->joint_velocity_[j];
-        RCLCPP_DEBUG_STREAM(this->nh_->get_logger(),
-			   "joint_name :" << this->dataPtr->joint_names_[j] <<
-			   " position kp:" << this->dataPtr->joint_kp_cmd_[j] <<
-			   " kd: " << this->dataPtr->joint_kd_cmd_[j] <<
-			   " err_pos: " << err_pos <<
-			   " err_vel: " << err_vel
-			   );   //"\tis controlled in POSITION"
-        /*this->dataPtr->sim_joints_[j]->SetPosition(0, this->dataPtr->joint_position_cmd_[j],true);*/
-	this->dataPtr->joint_effort_[j] =
-          this->dataPtr->joint_kp_cmd_[j]*err_pos +
-	  this->dataPtr->joint_kd_cmd_[j]*err_vel ;
+        double err_pos = this->dataPtr->joint_position_cmd_[j] - this->dataPtr->joint_position_[j];
+        double err_vel = this->dataPtr->joint_velocity_cmd_[j] - this->dataPtr->joint_velocity_[j];
+            RCLCPP_DEBUG_STREAM(this->nh_->get_logger(),
+            "joint_name :" << this->dataPtr->joint_names_[j] <<
+            " position kp:" << this->dataPtr->joint_kp_cmd_[j] <<
+            " kd: " << this->dataPtr->joint_kd_cmd_[j] <<
+            " err_pos: " << err_pos <<
+            " err_vel: " << err_vel
+            );   //"\tis controlled in POSITION"
+        this->dataPtr->joint_effort_[j] = this->dataPtr->joint_kp_cmd_[j]*err_pos +
+                                          this->dataPtr->joint_kd_cmd_[j]*err_vel ;
         this->dataPtr->sim_joints_[j]->SetForce(0,  this->dataPtr->joint_effort_[j]);
-
-	RCLCPP_DEBUG_STREAM(this->nh_->get_logger(),"");
+	      RCLCPP_DEBUG_STREAM(this->nh_->get_logger(),"");
       }
+
       if (this->dataPtr->joint_control_methods_[j] & VELOCITY) {
-        RCLCPP_DEBUG_STREAM(this->nh_->get_logger(), "velocity");    //\tis controlled in VELOCITY
-
-	this->dataPtr->joint_effort_[j] =
-          this->dataPtr->joint_kd_cmd_[j]*(this->dataPtr->joint_velocity_cmd_[j] - this->dataPtr->joint_velocity_[j]);
+            RCLCPP_DEBUG_STREAM(this->nh_->get_logger(), "velocity");    //\tis controlled in VELOCITY
+	      this->dataPtr->joint_effort_[j] = this->dataPtr->joint_kd_cmd_[j]*(this->dataPtr->joint_velocity_cmd_[j] -
+                                          this->dataPtr->joint_velocity_[j]);
         this->dataPtr->sim_joints_[j]->SetForce(0,  this->dataPtr->joint_effort_[j]);
-
-	RCLCPP_DEBUG_STREAM(this->nh_->get_logger(),  "");
+	      RCLCPP_DEBUG_STREAM(this->nh_->get_logger(),  "");
       }
+
       if (this->dataPtr->joint_control_methods_[j] & EFFORT) {
-	RCLCPP_DEBUG_STREAM(this->nh_->get_logger(), "effort");   //"\tis controlled in EFFORT"
+	          RCLCPP_DEBUG_STREAM(this->nh_->get_logger(), "effort");   //"\tis controlled in EFFORT"
         this->dataPtr->joint_effort_[j] = this->dataPtr->joint_effort_cmd_[j];
       }
 
       if (this->dataPtr->joint_control_methods_[j] & POS_VEL_EFF_GAINS) {
-        RCLCPP_DEBUG_STREAM(this->nh_->get_logger(), "pos_vel_eff_gains");   //"\tis controlled in EFFORT"
+            RCLCPP_DEBUG_STREAM(this->nh_->get_logger(), "pos_vel_eff_gains");   //"\tis controlled in EFFORT"
         this->dataPtr->joint_effort_[j] = this->dataPtr->joint_effort_cmd_[j] +
           this->dataPtr->joint_kp_cmd_[j]*(this->dataPtr->joint_position_cmd_[j] - this->dataPtr->joint_position_[j]) +
           this->dataPtr->joint_kd_cmd_[j]*(this->dataPtr->joint_velocity_cmd_[j] - this->dataPtr->joint_velocity_[j]);

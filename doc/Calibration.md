@@ -13,9 +13,9 @@ Calibration is the step where the robot finds a point that we have predetermined
 
 For each motor, we define a way for it to find  its Index :
 
-  -  `POS` : the motor search the first index in his **positive** axe
-  -  `NEG` : the motor search the first index in his **negative** axe
-  -  `ALT` : the search is in **positive and negative** axe
+  -  `POS` : the motor search the first index in his **positive** axis
+  -  `NEG` : the motor search the first index in his **negative** axis
+  -  `ALT` : the search is in **positive and negative** axis
   -  `AUTO` : find **automatically** the way (positive or negative) some bugs may occur
 
 Calibration is called when you launch the CPP file and when you call the function initialize.
@@ -26,11 +26,17 @@ For this step, you must have configured all the parameters mentioned in the prev
 
 1) Stop Bolt, put the robot's legs as straight as possible and turn Bolt on.
 
-2)  Open a new Terminal and source ROS
+2)  Open a new Terminal, go to your `Bolt_ws/` workspace and source ROS :
+
+          source /opt/ros/foxy/setup.bash
+
+          source install/setup.bash
 
 3)  Run in your Terminal :
 
-        ros2 run --prefix="sudo -E env PATH=${PATH} LD_LIBRARY_PATH=${LD_LIBRARY_PATH} PYTHONPATH=${PYTHONPATH}" ros2_hardware_interface_bolt bolt_hardware_calibration
+        bolt_config_path=src/ros2_control_bolt/ros2_description_bolt/config/bolt_config.yaml
+
+        ros2 run --prefix="sudo -E env PATH=${PATH} LD_LIBRARY_PATH=${LD_LIBRARY_PATH} PYTHONPATH=${PYTHONPATH}" ros2_hardware_interface_odri odri_hardware_calibration $bolt_config_path
 
 4)  Place the calibration object on Bolt while the simulation is running.
 
@@ -41,7 +47,7 @@ For this step, you must have configured all the parameters mentioned in the prev
 
     ![Bolt Calibration Values](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Calibration_Bolt_3-R.jpeg.png?raw=true "Bolt Calibration Values")
 
-6)  Open file `ros2_control_bolt/ros2_description_bolt/src/bolt_config.yaml` and paste the values in the variable **position_offsets (line 30)**, save the file and do a colcon build at `Bolt_ws/`.
+6)  Open file `ros2_control_bolt/ros2_description_bolt/config/bolt_config.yaml` and paste the values in the variable **position_offsets (line 30)**, save the file and do a colcon build at `Bolt_ws/`.
 
     ![Offset Change](https://github.com/Benjamin-Amsellem/ros2_control_bolt/blob/master/ros2_control_bolt_tuto/pictures/Calibration_Bolt_4-R.png?raw=true "Offset Change")
 
@@ -59,14 +65,15 @@ Now that everything is ready for the calibration, follow the next step to try so
 
 You know a lot of things about Bolt, but now let see the change you have operated.
 
-1) Open a Terminal, source your ROS
+1) Open a Terminal, go to your `Bolt_ws/` workspace and source your ROS
 
 3) If you have done some modification, run a Colcon Build always in `Bolt_ws/`, never in the `Bolt_ws/src/`
 
-8)  For example, run file `demo_bolt_from_yaml.cpp` and observe Bolt be positioned at the position calibrated :
+8) For example, run file `demo_bolt_from_yaml.cpp` and observe Bolt be positioned at the position calibrated :
 
-   		   ros2 run --prefix="sudo -E env PATH=${PATH} LD_LIBRARY_PATH=${LD_LIBRARY_PATH} PYTHONPATH=${PYTHONPATH}" ros2_hardware_interface_bolt demo_bolt_from_yaml
+
+        ros2 run --prefix="sudo -E env PATH=${PATH} LD_LIBRARY_PATH=${LD_LIBRARY_PATH} PYTHONPATH=${PYTHONPATH}" ros2_hardware_interface_odri demo_bolt_from_yaml $bolt_config_path
 
     **Now you know how to Start Bolt and have a good Calibration.**
 
-### Next step is to see how to use ros2 launch and have a modeling of Bolt in Rviz.
+### Next step is to see how to use ros2 launch and have a modeling of Bolt in Rviz. [Click here for the next step](https://github.com/Maxime-Fansi-laas/ros2_control_bolt/blob/master/doc/Launch.md).

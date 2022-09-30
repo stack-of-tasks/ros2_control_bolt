@@ -17,8 +17,8 @@ forward_position_controller:
     joints:
       - FL_HAA
       - FR_HAA
-      - FL_KFE
       - FL_HFE
-      - FR_KFE
       - FR_HFE
+      - FL_KFE
+      - FR_KFE
     interface_name: position
