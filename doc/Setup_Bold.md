@@ -104,4 +104,4 @@ in order to find the correct port. To do that :
 
     **Now you have seen how you put the right Ethernet Port in the code.**
 
-### Your next step is to run some tests to see [how the Bolt works](https://github.com/Maxime-Fansi-laas/ros2_control_bolt/blob/maxime_branch/doc/Calibration.md).
+### Your next step is to run some tests to see [how Bolt works](https://github.com/Maxime-Fansi-laas/ros2_control_bolt/blob/maxime_branch/doc/Calibration.md).
